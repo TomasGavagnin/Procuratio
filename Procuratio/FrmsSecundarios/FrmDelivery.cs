@@ -563,7 +563,6 @@ namespace Procuratio.FrmsSecundarios
                                                     FormInformacion.ShowDialog();
                                                 }
                                             }
-
                                         }
                                         else if (InformacionDelError == string.Empty)
                                         {
