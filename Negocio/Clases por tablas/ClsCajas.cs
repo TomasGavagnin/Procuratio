@@ -1,9 +1,7 @@
+using Datos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Datos;
 
 namespace Negocio
 {
@@ -38,7 +36,7 @@ namespace Negocio
                                 List<Caja> ListaFiltrada = null;
 
                                 TimeSpan HoraInicio = TimeSpan.Parse(_HoraInicio);
-                                TimeSpan HoraFin = TimeSpan.Parse(_HoraFin).Add(new TimeSpan(0,1,0)); // agrego 1 minuto porque sino no me toma la fecha hasta por los segundos
+                                TimeSpan HoraFin = TimeSpan.Parse(_HoraFin).Add(new TimeSpan(0, 1, 0)); // agrego 1 minuto porque sino no me toma la fecha hasta por los segundos
 
                                 if (HoraFin >= new TimeSpan(1, 0, 0, 0)) { HoraFin = TimeSpan.Parse(_HoraFin); }
 
@@ -47,7 +45,7 @@ namespace Negocio
                                     DateTime FechaDesde = Convert.ToDateTime(_FechaDesde).Date;
                                     DateTime FechaHasta = Convert.ToDateTime(_FechaHasta).Date;
 
-                                    ListaFiltrada = BBDD.Caja.Include("EstadoCaja").Include("TipoDeMonto").Include("Usuario").Where(Identificador => (Identificador.Fecha > FechaDesde || 
+                                    ListaFiltrada = BBDD.Caja.Include("EstadoCaja").Include("TipoDeMonto").Include("Usuario").Where(Identificador => (Identificador.Fecha > FechaDesde ||
                                     (Identificador.Fecha == FechaDesde && Identificador.Hora >= HoraInicio))
                                     && (Identificador.Fecha < FechaHasta || (Identificador.Fecha == FechaHasta && Identificador.Hora <= HoraFin)) && Identificador.ID_EstadoCaja == (int)ClsEstadosCajas.EEstadosCajas.Activo || Identificador.ID_EstadoCaja == (int)ClsEstadosCajas.EEstadosCajas.CajaAbierta).ToList();
                                 }
@@ -62,7 +60,7 @@ namespace Negocio
                                 {
                                     DateTime FechaHasta = Convert.ToDateTime(_FechaHasta).Date;
 
-                                    ListaFiltrada = BBDD.Caja.Include("EstadoCaja").Include("TipoDeMonto").Include("Usuario").Where(Identificador => Identificador.Fecha < FechaHasta || 
+                                    ListaFiltrada = BBDD.Caja.Include("EstadoCaja").Include("TipoDeMonto").Include("Usuario").Where(Identificador => Identificador.Fecha < FechaHasta ||
                                     (Identificador.Fecha == FechaHasta && Identificador.Hora <= HoraFin) && Identificador.ID_EstadoCaja == (int)ClsEstadosCajas.EEstadosCajas.Activo || Identificador.ID_EstadoCaja == (int)ClsEstadosCajas.EEstadosCajas.CajaAbierta).ToList();
                                 }
                                 else
@@ -103,7 +101,7 @@ namespace Negocio
                     $"ESTE ERROR PARA QUE SEA ARREGLADO.";
                     return null;
                 }
-            } 
+            }
         }
 
         /// <summary>
@@ -129,7 +127,7 @@ namespace Negocio
                     $"ESTE ERROR PARA QUE SEA ARREGLADO.";
                     return null;
                 }
-            } 
+            }
         }
 
         /// <summary>
@@ -202,7 +200,7 @@ namespace Negocio
                     return 0;
                 }
             }
-            
+
         }
 
         /// <summary>
@@ -221,7 +219,7 @@ namespace Negocio
 
                     if (ObjetoAEliminar != null)
                     {
-                        BBDD.Caja.Remove(ObjetoAEliminar); 
+                        BBDD.Caja.Remove(ObjetoAEliminar);
                         return BBDD.SaveChanges();
                     }
                     else

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Management;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Management;
 
 namespace Negocio
 {
@@ -41,7 +36,7 @@ namespace Negocio
                     {
                         //get the current printer name in the loop
                         NombreImpresoraActual = ImpresoraActual["Name"].ToString().ToLower();
-                        
+
                         //check if it matches the name provided
                         if (NombreImpresoraActual.Equals(_NombreImpresora.ToLower()))
                         {

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using Datos;
+﻿using Datos;
 using Negocio;
 using Procuratio.ClsDeApoyo;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Procuratio
 {
@@ -177,7 +171,7 @@ namespace Procuratio
             GerenteSubGerenteMozoDueño
         }
 
-        private const string TextoVisualContraseña = "CONTRASEÑA";
+        private readonly string TEXTO_VISUAL_CONTRASEÑA = "CONTRASEÑA";
         private EFiltroUsuariosAutorizados UsuariosAutorizados;
         private EFiltroUsuariosAutorizadosYParticular UsuariosAutorizadosYParticular;
         private int ID_UsuarioParticular = -1;
@@ -218,7 +212,7 @@ namespace Procuratio
 
             TextBox txtSeleccionado = (TextBox)sender;
 
-            if (txtSeleccionado.Text == TextoVisualContraseña)
+            if (txtSeleccionado.Text == TEXTO_VISUAL_CONTRASEÑA)
             {
                 txtSeleccionado.Text = string.Empty;
                 txtContraseña.UseSystemPasswordChar = true;
@@ -233,7 +227,7 @@ namespace Procuratio
 
             if (txtSeleccionado.Text == string.Empty)
             {
-                txtSeleccionado.Text = TextoVisualContraseña;
+                txtSeleccionado.Text = TEXTO_VISUAL_CONTRASEÑA;
                 txtContraseña.UseSystemPasswordChar = false;
             }
 
@@ -241,7 +235,7 @@ namespace Procuratio
         }
 
         private void picBTNMostrarContraseña_MouseMove(object sender, MouseEventArgs e) => txtContraseña.UseSystemPasswordChar = false;
-        private void picBTNMostrarContraseña_MouseLeave(object sender, EventArgs e) { if (txtContraseña.Text != TextoVisualContraseña) { txtContraseña.UseSystemPasswordChar = true; } }
+        private void picBTNMostrarContraseña_MouseLeave(object sender, EventArgs e) { if (txtContraseña.Text != TEXTO_VISUAL_CONTRASEÑA) { txtContraseña.UseSystemPasswordChar = true; } }
 
         private void LimpiarlblMensajeDeError(object sender, EventArgs e) { if (lblMensajeDeError.Visible == true) { lblMensajeDeError.Visible = false; } }
         #endregion

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.IO;
-using System.Collections.Generic;
+﻿using Datos;
 using Negocio;
 using Negocio.Clases_por_tablas;
-using Datos;
-using System.Data.Entity.Validation;
 using Procuratio.ClsDeApoyo;
 using Procuratio.FrmGenerales;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Procuratio
 {
@@ -80,13 +78,13 @@ namespace Procuratio
             ID_Mozo = -1;
             ID_Chef = -1;
             ID_Pedido = -1;
-            
+
             // Instancio todo lo que voy a necesitar para realizar las actualizaciones
             string InformacionDelError = string.Empty;
 
             ClsPedidos Pedidos = new ClsPedidos();
             Pedido ActualizarPedido = new ClsPedidos();
-        
+
             ClsPedidosXMesas PedidosXMesas = new ClsPedidosXMesas();
             List<PedidoXMesa> ListarPedidosActivos = PedidosXMesas.LeerListado(ClsPedidosXMesas.ETipoDeListado.CargarPorID, ref InformacionDelError);
 
@@ -163,7 +161,7 @@ namespace Procuratio
                         {
                             case ClsEstadosPedidos.EEstadosPedidos.Pendiente:
                                 {
-                                    LabelEstadoDelPedido.Text = Pendiente;
+                                    LabelEstadoDelPedido.Text = PENDIENTE;
                                     LabelEstadoDelPedido.BackColor = Color.LightCoral;
                                     BotonEditarMesa.Enabled = true;
                                     BotonEliminarMesa.Enabled = true;
@@ -173,7 +171,7 @@ namespace Procuratio
                                 }
                             case ClsEstadosPedidos.EEstadosPedidos.EnProceso:
                                 {
-                                    LabelEstadoDelPedido.Text = EnProceso;
+                                    LabelEstadoDelPedido.Text = EN_PROCESO;
                                     LabelEstadoDelPedido.BackColor = Color.Orange;
                                     BotonEditarMesa.Enabled = true;
                                     BotonEliminarMesa.Enabled = false;
@@ -183,7 +181,7 @@ namespace Procuratio
                                 }
                             case ClsEstadosPedidos.EEstadosPedidos.ParaEntrega:
                                 {
-                                    LabelEstadoDelPedido.Text = ParaEntrega;
+                                    LabelEstadoDelPedido.Text = PARA_ENTREGA;
                                     LabelEstadoDelPedido.BackColor = Color.LightGreen;
                                     BotonEditarMesa.Enabled = true;
                                     BotonEliminarMesa.Enabled = false;
@@ -193,7 +191,7 @@ namespace Procuratio
                                 }
                             case ClsEstadosPedidos.EEstadosPedidos.Entregado:
                                 {
-                                    LabelEstadoDelPedido.Text = Entregado;
+                                    LabelEstadoDelPedido.Text = ENTREGADO;
                                     LabelEstadoDelPedido.BackColor = Color.YellowGreen;
                                     BotonEditarMesa.Enabled = true;
                                     BotonEliminarMesa.Enabled = false;
@@ -206,7 +204,7 @@ namespace Procuratio
                                 }
                             case ClsEstadosPedidos.EEstadosPedidos.EsperandoPago:
                                 {
-                                    LabelEstadoDelPedido.Text = EsperandoPago;
+                                    LabelEstadoDelPedido.Text = ESPERANDO_PAGO;
                                     LabelEstadoDelPedido.BackColor = Color.SeaGreen;
                                     BotonEliminarMesa.Enabled = false;
                                     BotonCerrarMesa.Enabled = true;
@@ -230,7 +228,7 @@ namespace Procuratio
                     }
                 }
             }
-            
+
             if (ListarPedidosActivos != null)
             {
                 // Cambio el estado del ID pedido para ignorarlo y solo cargar los que no esten en pantalla
@@ -417,7 +415,7 @@ namespace Procuratio
         private List<int> ClientesDelPedido = new List<int>();
         private DialogResult CargoClientesAlPedido = DialogResult.Cancel;
 
-        private readonly string Pendiente = "Pedido = Pendiente", EnProceso = "Pedido = En proceso", ParaEntrega = "Pedido = Para entrega", Entregado = "Pedido = Entregado", EsperandoPago = "Esperando el pago";
+        private readonly string PENDIENTE = "Pedido = Pendiente", EN_PROCESO = "Pedido = En proceso", PARA_ENTREGA = "Pedido = Para entrega", ENTREGADO = "Pedido = Entregado", ESPERANDO_PAGO = "Esperando el pago";
         #endregion
 
         #region Codigo para darle estilo a los botones
@@ -470,7 +468,7 @@ namespace Procuratio
             {
                 Acumulador -= 5;
             }
-            
+
             picBTNInformacion.BackColor = Color.FromArgb(32 + Acumulador, 42 + Acumulador, 52 + Acumulador);
         }
         #endregion
@@ -641,7 +639,7 @@ namespace Procuratio
 
             Button BotonListaPedidos = PropBotonListaPedidos();
             Label LabelNombreMozo = PropLabelNombreMozo();
-            Label LabelEstadoPedido = PropEstadoPedido(); 
+            Label LabelEstadoPedido = PropEstadoPedido();
             Label LabelTiempoDeEspera = PropTiempoDeEspera();
             Button BotonEditarMesa = PropBotonEditarMesa();
             Button BotonCerrarMesa = PropBotonCerrarMesa();
@@ -921,7 +919,7 @@ namespace Procuratio
             int[,] DatosTag = new int[1, 3];
             int Mozo = ID_Mozo;
             int Chef = ID_Chef;
-            
+
             DatosTag[0, 0] = (int)ETagsControles.lblNombreMozo;
             DatosTag[0, 1] = Mozo;
             DatosTag[0, 2] = Chef;
@@ -954,31 +952,31 @@ namespace Procuratio
             {
                 case ClsEstadosPedidos.EEstadosPedidos.Pendiente:
                     {
-                        PropiedadesLabel.Text = Pendiente;
+                        PropiedadesLabel.Text = PENDIENTE;
                         PropiedadesLabel.BackColor = Color.LightCoral;
                         break;
                     }
                 case ClsEstadosPedidos.EEstadosPedidos.EnProceso:
                     {
-                        PropiedadesLabel.Text = EnProceso;
+                        PropiedadesLabel.Text = EN_PROCESO;
                         PropiedadesLabel.BackColor = Color.Orange;
                         break;
                     }
                 case ClsEstadosPedidos.EEstadosPedidos.ParaEntrega:
                     {
-                        PropiedadesLabel.Text = ParaEntrega;
+                        PropiedadesLabel.Text = PARA_ENTREGA;
                         PropiedadesLabel.BackColor = Color.LightGreen;
                         break;
                     }
                 case ClsEstadosPedidos.EEstadosPedidos.Entregado:
                     {
-                        PropiedadesLabel.Text = Entregado;
+                        PropiedadesLabel.Text = ENTREGADO;
                         PropiedadesLabel.BackColor = Color.YellowGreen;
                         break;
                     }
                 case ClsEstadosPedidos.EEstadosPedidos.EsperandoPago:
                     {
-                        PropiedadesLabel.Text = EsperandoPago;
+                        PropiedadesLabel.Text = ESPERANDO_PAGO;
                         PropiedadesLabel.BackColor = Color.SeaGreen;
                         break;
                     }
@@ -1261,11 +1259,11 @@ namespace Procuratio
                             foreach (Control ControlMesaSeleccionada in PanelPadre.Controls)
                             {
                                 if (ComparaTags(ControlMesaSeleccionada.Tag, ETagsControles.lblNumMesa))
-                                { 
+                                {
                                     DatosTag = new int[1, 2];
 
                                     DatosTag = (int[,])ControlMesaSeleccionada.Tag;
-                                    
+
                                     ID_Mesas.Add(DatosTag[0, 1]);
                                 }
                                 else if (ComparaTags(ControlMesaSeleccionada.Tag, ETagsControles.btnListaPedidos))
@@ -1771,7 +1769,7 @@ namespace Procuratio
                 }
 
                 CargarCMBMozos();
-                
+
                 foreach (Usuario Elemento in cmbNombreMozo.Items)
                 {
                     if (Elemento.ID_Usuario == MozoSeleccionado)
@@ -1851,7 +1849,7 @@ namespace Procuratio
             NoActualizarPorNumeroMesa = true;
             txtBuscarMesa.Text = string.Empty;
             NoActualizarPorNumeroMesa = false;
-            
+
             if (rbnTodo.Checked)
             {
                 AplicarFiltroPorEstadoPedido(EEstadosPedido.NingunEstado);
@@ -1936,7 +1934,7 @@ namespace Procuratio
             FormularioCargado = false;
             cmbNombreMozo.SelectedValue = 0;
             FormularioCargado = true;
-            
+
             foreach (Control PanelMesa in pnlContenedorMesas.Controls)
             {
                 // Si la tag del panel coincide con el de la planta que se esta buscando, mostrar el panel (y que este no sea le panel de ejemplo)

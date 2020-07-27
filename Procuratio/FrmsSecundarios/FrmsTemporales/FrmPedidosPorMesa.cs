@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using Datos;
+﻿using Datos;
 using Negocio;
-using Procuratio.FrmsSecundarios.FrmsTemporales.FrmMesas;
+using Negocio.Clases_de_apoyo;
 using Negocio.Clases_por_tablas;
-using Procuratio.FrmsSecundarios.FrmsTemporales.FrmDelivery;
-using System.Drawing.Printing;
 using Procuratio.ClsDeApoyo;
 using Procuratio.FrmGenerales;
-using Negocio.Clases_de_apoyo;
+using Procuratio.FrmsSecundarios.FrmsTemporales.FrmDelivery;
+using Procuratio.FrmsSecundarios.FrmsTemporales.FrmMesas;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Procuratio
 {
@@ -122,7 +117,7 @@ namespace Procuratio
 
                 // Creo el item para listar todo
                 ListarCategorias.Add(new CategoriaArticulo { ID_CategoriaArticulo = 0, Nombre = "Todas las categorias" });
-                
+
                 // Llenar el combo
                 cmbCategoria.DataSource = ListarCategorias.ToList();
 
@@ -256,8 +251,8 @@ namespace Procuratio
             ID_Articulo, Nombre, Descripcion, Categoria, Precio, Seleccionar
         }
 
-        private const string Pendiente = "Pedido = Pendiente", EnProceso = "Pedido = En proceso", ParaEntrega = "Pedido = Para entrega", Entregado = "Pedido = Entregado", EsperandoPago = "Esperando el pago";
-        private const string TextoVisualBuscar = "Buscar por nombre de articulo...";
+        private readonly string PENDIENTE = "Pedido = Pendiente", EN_PROCESO = "Pedido = En proceso", PARA_ENTREGA = "Pedido = Para entrega", ENTREGADO = "Pedido = Entregado", ESPERANDO_PAGO = "Esperando el pago";
+        private readonly string TEXTO_VISUAL_BUSCAR = "Buscar por nombre de articulo...";
         private int Acumulador = 0;
         private bool Invertir = true;
         private bool FormularioCargado = false;
@@ -336,7 +331,7 @@ namespace Procuratio
         private void TxtBuscarPorNombre_Enter(object sender, EventArgs e)
         {
             FormularioCargado = false;
-            if (txtBuscarPorNombre.Text == TextoVisualBuscar) { txtBuscarPorNombre.Text = string.Empty; }
+            if (txtBuscarPorNombre.Text == TEXTO_VISUAL_BUSCAR) { txtBuscarPorNombre.Text = string.Empty; }
             txtBuscarPorNombre.ForeColor = ClsColores.GrisClaro;
             FormularioCargado = true;
         }
@@ -344,7 +339,7 @@ namespace Procuratio
         private void TxtBuscarPorNombre_Leave(object sender, EventArgs e)
         {
             FormularioCargado = false;
-            if (txtBuscarPorNombre.Text == string.Empty) { txtBuscarPorNombre.Text = TextoVisualBuscar; }
+            if (txtBuscarPorNombre.Text == string.Empty) { txtBuscarPorNombre.Text = TEXTO_VISUAL_BUSCAR; }
             txtBuscarPorNombre.ForeColor = ClsColores.GrisOscuro;
             FormularioCargado = true;
         }
@@ -444,7 +439,7 @@ namespace Procuratio
         {
             // Al actualizar el txt se activa el filtro de buscar por nombre
             FormularioCargado = false;
-            txtBuscarPorNombre.Text = TextoVisualBuscar;
+            txtBuscarPorNombre.Text = TEXTO_VISUAL_BUSCAR;
             cmbCategoria.SelectedValue = 0;
             FormularioCargado = true;
 
@@ -511,7 +506,7 @@ namespace Procuratio
                                 {
                                     dgvArticulosPedido.Rows[NumeroDeFila].Cells[(int)ENumColDGVArticulosDelPedido.Enviado].Value = "- -";
                                 }
-                                
+
                                 dgvArticulosPedido.Rows[NumeroDeFila].Cells[(int)ENumColDGVArticulosDelPedido.Seleccionar].Value = false;
                             }
                             else
@@ -550,7 +545,7 @@ namespace Procuratio
         {
             ArticulosDeCartaMarcados.Clear();
             FormularioCargado = false;
-            txtBuscarPorNombre.Text = TextoVisualBuscar;
+            txtBuscarPorNombre.Text = TEXTO_VISUAL_BUSCAR;
             cmbCategoria.SelectedItem = 0;
             FormularioCargado = true;
             CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivos);
@@ -614,7 +609,7 @@ namespace Procuratio
                                             for (int IndiceDos = 0; IndiceDos < SubTotalDeFilas; IndiceDos++)
                                             {
                                                 VerificarSiEsCocina = Articulos.LeerPorNumero((int)dgvArticulosPedido.Rows[IndiceDos].Cells[(int)ENumColDGVArticulosDelPedido.ID_Articulo].Value, ref InformacionDelError);
-                                                
+
                                                 // minimo un articulo para cocina en delivery
                                                 if (VerificarSiEsCocina.CategoriaArticulo.ParaCocina == (int)ClsCategoriasArticulos.EParaCocina.Si)
                                                 {
@@ -823,7 +818,7 @@ namespace Procuratio
         private void ActualizaCantidad(bool _TipoDeCuenta)
         {
             int TotalDeFilas = dgvArticulosPedido.Rows.Count;
-            
+
             string InformacionDelError = string.Empty;
 
             ClsDetalles Detalles = new ClsDetalles();
@@ -902,7 +897,7 @@ namespace Procuratio
                                                         dgvArticulosPedido.Rows[Indice].Cells[(int)ENumColDGVArticulosDelPedido.Enviado].Value = "SI";
                                                     }
                                                 }
-                                                else if(InformacionDelError != string.Empty)
+                                                else if (InformacionDelError != string.Empty)
                                                 {
                                                     MessageBox.Show($"{InformacionDelError}", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                                     Close();
@@ -1047,7 +1042,7 @@ namespace Procuratio
 
             ActualizarTotal();
         }
-        
+
         private void BtnEnviarPedido_Click(object sender, EventArgs e)
         {
             if (dgvArticulosPedido.Rows.Count > 0)
@@ -1228,7 +1223,7 @@ namespace Procuratio
                 }
 
                 InformacionDelError = string.Empty;
-                
+
                 if (dgvArticulosPedido.Rows[Indice].Cells[(int)ENumColDGVArticulosDelPedido.Seleccionar].Value != null)
                 {
                     dgvArticulosPedido.Rows[Indice].Cells[(int)ENumColDGVArticulosDelPedido.Seleccionar].Value = false;
@@ -1547,7 +1542,7 @@ namespace Procuratio
                     ID_CategoriaFiltro = CategoriaSeleccionada.ID_CategoriaArticulo;
                 }
 
-                if (txtBuscarPorNombre.Text != TextoVisualBuscar) { NombreArticulo = txtBuscarPorNombre.Text; }
+                if (txtBuscarPorNombre.Text != TEXTO_VISUAL_BUSCAR) { NombreArticulo = txtBuscarPorNombre.Text; }
 
                 dgvCarta.Rows.Clear();
 
@@ -1745,28 +1740,28 @@ namespace Procuratio
             {
                 case ClsEstadosPedidos.EEstadosPedidos.Pendiente:
                     {
-                        lblEstadoDelPedido.Text = Pendiente;
+                        lblEstadoDelPedido.Text = PENDIENTE;
                         lblEstadoDelPedido.BackColor = Color.LightCoral;
                         btnMostrarCocina.Enabled = false;
                         break;
                     }
                 case ClsEstadosPedidos.EEstadosPedidos.EnProceso:
                     {
-                        lblEstadoDelPedido.Text = EnProceso;
+                        lblEstadoDelPedido.Text = EN_PROCESO;
                         lblEstadoDelPedido.BackColor = Color.Orange;
                         btnMostrarCocina.Enabled = true;
                         break;
                     }
                 case ClsEstadosPedidos.EEstadosPedidos.ParaEntrega:
                     {
-                        lblEstadoDelPedido.Text = ParaEntrega;
+                        lblEstadoDelPedido.Text = PARA_ENTREGA;
                         lblEstadoDelPedido.BackColor = Color.LightGreen;
                         btnMostrarCocina.Enabled = false;
                         break;
                     }
                 case ClsEstadosPedidos.EEstadosPedidos.Entregado:
                     {
-                        lblEstadoDelPedido.Text = Entregado;
+                        lblEstadoDelPedido.Text = ENTREGADO;
                         lblEstadoDelPedido.BackColor = Color.YellowGreen;
                         btnMostrarCocina.Enabled = false;
                         break;
@@ -1774,7 +1769,7 @@ namespace Procuratio
                 case ClsEstadosPedidos.EEstadosPedidos.EsperandoPago:
                     {
                         // (No deberia entrar aca)
-                        lblEstadoDelPedido.Text = EsperandoPago;
+                        lblEstadoDelPedido.Text = ESPERANDO_PAGO;
                         lblEstadoDelPedido.BackColor = Color.SeaGreen;
                         btnMostrarCocina.Enabled = false;
                         break;

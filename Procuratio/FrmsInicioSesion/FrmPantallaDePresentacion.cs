@@ -1,9 +1,7 @@
-﻿using Negocio; //Referencia a mi capa de regocio para validar contraseña
+﻿using Procuratio.ClsDeApoyo;
 using System;
-using System.Drawing;
 using System.Runtime.InteropServices; //libreria para manipular el form
 using System.Windows.Forms;
-using Procuratio.ClsDeApoyo;
 
 namespace Procuratio
 {
@@ -19,7 +17,7 @@ namespace Procuratio
         #region Variables
         private static FrmPantallaDePresentacion InstanciaForm;
         private bool AplicacionCargando = true;
-        private readonly string MensajeDeCarga = "CARGANDO";
+        private readonly string MENSAJE_DE_CARGA = "CARGANDO";
         #endregion
 
         #region Estilo
@@ -79,7 +77,7 @@ namespace Procuratio
             lblCargando.Visible = true;
             picBTNCerrar.Visible = false;
             AplicacionCargando = true;
-            lblCargando.Text = MensajeDeCarga;
+            lblCargando.Text = MENSAJE_DE_CARGA;
         }
 
         #region Propiedades

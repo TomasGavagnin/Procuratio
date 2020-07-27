@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Datos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Datos;
 
 namespace Negocio
 {
@@ -29,15 +27,16 @@ namespace Negocio
                     {
                         case ETipoDeListado.EliminarPorID: return BBDD.PedidoXMesa.Where(Identificador => Identificador.ID_Pedido == _PedidoBuscar).ToList();
 
-                        case ETipoDeListado.CargarPorID: return BBDD.PedidoXMesa.Include("Mesa.Usuario").Include("Pedido").Where(Identificador => Identificador.Pedido.ID_EstadoPedido != (int)ClsEstadosPedidos.EEstadosPedidos.Eliminado
-                        && Identificador.Pedido.ID_EstadoPedido != (int)ClsEstadosPedidos.EEstadosPedidos.Finalizado).ToList();
+                        case ETipoDeListado.CargarPorID:
+                            return BBDD.PedidoXMesa.Include("Mesa.Usuario").Include("Pedido").Where(Identificador => Identificador.Pedido.ID_EstadoPedido != (int)ClsEstadosPedidos.EEstadosPedidos.Eliminado
+&& Identificador.Pedido.ID_EstadoPedido != (int)ClsEstadosPedidos.EEstadosPedidos.Finalizado).ToList();
 
                         case ETipoDeListado.BuscarMesasYMozo:
                             return BBDD.PedidoXMesa.Include("Mesa.Usuario").Include("Pedido").Where(Identificador => Identificador.ID_Pedido == _PedidoBuscar).ToList();
 
                         default: return null;
                     }
-                    
+
                 }
                 catch (Exception Error)
                 {

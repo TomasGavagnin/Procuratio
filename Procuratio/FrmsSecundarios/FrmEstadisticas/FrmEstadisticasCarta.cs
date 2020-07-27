@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Negocio;
+using Negocio.Clases_de_apoyo;
+using Procuratio.ClsDeApoyo;
+using System;
+using System.Collections;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Datos;
-using Negocio;
-using Negocio.Clases_de_apoyo;
-using System.Collections;
-using Procuratio.ClsDeApoyo;
 
 namespace Procuratio.FrmsSecundarios.FrmEstadisticas
 {
@@ -35,7 +29,7 @@ namespace Procuratio.FrmsSecundarios.FrmEstadisticas
             CargarChtArticulosMenosVendidosCategoria();
             CargarChtArticulosVendidosPorMes();
         }
-        
+
         private void AsigarValoresPorDefecto()
         {
             dtpFechaDesde.Value = Convert.ToDateTime($@"01/{DateTime.Today.Month}/{DateTime.Today.Year}");
@@ -297,7 +291,7 @@ namespace Procuratio.FrmsSecundarios.FrmEstadisticas
                         NombreCategoria.Add(Elemento[0].ToString());
                         CantidadArticulos.Add(Elemento[1]);
                     }
-                    
+
                     ChtArticulosMenosVendidosPorCategoria.Series[0].Points.DataBindXY(NombreCategoria, CantidadArticulos);
                 }
                 else

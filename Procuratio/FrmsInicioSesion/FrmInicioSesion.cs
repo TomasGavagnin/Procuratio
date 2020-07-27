@@ -1,13 +1,9 @@
-﻿using Negocio;
-using Datos;
+﻿using Datos;
+using Negocio;
+using Procuratio.ClsDeApoyo;
 using System;
-using System.Drawing;
 using System.Runtime.InteropServices; //libreria para manipular el form
 using System.Windows.Forms;
-using System.Configuration;
-using System.Collections.Generic;
-using Procuratio.Reportes;
-using Procuratio.ClsDeApoyo;
 
 namespace Procuratio
 {
@@ -31,7 +27,7 @@ namespace Procuratio
         private bool SeCierraLaAplicacion = false;
         private bool TiempoDeSesionExedido = false;
 
-        private readonly string TextoVisualUsuario = "NOMBRE", TextoVisualContraseña = "CONTRASEÑA";
+        private readonly string TEXTO_VISUAL_USUARIO = "NOMBRE", TEXTO_VISUAL_CONTRASEÑA = "CONTRASEÑA";
         #endregion
 
         #region Codigo para agregarle la propiedad de mover a la barra personalizada
@@ -74,11 +70,11 @@ namespace Procuratio
 
             if (txtSeleccionado.Name == txtUsuario.Name)
             {
-                if (txtSeleccionado.Text == TextoVisualUsuario) { txtSeleccionado.Text = string.Empty; }
+                if (txtSeleccionado.Text == TEXTO_VISUAL_USUARIO) { txtSeleccionado.Text = string.Empty; }
             }
             else
             {
-                if (txtSeleccionado.Text == TextoVisualContraseña)
+                if (txtSeleccionado.Text == TEXTO_VISUAL_CONTRASEÑA)
                 {
                     txtSeleccionado.Text = string.Empty;
                     txtContraseña.UseSystemPasswordChar = true;
@@ -94,13 +90,13 @@ namespace Procuratio
 
             if (txtSeleccionado.Name == txtUsuario.Name)
             {
-                if (txtSeleccionado.Text == string.Empty) { txtSeleccionado.Text = TextoVisualUsuario; }
+                if (txtSeleccionado.Text == string.Empty) { txtSeleccionado.Text = TEXTO_VISUAL_USUARIO; }
             }
             else
             {
                 if (txtSeleccionado.Text == string.Empty)
                 {
-                    txtSeleccionado.Text = TextoVisualContraseña;
+                    txtSeleccionado.Text = TEXTO_VISUAL_CONTRASEÑA;
                     txtContraseña.UseSystemPasswordChar = false;
                 }
             }
@@ -109,7 +105,7 @@ namespace Procuratio
         }
 
         private void picBTNMostrarContraseña_MouseMove(object sender, MouseEventArgs e) => txtContraseña.UseSystemPasswordChar = false;
-        private void picBTNMostrarContraseña_MouseLeave(object sender, EventArgs e) { if (txtContraseña.Text != TextoVisualContraseña) { txtContraseña.UseSystemPasswordChar = true; } }
+        private void picBTNMostrarContraseña_MouseLeave(object sender, EventArgs e) { if (txtContraseña.Text != TEXTO_VISUAL_CONTRASEÑA) { txtContraseña.UseSystemPasswordChar = true; } }
 
         private void LimpiarlblMensajeDeError(object sender, EventArgs e) { if (lblMensajeDeError.Visible == true) { lblMensajeDeError.Visible = false; } }
         #endregion
@@ -149,8 +145,8 @@ namespace Procuratio
 
             if (UsuarioIniciaSesion != null)
             {
-                txtUsuario.Text = TextoVisualUsuario;
-                txtContraseña.Text = TextoVisualContraseña;
+                txtUsuario.Text = TEXTO_VISUAL_USUARIO;
+                txtContraseña.Text = TEXTO_VISUAL_CONTRASEÑA;
                 txtContraseña.UseSystemPasswordChar = false;
 
                 Hide();

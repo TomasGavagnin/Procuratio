@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using Datos;
+﻿using Datos;
 using Negocio;
 using Procuratio.ClsDeApoyo;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Procuratio
 {
@@ -46,7 +42,7 @@ namespace Procuratio
             ID_Categoria, Categoria, SeEnvianCocina, Seleccionar
         }
 
-        private readonly string TextoVisualBuscar = "Buscar por nombre de articulo...", TextoVisualComboBox = "Todas las categorias";
+        private readonly string TEXTO_VISUAL_BUSCAR = "Buscar por nombre de articulo...", TEXTO_VISUAL_COMBOBOX = "Todas las categorias";
         private bool FormularioCargado = false;
         private int UltimaFilaSeleccionada = -1;
         private List<int> ArticulosDeCartaMarcados = new List<int>();
@@ -101,7 +97,7 @@ namespace Procuratio
         private void TxtBuscarPorNombre_Enter(object sender, EventArgs e)
         {
             FormularioCargado = false;
-            if (txtBuscarPorNombre.Text == TextoVisualBuscar) { txtBuscarPorNombre.Text = string.Empty; }
+            if (txtBuscarPorNombre.Text == TEXTO_VISUAL_BUSCAR) { txtBuscarPorNombre.Text = string.Empty; }
             txtBuscarPorNombre.ForeColor = ClsColores.GrisClaro;
             FormularioCargado = true;
         }
@@ -109,7 +105,7 @@ namespace Procuratio
         private void TxtBuscarPorNombre_Leave(object sender, EventArgs e)
         {
             FormularioCargado = false;
-            if (txtBuscarPorNombre.Text == string.Empty) { txtBuscarPorNombre.Text = TextoVisualBuscar; }
+            if (txtBuscarPorNombre.Text == string.Empty) { txtBuscarPorNombre.Text = TEXTO_VISUAL_BUSCAR; }
             txtBuscarPorNombre.ForeColor = ClsColores.GrisOscuro;
             FormularioCargado = true;
         }
@@ -248,7 +244,7 @@ namespace Procuratio
 
                             UltimaFilaSeleccionada = -1;
                         }
-                        else if(InformacionDelError != string.Empty)
+                        else if (InformacionDelError != string.Empty)
                         {
                             MessageBox.Show($"{InformacionDelError}", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
@@ -378,7 +374,7 @@ namespace Procuratio
                     ID_CategoriaFiltro = CategoriaSeleccionada.ID_CategoriaArticulo;
                 }
 
-                if (txtBuscarPorNombre.Text != TextoVisualBuscar) { NombreArticulo = txtBuscarPorNombre.Text; }
+                if (txtBuscarPorNombre.Text != TEXTO_VISUAL_COMBOBOX) { NombreArticulo = txtBuscarPorNombre.Text; }
 
                 string InformacionDelError = string.Empty;
 
@@ -516,7 +512,7 @@ namespace Procuratio
             if (ListarCategorias != null)
             {
                 // Creo el item para listar todo
-                ListarCategorias.Add(new CategoriaArticulo { ID_CategoriaArticulo = 0, Nombre = TextoVisualComboBox });
+                ListarCategorias.Add(new CategoriaArticulo { ID_CategoriaArticulo = 0, Nombre = TEXTO_VISUAL_COMBOBOX });
 
                 // Nombre de la columna que contiene el nombre
                 cmbCategoria.DisplayMember = "Nombre";

@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Datos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Datos;
 
 namespace Negocio
 {
@@ -39,7 +37,7 @@ namespace Negocio
                             }
                         case ETipoDeListado.CrearRegistro:
                             {
-                                return BBDD.TipoDeMonto.Include("TipoDeMovimiento").Where(Identificador => Identificador.ID_TipoDeMonto > 9 
+                                return BBDD.TipoDeMonto.Include("TipoDeMovimiento").Where(Identificador => Identificador.ID_TipoDeMonto > 9
                                 || Identificador.ID_TipoDeMonto == (int)ETiposDeMontos.AperturaCaja || Identificador.ID_TipoDeMonto == (int)ETiposDeMontos.CierreCaja).ToList();
                             }
                         default: return null;

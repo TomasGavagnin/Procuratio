@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using Datos;
+﻿using Datos;
 using Negocio;
 using Negocio.Clases_por_tablas;
 using Procuratio.ClsDeApoyo;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Procuratio.FrmsSecundarios.FrmsTemporales.FrmClientes
 {
@@ -126,6 +120,6 @@ namespace Procuratio.FrmsSecundarios.FrmsTemporales.FrmClientes
 
         private void PicBTNCerrar_Click(object sender, EventArgs e) => Close();
 
-        public List<int> S_ListaDeClientes { set { ListaDeClientes = value; } } 
+        public List<int> S_ListaDeClientes { set { ListaDeClientes = value; } }
     }
 }

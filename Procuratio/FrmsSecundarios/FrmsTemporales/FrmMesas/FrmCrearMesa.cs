@@ -1,14 +1,12 @@
-﻿using System;
+﻿using Datos;
+using Negocio;
+using Procuratio.ClsDeApoyo;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Datos;
-using Negocio;
-using Negocio.Clases_por_tablas;
-using System.Threading;
-using Procuratio.ClsDeApoyo;
 
 namespace Procuratio
 {
@@ -170,7 +168,6 @@ namespace Procuratio
             ID_Mesa, Numero, Capacidad, Seleccionar
         }
 
-        //private FrmMesas FormMesas;
         private int Acumulador = 0;
         private bool Invertir = true;
         private int[,] NumeroDeMesas = new int[12, 2];

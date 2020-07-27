@@ -41,7 +41,7 @@ namespace Procuratio.ClsDeApoyo
         /// Color usado para botones de cancelacion o eliminacion.
         /// </summary>
         public static readonly Color Rojo = Color.FromArgb(232, 17, 35);
-        
+
         /// <summary>
         /// Color usado para botones de confirmacion.
         /// </summary>

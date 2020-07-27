@@ -1,13 +1,12 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Collections.Generic;
-using Datos;
+﻿using Datos;
 using Negocio;
 using Negocio.Clases_por_tablas;
-using Procuratio.Reportes;
 using Procuratio.ClsDeApoyo;
 using Procuratio.FrmGenerales;
+using Procuratio.Reportes;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Procuratio
 {
@@ -129,7 +128,7 @@ namespace Procuratio
         {
             Button BotonEnFoco = (Button)sender;
 
-            if (BotonEnFoco.Name == btnAplicarFiltro.Name || BotonEnFoco.Name == btnVerRegistrosDeHoy.Name 
+            if (BotonEnFoco.Name == btnAplicarFiltro.Name || BotonEnFoco.Name == btnVerRegistrosDeHoy.Name
                 || BotonEnFoco.Name == btnImprimir.Name)
             {
                 BotonEnFoco.BackColor = ClsColores.VioletaClaro;
@@ -335,7 +334,7 @@ namespace Procuratio
                 {
                     cmbTipoDeMonto.SelectedValue = 0;
                 }
-                
+
 
                 if (cmbUsuarios.SelectedValue != null)
                 {

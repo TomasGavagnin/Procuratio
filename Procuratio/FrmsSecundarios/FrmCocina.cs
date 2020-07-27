@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Datos;
+﻿using Datos;
 using Negocio;
 using Negocio.Clases_de_apoyo;
 using Negocio.Clases_por_tablas;
 using Procuratio.ClsDeApoyo;
+using System;
+using System.Collections.Generic;
+using System.Drawing.Printing;
+using System.Windows.Forms;
 
 namespace Procuratio
 {
@@ -452,7 +446,7 @@ namespace Procuratio
                         }
                     }
                 }
-                
+
                 // El pedido fue eliminado desde la ventana de pedidos.
                 if (!PedidoEncontrado) { PedidosEliminar.Add(Elemento); }
             }
@@ -475,7 +469,7 @@ namespace Procuratio
         private void DgvListaPedidos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView DetectarTipoCasilla = (DataGridView)sender;
-            
+
             if (DetectarTipoCasilla.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0 && (string)dgvListaPedidos.Rows[e.RowIndex].Cells[(int)ENumColDGVListaPedidos.EsDelivery].Value == "NO")
             {
                 using (FrmMesasReservadas FormMesasReservadas = new FrmMesasReservadas((int)dgvListaPedidos.Rows[e.RowIndex].Cells[(int)ENumColDGVListaPedidos.ID_Pedido].Value))

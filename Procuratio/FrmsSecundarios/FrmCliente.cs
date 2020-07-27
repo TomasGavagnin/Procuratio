@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using Datos;
+﻿using Datos;
 using Negocio;
 using Negocio.Clases_por_tablas;
-using Procuratio.FrmsSecundarios.FrmsTemporales.FrmDelivery;
-using System.Threading;
-using Procuratio.FrmsSecundarios.FrmsTemporales.FrmClientes;
 using Procuratio.ClsDeApoyo;
+using Procuratio.FrmsSecundarios.FrmsTemporales.FrmClientes;
+using Procuratio.FrmsSecundarios.FrmsTemporales.FrmDelivery;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Procuratio
 {
@@ -148,7 +141,7 @@ namespace Procuratio
         private FrmAdministrarReserva FormAdministrarReservas = null;
         private FrmCrearEditarDelivery FormCrearEditarDelivery = null;
         private FrmCrearMesa FormCrearMesa = null;
-        private readonly string TextoVisualBuscar = "Buscar por nombre de cliente...", TextoVisualApellido = "Buscar por apellido de cliente...", TextoVisualTelefono = "Buscar por telefono de cliente...";
+        private readonly string TEXTO_VISUAL_BUSCAR = "Buscar por nombre de cliente...", TEXTO_VISUAL_APELLIDO = "Buscar por apellido de cliente...", TEXTO_VISUAL_TELEFONO = "Buscar por telefono de cliente...";
         private List<int> ClientesDelPedido = new List<int>();
         private int ID_Pedido = -1;
         private bool FormularioCargado = false;
@@ -192,37 +185,37 @@ namespace Procuratio
 
         private void TxtBuscarPorNombre_Enter(object sender, EventArgs e)
         {
-            if (txtBuscarPorNombre.Text == TextoVisualBuscar) { txtBuscarPorNombre.Text = string.Empty; }
+            if (txtBuscarPorNombre.Text == TEXTO_VISUAL_BUSCAR) { txtBuscarPorNombre.Text = string.Empty; }
             txtBuscarPorNombre.ForeColor = ClsColores.GrisClaro;
         }
 
         private void TxtBuscarPorNombre_Leave(object sender, EventArgs e)
         {
-            if (txtBuscarPorNombre.Text == string.Empty) { txtBuscarPorNombre.Text = TextoVisualBuscar; }
+            if (txtBuscarPorNombre.Text == string.Empty) { txtBuscarPorNombre.Text = TEXTO_VISUAL_BUSCAR; }
             txtBuscarPorNombre.ForeColor = ClsColores.GrisOscuro;
         }
 
         private void TxtBuscarPorApellido_Enter(object sender, EventArgs e)
         {
-            if (TxtBuscarPorApellido.Text == TextoVisualApellido) { TxtBuscarPorApellido.Text = string.Empty; }
+            if (TxtBuscarPorApellido.Text == TEXTO_VISUAL_APELLIDO) { TxtBuscarPorApellido.Text = string.Empty; }
             TxtBuscarPorApellido.ForeColor = ClsColores.GrisClaro;
         }
 
         private void TxtBuscarPorApellido_Leave(object sender, EventArgs e)
         {
-            if (TxtBuscarPorApellido.Text == string.Empty) { TxtBuscarPorApellido.Text = TextoVisualApellido; }
+            if (TxtBuscarPorApellido.Text == string.Empty) { TxtBuscarPorApellido.Text = TEXTO_VISUAL_APELLIDO; }
             TxtBuscarPorApellido.ForeColor = ClsColores.GrisOscuro;
         }
 
         private void TxtBuscarPorTelefono_Enter(object sender, EventArgs e)
         {
-            if (TxtBuscarPorTelefono.Text == TextoVisualTelefono) { TxtBuscarPorTelefono.Text = string.Empty; }
+            if (TxtBuscarPorTelefono.Text == TEXTO_VISUAL_TELEFONO) { TxtBuscarPorTelefono.Text = string.Empty; }
             TxtBuscarPorTelefono.ForeColor = ClsColores.GrisClaro;
         }
 
         private void TxtBuscarPorTelefono_Leave(object sender, EventArgs e)
         {
-            if (TxtBuscarPorTelefono.Text == string.Empty) { TxtBuscarPorTelefono.Text = TextoVisualTelefono; }
+            if (TxtBuscarPorTelefono.Text == string.Empty) { TxtBuscarPorTelefono.Text = TEXTO_VISUAL_TELEFONO; }
             TxtBuscarPorTelefono.ForeColor = ClsColores.GrisOscuro;
         }
         #endregion
@@ -244,7 +237,7 @@ namespace Procuratio
         private void TxtBuscarPorNombre_TextChanged(object sender, EventArgs e) => CargarDGVClientes(ClsClientes.EClienteBuscar.Filtro);
         private void TxtBuscarPorApellido_TextChanged(object sender, EventArgs e) => CargarDGVClientes(ClsClientes.EClienteBuscar.Filtro);
         private void TxtBuscarPorTelefono_TextChanged(object sender, EventArgs e) => CargarDGVClientes(ClsClientes.EClienteBuscar.Filtro);
-        
+
         private void BtnCrearCliente_Click(object sender, EventArgs e)
         {
             using (FrmGestionCliente CrearCliente = new FrmGestionCliente())
@@ -297,7 +290,7 @@ namespace Procuratio
                 }
 
                 DialogResult = DialogResult.OK;
-                Close(); 
+                Close();
             }
         }
 
@@ -395,9 +388,9 @@ namespace Procuratio
         private void LimpiarFiltros()
         {
             FormularioCargado = false;
-            txtBuscarPorNombre.Text = TextoVisualBuscar;
-            TxtBuscarPorApellido.Text = TextoVisualApellido;
-            TxtBuscarPorTelefono.Text = TextoVisualTelefono;
+            txtBuscarPorNombre.Text = TEXTO_VISUAL_BUSCAR;
+            TxtBuscarPorApellido.Text = TEXTO_VISUAL_APELLIDO;
+            TxtBuscarPorTelefono.Text = TEXTO_VISUAL_TELEFONO;
             FormularioCargado = true;
         }
 
@@ -407,8 +400,8 @@ namespace Procuratio
             ClientesDelPedido.Clear();
 
             // IndiceArray me mantiene el indice real de asignacion
-            for (int Indice = 0; Indice < TotalDeFilas; Indice++) 
-            { 
+            for (int Indice = 0; Indice < TotalDeFilas; Indice++)
+            {
                 dgvListarClientes.Rows[Indice].Cells[(int)ENumColDGVCliente.Seleccionar].Value = false;
                 ClsColores.MarcarFilaDGV(dgvListarClientes, Indice, false);
             }
@@ -457,7 +450,7 @@ namespace Procuratio
                             ClientesDelPedido.RemoveAll(I => I == (int)dgvListarClientes.Rows[e.RowIndex].Cells[(int)ENumColDGVCliente.ID_Cliente].Value);
                         }
                     }
-                    
+
                     lblResultadoTotalClientes.Text = Convert.ToString(ClientesDelPedido.Count);
                 }
             }
@@ -613,9 +606,9 @@ namespace Procuratio
                 string ApellidoCliente = string.Empty;
                 string TelefonoCliente = string.Empty;
 
-                if (txtBuscarPorNombre.Text != TextoVisualBuscar) { NombreCliente = txtBuscarPorNombre.Text; }
-                if (TxtBuscarPorApellido.Text != TextoVisualApellido) { ApellidoCliente = TxtBuscarPorApellido.Text; }
-                if (TxtBuscarPorTelefono.Text != TextoVisualTelefono) { TelefonoCliente = TxtBuscarPorTelefono.Text; }
+                if (txtBuscarPorNombre.Text != TEXTO_VISUAL_BUSCAR) { NombreCliente = txtBuscarPorNombre.Text; }
+                if (TxtBuscarPorApellido.Text != TEXTO_VISUAL_APELLIDO) { ApellidoCliente = TxtBuscarPorApellido.Text; }
+                if (TxtBuscarPorTelefono.Text != TEXTO_VISUAL_TELEFONO) { TelefonoCliente = TxtBuscarPorTelefono.Text; }
 
                 dgvListarClientes.Rows.Clear();
 

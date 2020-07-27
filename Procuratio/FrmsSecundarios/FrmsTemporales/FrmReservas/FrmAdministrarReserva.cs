@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
+﻿using Datos;
 using Negocio;
-using Datos;
 using Procuratio.ClsDeApoyo;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Procuratio
 {
@@ -96,7 +91,7 @@ namespace Procuratio
             {
                 dtpFecha.Value = CargarDatosReserva.Fecha;
                 mtbHorario.Text = Convert.ToString(CargarDatosReserva.Hora);
-                cmbFormaContacto.SelectedValue = CargarDatosReserva.ID_ViaContacto; 
+                cmbFormaContacto.SelectedValue = CargarDatosReserva.ID_ViaContacto;
                 nudCantidadPersonas.Value = CargarDatosReserva.CantidadPersonas;
             }
             else if (InformacionDelError == string.Empty)
@@ -143,7 +138,7 @@ namespace Procuratio
         private int ID_Cliente = -1;
         List<int> ListaDeMesasReserva = new List<int>();
         List<int> Numeracion = new List<int>();
-        private const int TiempoMinimoNuevaReserva = 5;
+        private readonly int TIEMPO_MINIMO_NUEVA_RESERVA = 5;
         private bool DatosCargados = false; // Evita que se vacie la lista de mesas si modifica la cantidad de personas, al estar cargando el formulario
         #endregion
 
@@ -301,7 +296,7 @@ namespace Procuratio
                 ActualizarReserva.ID_Reserva = ID_Reserva;
                 ActualizarReserva.Fecha = Convert.ToDateTime(dtpFecha.Value.Date);
                 ActualizarReserva.Hora = TimeSpan.Parse(mtbHorario.Text);
-                ActualizarReserva.ID_ViaContacto = ContactoSeleccionado.ID_ViaDeContacto; 
+                ActualizarReserva.ID_ViaContacto = ContactoSeleccionado.ID_ViaDeContacto;
                 ActualizarReserva.CantidadPersonas = (int)nudCantidadPersonas.Value;
                 ActualizarReserva.ID_EstadoReserva = (int)ClsEstadoReservas.EEstadosReservas.Pendiente;
 
@@ -395,7 +390,7 @@ namespace Procuratio
 
                 CrearReserva.Fecha = Convert.ToDateTime(dtpFecha.Value.Date);
                 CrearReserva.Hora = TimeSpan.Parse(mtbHorario.Text);
-                CrearReserva.ID_ViaContacto = ContactoSeleccionado.ID_ViaDeContacto; 
+                CrearReserva.ID_ViaContacto = ContactoSeleccionado.ID_ViaDeContacto;
                 CrearReserva.CantidadPersonas = (int)nudCantidadPersonas.Value;
                 CrearReserva.ID_EstadoReserva = (int)ClsEstadoReservas.EEstadosReservas.Pendiente;
                 CrearReserva.ID_Cliente = ID_Cliente;
@@ -473,7 +468,7 @@ namespace Procuratio
                     bool ValidarHoraDiaActual = true;
 
                     int HoraActual = Convert.ToInt32(DateTime.Now.ToString("HH"));
-                    int MinutoActual = Convert.ToInt32(DateTime.Now.ToString("mm")) + TiempoMinimoNuevaReserva;
+                    int MinutoActual = Convert.ToInt32(DateTime.Now.ToString("mm")) + TIEMPO_MINIMO_NUEVA_RESERVA;
 
                     // Validar como correcto un horario mayor a la hora actual si la reserva la anotará para el mismo dia
                     if (DateTime.Today == dtpFecha.Value.Date && Convert.ToInt32(Horario[0]) <= HoraActual)
@@ -499,7 +494,7 @@ namespace Procuratio
                     }
                     else
                     {
-                        using (FrmInformacion FormInformacion = new FrmInformacion($"La hora de reserva debe por lo menos {TiempoMinimoNuevaReserva}" +
+                        using (FrmInformacion FormInformacion = new FrmInformacion($"La hora de reserva debe por lo menos {TIEMPO_MINIMO_NUEVA_RESERVA}" +
                                 $" minutos mayor " +
                                 $"a la hora actual (ya que " +
                                 $"reserva el mismo dia).", ClsColores.Blanco, 200, 300))

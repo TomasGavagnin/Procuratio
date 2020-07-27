@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Datos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Datos;
 
 namespace Negocio
 {
@@ -29,8 +27,9 @@ namespace Negocio
                 {
                     switch (_TipoDeFiltro)
                     {
-                        case EClienteBuscar.Todos: return BBDD.Cliente.Where(Identificador => Identificador.ID_Cliente != 1).OrderBy(Identificador => Identificador.Nombre)
-                                .ThenBy(Identificador => Identificador.Apellido).ToList();
+                        case EClienteBuscar.Todos:
+                            return BBDD.Cliente.Where(Identificador => Identificador.ID_Cliente != 1).OrderBy(Identificador => Identificador.Nombre)
+         .ThenBy(Identificador => Identificador.Apellido).ToList();
 
                         case EClienteBuscar.Filtro:
                             {
@@ -67,7 +66,7 @@ namespace Negocio
                                 _NombreCliente = _NombreCliente.ToLower();
                                 _ApellidoCliente = _ApellidoCliente.ToLower();
 
-                                return BBDD.Cliente.Where(Identificador => Identificador.Nombre.ToLower() == _NombreCliente 
+                                return BBDD.Cliente.Where(Identificador => Identificador.Nombre.ToLower() == _NombreCliente
                                 && Identificador.Apellido.ToLower() == _ApellidoCliente
                                 && Identificador.ID_Cliente != _ID_Cliente
                                 && Identificador.ID_Cliente != 1).ToList();

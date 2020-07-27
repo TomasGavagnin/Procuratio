@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Datos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Datos;
 
 namespace Negocio
 {
@@ -33,13 +31,15 @@ namespace Negocio
                 {
                     switch (_TipoDeFiltro)
                     {
-                        case ETipoDeFiltro.ReservasActivas: return BBDD.Reserva.Include("Cliente").Include("EstadoReserva").Where(Identificador => Identificador.Fecha >= DateTime.Today 
-                        && (Identificador.ID_EstadoReserva != (int)ClsEstadoReservas.EEstadosReservas.Eliminada
-                        || Identificador.ID_EstadoReserva == (int)ClsEstadoReservas.EEstadosReservas.SinConfirmar)).ToList();
+                        case ETipoDeFiltro.ReservasActivas:
+                            return BBDD.Reserva.Include("Cliente").Include("EstadoReserva").Where(Identificador => Identificador.Fecha >= DateTime.Today
+&& (Identificador.ID_EstadoReserva != (int)ClsEstadoReservas.EEstadosReservas.Eliminada
+|| Identificador.ID_EstadoReserva == (int)ClsEstadoReservas.EEstadosReservas.SinConfirmar)).ToList();
 
-                        case ETipoDeFiltro.ReservasExpiradas: return BBDD.Reserva.Include("Cliente").Include("EstadoReserva").Where(Identificador => Identificador.Fecha <= DateTime.Today 
-                        && (Identificador.ID_EstadoReserva == (int)ClsEstadoReservas.EEstadosReservas.Pendiente
-                        || Identificador.ID_EstadoReserva == (int)ClsEstadoReservas.EEstadosReservas.SinConfirmar)).ToList();
+                        case ETipoDeFiltro.ReservasExpiradas:
+                            return BBDD.Reserva.Include("Cliente").Include("EstadoReserva").Where(Identificador => Identificador.Fecha <= DateTime.Today
+&& (Identificador.ID_EstadoReserva == (int)ClsEstadoReservas.EEstadosReservas.Pendiente
+|| Identificador.ID_EstadoReserva == (int)ClsEstadoReservas.EEstadosReservas.SinConfirmar)).ToList();
 
                         case ETipoDeFiltro.Filtro:
                             {
@@ -48,7 +48,7 @@ namespace Negocio
 
                                 // Como pre filtro uso la fecha desde que generalmente esta disponible siempre, si no lo esta, realiza el filtrado sobre
                                 // todos los registros
-                                
+
                                 if (_FechaDesde != string.Empty && _FechaHasta != string.Empty)
                                 {
                                     DateTime FechaDesde = Convert.ToDateTime(_FechaDesde).Date;
@@ -56,7 +56,7 @@ namespace Negocio
 
                                     ListaFiltrada = BBDD.Reserva.Include("Cliente").Include("EstadoReserva").Where(Identificador => Identificador.Fecha >= FechaDesde
                                     && Identificador.Fecha <= FechaHasta).ToList();
-                                }    
+                                }
                                 else if (_FechaDesde != string.Empty)
                                 {
                                     DateTime FechaDesde = Convert.ToDateTime(_FechaDesde).Date;

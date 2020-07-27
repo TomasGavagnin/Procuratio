@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Datos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Datos;
 
 namespace Negocio
 {
@@ -44,55 +42,65 @@ namespace Negocio
                 {
                     switch (_TipoDeFiltro)
                     {
-                        case ETipoListado.UsuariosActivos: return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo
-                        && Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Administrador).ToList();
+                        case ETipoListado.UsuariosActivos:
+                            return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo
+&& Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Administrador).ToList();
 
-                        case ETipoListado.UsuariosInactivos: return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Inactivo
-                        && Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Administrador).ToList();
+                        case ETipoListado.UsuariosInactivos:
+                            return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Inactivo
+&& Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Administrador).ToList();
 
-                        case ETipoListado.UsuariosGerYSubGer: return BBDD.Usuario.Where(Identificador => Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Gerente 
-                        || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.SubGerente
-                        || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
-                        && Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
+                        case ETipoListado.UsuariosGerYSubGer:
+                            return BBDD.Usuario.Where(Identificador => Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Gerente
+|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.SubGerente
+|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
+&& Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
 
-                        case ETipoListado.UsuariosGerentes: return BBDD.Usuario.Where(Identificador => Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Gerente
-                        || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
-                        && Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
+                        case ETipoListado.UsuariosGerentes:
+                            return BBDD.Usuario.Where(Identificador => Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Gerente
+|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
+&& Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
 
-                        case ETipoListado.UsuariosParaMesas: return BBDD.Usuario.Where(Identificador => Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Chef 
-                        && Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo
-                        && Identificador.ID_Usuario != 1).ToList();
+                        case ETipoListado.UsuariosParaMesas:
+                            return BBDD.Usuario.Where(Identificador => Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Chef
+&& Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo
+&& Identificador.ID_Usuario != 1).ToList();
 
-                        case ETipoListado.UsuariosChef: return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Chef
-                        && Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
+                        case ETipoListado.UsuariosChef:
+                            return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Chef
+&& Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
 
-                        case ETipoListado.ChefGerenteSubgerente:  return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Chef
-                        || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Gerente 
-                        || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.SubGerente
-                        || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
-                        && Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
+                        case ETipoListado.ChefGerenteSubgerente:
+                            return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Chef
+|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Gerente
+|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.SubGerente
+|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
+&& Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
 
-                        case ETipoListado.GerenteSubGerenteMozoDueño: return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_Usuario == _ID_UsuarioActual
-                        || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Gerente
-                        || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.SubGerente
-                        || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
-                        && Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
+                        case ETipoListado.GerenteSubGerenteMozoDueño:
+                            return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_Usuario == _ID_UsuarioActual
+|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Gerente
+|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.SubGerente
+|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
+&& Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
 
-                        case ETipoListado.Desarrollador: return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
-                        && Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
+                        case ETipoListado.Desarrollador:
+                            return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
+&& Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
 
                         case ETipoListado.DatosRepetidos:
-                        _Nombre = _Nombre.ToLower();
-                        _Apellido = _Apellido.ToLower();
-                        _Contraseña = _Contraseña.ToLower();
+                            _Nombre = _Nombre.ToLower();
+                            _Apellido = _Apellido.ToLower();
+                            _Contraseña = _Contraseña.ToLower();
 
-                        return BBDD.Usuario.Include("Perfil").Where(Identificador => ((Identificador.Nombre.ToLower() == _Nombre 
-                        && Identificador.Apellido.ToLower() == _Apellido)
-                        || Identificador.Contraseña.ToLower() == _Contraseña) 
-                        && Identificador.ID_Usuario != _ID_UsuarioActual).ToList();
+                            return BBDD.Usuario.Include("Perfil").Where(Identificador => ((Identificador.Nombre.ToLower() == _Nombre
+                            && Identificador.Apellido.ToLower() == _Apellido)
+                            || Identificador.Contraseña.ToLower() == _Contraseña)
+                            && Identificador.ID_Usuario != _ID_UsuarioActual).ToList();
 
-                        case ETipoListado.TodosLosUsuarios: return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo 
-                        && Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Administrador).ToList();
+                        case ETipoListado.TodosLosUsuarios:
+                            return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo
+&& Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Administrador).ToList();
 
                         default: return null;
                     }
@@ -134,7 +142,7 @@ namespace Negocio
                             {
                                 _Nombre = _Nombre.ToLower();
 
-                                return BBDD.Usuario.Include("Perfil").SingleOrDefault(Identificador => Identificador.Nombre.ToLower() == _Nombre 
+                                return BBDD.Usuario.Include("Perfil").SingleOrDefault(Identificador => Identificador.Nombre.ToLower() == _Nombre
                                 && Identificador.Contraseña == _Contraseña);
                             }
 

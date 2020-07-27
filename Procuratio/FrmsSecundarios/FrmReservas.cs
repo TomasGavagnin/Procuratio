@@ -1,14 +1,11 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using Datos;
 using Negocio;
-using Datos;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Procuratio.Reportes;
 using Procuratio.ClsDeApoyo;
 using Procuratio.FrmGenerales;
-using System.Threading.Tasks;
+using Procuratio.Reportes;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Procuratio
 {
@@ -84,8 +81,8 @@ namespace Procuratio
             Estado, Seleccionar
         }
 
-        private const string TextoVisualBuscar = "Buscar por nombre de cliente...";
-        private const int TiempoMinimoNuevaReserva = 5; //Establece cuantos minutos mas puede hacer una reserva si la realiza el
+        private readonly string TEXTO_VISUAL_BUSCAR = "Buscar por nombre de cliente...";
+        private readonly int TIEMPO_MINIMO_NUEVA_RESERVA = 5; //Establece cuantos minutos mas puede hacer una reserva si la realiza el
                                                         //mismo dia a una hora cerca de la actual
         List<int> ListaDeMesasReserva = new List<int>();
         private int[,] NumeroDeMesas = new int[12, 2];
@@ -131,13 +128,13 @@ namespace Procuratio
 
         private void TxtBuscarPorNombre_Enter(object sender, EventArgs e)
         {
-            if (txtBuscarPorNombre.Text == TextoVisualBuscar) { txtBuscarPorNombre.Text = string.Empty; }
+            if (txtBuscarPorNombre.Text == TEXTO_VISUAL_BUSCAR) { txtBuscarPorNombre.Text = string.Empty; }
             txtBuscarPorNombre.ForeColor = ClsColores.GrisClaro;
         }
 
         private void TxtBuscarPorNombre_Leave(object sender, EventArgs e)
         {
-            if (txtBuscarPorNombre.Text == string.Empty) { txtBuscarPorNombre.Text = TextoVisualBuscar; }
+            if (txtBuscarPorNombre.Text == string.Empty) { txtBuscarPorNombre.Text = TEXTO_VISUAL_BUSCAR; }
             txtBuscarPorNombre.ForeColor = ClsColores.GrisOscuro;
         }
         #endregion
@@ -204,7 +201,7 @@ namespace Procuratio
         /// </summary>
         private void ReservasPendientesSinConfirmar()
         {
-            txtBuscarPorNombre.Text = TextoVisualBuscar;
+            txtBuscarPorNombre.Text = TEXTO_VISUAL_BUSCAR;
             cmbEstadoReserva.SelectedValue = 0;
             cmbEstadoReserva.Text = "Pendientes y sin confirmar";
             TextoCombo = "Pendientes y sin confirmar";
@@ -216,7 +213,7 @@ namespace Procuratio
             dtpDechaHasta.Value = DateTime.Today;
             AplicaFiltro = true;
             IgnorarEliminadas = true;
-            
+
             CargarDGVReservas(ClsReservas.ETipoDeFiltro.Filtro);
         }
 
@@ -582,7 +579,7 @@ namespace Procuratio
                                                             {
                                                                 ID_Reserva = ConfirmarReseva.ID_Reserva;
                                                                 ID_Cliente = ConfirmarReseva.ID_Cliente;
-                                                                
+
                                                                 CantidadDePersonas = ConfirmarReseva.CantidadPersonas;
                                                                 CrearMesaReserva();
 
@@ -807,12 +804,12 @@ namespace Procuratio
                 ID_EstadoReserva = EstadoReservaSeleccionado.ID_EstadoReserva;
             }
 
-            if (!ckbIncluirFechaDesde.Checked && !ckbIncluirFechaHasta.Checked && txtBuscarPorNombre.Text == TextoVisualBuscar && ID_EstadoReserva == 0)
+            if (!ckbIncluirFechaDesde.Checked && !ckbIncluirFechaHasta.Checked && txtBuscarPorNombre.Text == TEXTO_VISUAL_BUSCAR && ID_EstadoReserva == 0)
             {
                 ResultadoFormulario = new FrmRespuesta($"¿Estas seguro que quieres cargar las reservas sin poner una 'fecha desde', una 'fecha hasta', un 'nombre' y un 'estado de reserva'? " +
                 $"Esto podria demorar en funcion de la cantidad de datos ya que traeria todos los registros.", FrmRespuesta.ETamaño.Pequeño, FrmRespuesta.ETipo.Si_No);
             }
-            else if (!ckbIncluirFechaDesde.Checked && txtBuscarPorNombre.Text == TextoVisualBuscar && ID_EstadoReserva == 0)
+            else if (!ckbIncluirFechaDesde.Checked && txtBuscarPorNombre.Text == TEXTO_VISUAL_BUSCAR && ID_EstadoReserva == 0)
             {
                 ResultadoFormulario = new FrmRespuesta($"¿Estas seguro que quieres cargar las reservas sin poner una 'fecha desde', un 'nombre' y un 'estado de reserva'? " +
                 $"Esto podria demorar en funcion de la cantidad de datos ya que traeria todos los registros (hasta la 'fecha hasta' " +
@@ -883,7 +880,7 @@ namespace Procuratio
                     $"en cuenta este filtro", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
-            if (txtBuscarPorNombre.Text != TextoVisualBuscar) { NombreCliente = txtBuscarPorNombre.Text; }
+            if (txtBuscarPorNombre.Text != TEXTO_VISUAL_BUSCAR) { NombreCliente = txtBuscarPorNombre.Text; }
 
             string FechaDesde = Convert.ToString(dtpFechaDesde.Value.Date);
             string FechaHasta = Convert.ToString(dtpDechaHasta.Value.Date);
@@ -1056,7 +1053,7 @@ namespace Procuratio
 
                     string NombreCliente = "Sin nombre de cliente";
 
-                    if (txtBuscarPorNombre.Text != TextoVisualBuscar) { NombreCliente = txtBuscarPorNombre.Text; }
+                    if (txtBuscarPorNombre.Text != TEXTO_VISUAL_BUSCAR) { NombreCliente = txtBuscarPorNombre.Text; }
 
                     string TextoEstadoReserva = string.Empty;
 

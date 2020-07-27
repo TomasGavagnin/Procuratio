@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using Datos;
+﻿using Datos;
 using Negocio;
 using Procuratio.ClsDeApoyo;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Procuratio
 {
@@ -49,7 +44,7 @@ namespace Procuratio
             string InformacionDelError = string.Empty;
 
             ClsCategoriasArticulos Categorias = new ClsCategoriasArticulos();
-            List<CategoriaArticulo> ListarCategorias = Categorias.LeerListado(ClsCategoriasArticulos.ETipoListado.CategoriasActivas,ref InformacionDelError);
+            List<CategoriaArticulo> ListarCategorias = Categorias.LeerListado(ClsCategoriasArticulos.ETipoListado.CategoriasActivas, ref InformacionDelError);
 
             if (ListarCategorias != null)
             {
@@ -105,7 +100,6 @@ namespace Procuratio
         #endregion
 
         #region Variables
-        private const string TextoVisualBuscar = "Buscar por nombre de articulo...", TextoVisualComboBox = "Categoria";
         private int ID_Articulo = -1;
         #endregion
 
@@ -405,7 +399,7 @@ namespace Procuratio
             string InformacionDelError = string.Empty;
 
             ClsArticulos Articulos = new ClsArticulos();
-            List<Articulo> BuscarDatosRepetidos = Articulos.LeerListado(ClsArticulos.ETipoListado.AritulosRepetidos, ref InformacionDelError,ClsArticulos.ETipoListado.AritulosRepetidos, "", 0, _Nombre, _ID_ArticuloActual);
+            List<Articulo> BuscarDatosRepetidos = Articulos.LeerListado(ClsArticulos.ETipoListado.AritulosRepetidos, ref InformacionDelError, ClsArticulos.ETipoListado.AritulosRepetidos, "", 0, _Nombre, _ID_ArticuloActual);
 
             if (BuscarDatosRepetidos != null)
             {

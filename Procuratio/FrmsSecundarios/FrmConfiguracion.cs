@@ -1,14 +1,13 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using Datos;
+﻿using Datos;
 using Negocio;
-using System.Collections.Generic;
-using Procuratio.FrmsSecundarios.FrmsTemporales.FrmConfiguracion;
-using System.Drawing.Printing;
-using Negocio.Clases_por_tablas;
-using Procuratio.ClsDeApoyo;
 using Negocio.Clases_de_apoyo;
+using Procuratio.ClsDeApoyo;
+using Procuratio.FrmsSecundarios.FrmsTemporales.FrmConfiguracion;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.Windows.Forms;
 
 namespace Procuratio
 {
@@ -98,7 +97,7 @@ namespace Procuratio
                 MessageBox.Show($"{InformacionDelError}", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        
+
         private void MostrarMenuVencimientos()
         {
             if (FrmInicioSesion.ObtenerInstancia().G_ID_PerfilUsuarioInicioSesion == (int)ClsPerfiles.EPerfiles.Administrador)
@@ -207,7 +206,7 @@ namespace Procuratio
             InformacionDelError = string.Empty;
 
             if (Configuraciones.Actualizar(ActualizarConfiguracion, ref InformacionDelError) != 0)
-            {   
+            {
                 if (ActualizarConfiguracion.TrabajaConPlantaAlta == 0)
                 {
                     lblCantidadMesasPATexto.Visible = false;
@@ -327,7 +326,7 @@ namespace Procuratio
                 {
                     BuscarMesaInactiva = Mesas.LeerPorNumero(-1, ClsMesas.ETipoDeListado.PrimerMesaInactivaPA, ref InformacionDelError);
                 }
-                
+
                 if (BuscarMesaInactiva != null) //encontro una mesa ya creada para actualizarle el estado y la capacidad
                 {
                     BuscarMesaInactiva.ID_EstadoMesa = (int)ClsEstadosMesas.EEstadosMesas.Activo_Disponible;

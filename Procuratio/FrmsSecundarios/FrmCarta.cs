@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Procuratio.FrmsSecundarios.FrmsTemporales.FrmCarta;
-using Datos;
+﻿using Datos;
 using Negocio;
 using Procuratio.ClsDeApoyo;
+using Procuratio.FrmsSecundarios.FrmsTemporales.FrmCarta;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Procuratio
 {
@@ -78,7 +74,6 @@ namespace Procuratio
             btnAplicarAumentoDescuento.Enabled = !_LicenciaExpirada;
             btnEliminarArtCat.Enabled = !_LicenciaExpirada;
             btnCrearArticulo.Enabled = !_LicenciaExpirada;
-            btnCrearCategoria.Enabled = !_LicenciaExpirada;
             BtnVerEditarCategorias.Enabled = !_LicenciaExpirada;
             dgvCarta.Enabled = !_LicenciaExpirada;
             grbAumentoDescuento.Enabled = !_LicenciaExpirada;
@@ -102,7 +97,7 @@ namespace Procuratio
             ID_Articulo, Nombre, Descripcion, Categoria, PrecioCarta, PrecioDelivery, Seleccionar
         }
 
-        private const string TextoVisualBuscar = "Buscar por nombre de articulo...";
+        private readonly string TEXTO_VISUAL_BUSCAR = "Buscar por nombre de articulo...";
         private bool FormularioCargado = false;
         private List<int> ArticulosDeCartaMarcados = new List<int>();
         private int UltimaFilaSeleccionada = -1;
@@ -132,7 +127,7 @@ namespace Procuratio
         private void TxtBuscarPorNombre_Enter(object sender, EventArgs e)
         {
             FormularioCargado = false;
-            if (txtBuscarPorNombre.Text == TextoVisualBuscar) { txtBuscarPorNombre.Text = string.Empty; }
+            if (txtBuscarPorNombre.Text == TEXTO_VISUAL_BUSCAR) { txtBuscarPorNombre.Text = string.Empty; }
             txtBuscarPorNombre.ForeColor = ClsColores.GrisClaro;
             FormularioCargado = true;
         }
@@ -140,7 +135,7 @@ namespace Procuratio
         private void TxtBuscarPorNombre_Leave(object sender, EventArgs e)
         {
             FormularioCargado = false;
-            if (txtBuscarPorNombre.Text == string.Empty) { txtBuscarPorNombre.Text = TextoVisualBuscar; }
+            if (txtBuscarPorNombre.Text == string.Empty) { txtBuscarPorNombre.Text = TEXTO_VISUAL_BUSCAR; }
             txtBuscarPorNombre.ForeColor = ClsColores.GrisOscuro;
             FormularioCargado = true;
         }
@@ -157,38 +152,6 @@ namespace Procuratio
                 {
                     CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivos);
                     FrmPrincipal.ObtenerInstancia().S_tslResultadoOperacion = "Articulo creado correctamente";
-                }
-            }
-        }
-
-        public void BtnCrearCategoria_Click(object sender, EventArgs e)
-        {
-            using (FrmCrearCategoria FormCrearCategoria = new FrmCrearCategoria())
-            {
-                FormCrearCategoria.ShowDialog();
-
-                if (FormCrearCategoria.DialogResult == DialogResult.OK)
-                {
-                    string InformacionDelError = string.Empty;
-
-                    ClsCategoriasArticulos CategoriasArticulos = new ClsCategoriasArticulos();
-
-                    List<CategoriaArticulo> ActualizarCategorias = CategoriasArticulos.LeerListado(ClsCategoriasArticulos.ETipoListado.CategoriasActivas, ref InformacionDelError);
-
-                    if (ActualizarCategorias != null)
-                    {
-                        CargarCMBCategorias();
-                        FrmPrincipal.ObtenerInstancia().S_tslResultadoOperacion = "Categoria agregada correctamente";
-                    }
-                    else if (InformacionDelError == string.Empty)
-                    {
-                        FrmPrincipal.ObtenerInstancia().MensajeAdvertencia("Fallo al agregar la categoria");
-                    }
-                    else
-                    {
-                        FrmPrincipal.ObtenerInstancia().MensajeAdvertencia("Fallo al agregar la categoria");
-                        MessageBox.Show($"{InformacionDelError}", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
                 }
             }
         }
@@ -265,7 +228,7 @@ namespace Procuratio
 
                 FormularioCargado = false;
                 CargarCMBCategorias();
-                txtBuscarPorNombre.Text = TextoVisualBuscar;
+                txtBuscarPorNombre.Text = TEXTO_VISUAL_BUSCAR;
                 cmbCategoria.Text = "Todas las categorias";
                 FormularioCargado = true;
             }
@@ -685,7 +648,7 @@ namespace Procuratio
                     ID_CategoriaFiltro = CategoriaSeleccionada.ID_CategoriaArticulo;
                 }
 
-                if (txtBuscarPorNombre.Text != TextoVisualBuscar) { NombreArticulo = txtBuscarPorNombre.Text; }
+                if (txtBuscarPorNombre.Text != TEXTO_VISUAL_BUSCAR) { NombreArticulo = txtBuscarPorNombre.Text; }
 
                 dgvCarta.Rows.Clear();
 
@@ -751,8 +714,8 @@ namespace Procuratio
                 else if (InformacionDelError == string.Empty)
                 {
                     FrmPrincipal.ObtenerInstancia().MensajeAdvertencia("Fallo al cargar los articulos");
-                        MessageBox.Show($"Ocurrio un fallo al intentar cargar los articulos de la carta",
-                            "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Ocurrio un fallo al intentar cargar los articulos de la carta",
+                        "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {

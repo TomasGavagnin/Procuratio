@@ -1,11 +1,10 @@
 ﻿using Datos;
 using Negocio;
+using Procuratio.ClsDeApoyo;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using Procuratio.ClsDeApoyo;
 
 namespace Procuratio.FrmsSecundarios.FrmsTemporales.FrmCarta
 {

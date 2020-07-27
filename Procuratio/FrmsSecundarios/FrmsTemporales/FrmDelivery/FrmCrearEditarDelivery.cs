@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Datos;
+﻿using Datos;
 using Negocio;
-using System.Runtime.InteropServices;
 using Negocio.Clases_por_tablas;
 using Procuratio.ClsDeApoyo;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Procuratio.FrmsSecundarios.FrmsTemporales.FrmDelivery
 {
@@ -423,7 +419,7 @@ namespace Procuratio.FrmsSecundarios.FrmsTemporales.FrmDelivery
                 }
 
                 CrearDelivery.ID_EstadoDelivery = (int)ClsEstadosDeliveries.EEstadosDeliveries.EnCocina;
-                
+
                 if (ckbRetiraEnElLocal.Checked)
                 {
                     CrearDelivery.Destino = null;

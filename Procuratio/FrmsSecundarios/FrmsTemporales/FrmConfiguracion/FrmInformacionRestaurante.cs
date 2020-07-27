@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Datos;
-using Negocio;
-using System.Runtime.InteropServices;
+﻿using Datos;
 using Negocio.Clases_por_tablas;
 using Procuratio.ClsDeApoyo;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Procuratio.FrmsSecundarios.FrmsTemporales.FrmConfiguracion
 {
@@ -38,7 +31,7 @@ namespace Procuratio.FrmsSecundarios.FrmsTemporales.FrmConfiguracion
                 if (CargarDatos.Eslogan != null) { TxtEslogan.Text = CargarDatos.Eslogan.Trim(); }
 
                 TxtTelefonoUno.Text = Convert.ToString(CargarDatos.TelefonoUno);
-                
+
                 if (CargarDatos.TelefonoDos != null) { TxtTelefonoDos.Text = Convert.ToString(CargarDatos.TelefonoDos); }
             }
             else if (InformacionDelError == string.Empty)
@@ -135,7 +128,7 @@ namespace Procuratio.FrmsSecundarios.FrmsTemporales.FrmConfiguracion
                 RegistroDeErrores += "Debe ingresar un minimo de 8 caracteres en la direccion.\r\n\r\n";
                 AnchoFormInformacion += 50;
             }
-            
+
             if (TxtEslogan.Text != string.Empty && (TxtEslogan.Text.Length > 24 || TxtEslogan.Text.Length < 22))
             {
                 DatosValidos = false;

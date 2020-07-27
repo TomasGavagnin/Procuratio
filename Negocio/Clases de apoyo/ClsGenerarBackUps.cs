@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Datos;
+using Negocio.Clases_por_tablas;
+using System;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.Configuration;
-using System.IO.Compression;
-using Negocio;
-using Datos;
-using Negocio.Clases_por_tablas;
-using System.Net.Mail;
-using System.IO;
 
 namespace Negocio
 {
@@ -43,7 +35,7 @@ namespace Negocio
                             Ruta = $@"{RutaIndicada.SelectedPath}";
 
                             string InformacionDelError = string.Empty;
-                        
+
                             ClsInformacionesRestaurantes InformacionesRestaurantes = new ClsInformacionesRestaurantes();
                             InformacionRestaurante BuscarDatosRestaurante = InformacionesRestaurantes.LeerPorNumero(1, ref InformacionDelError);
 

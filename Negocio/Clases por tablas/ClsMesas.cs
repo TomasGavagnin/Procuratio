@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Datos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Datos;
 
 namespace Negocio
 {
@@ -32,17 +30,21 @@ namespace Negocio
                     {
                         case ETipoDeListado.Todo: return BBDD.Mesa.ToList();
 
-                        case ETipoDeListado.MesasActivasPB: return BBDD.Mesa.Where(Identificador => Identificador.ID_EstadoMesa != (int)ClsEstadosMesas.EEstadosMesas.Inactivo 
-                        && Identificador.Numero <= 99).ToList();
+                        case ETipoDeListado.MesasActivasPB:
+                            return BBDD.Mesa.Where(Identificador => Identificador.ID_EstadoMesa != (int)ClsEstadosMesas.EEstadosMesas.Inactivo
+&& Identificador.Numero <= 99).ToList();
 
-                        case ETipoDeListado.MesasActivasPA: return BBDD.Mesa.Where(Identificador => Identificador.ID_EstadoMesa != (int)ClsEstadosMesas.EEstadosMesas.Inactivo 
-                        && Identificador.Numero >= 100).ToList();
+                        case ETipoDeListado.MesasActivasPA:
+                            return BBDD.Mesa.Where(Identificador => Identificador.ID_EstadoMesa != (int)ClsEstadosMesas.EEstadosMesas.Inactivo
+&& Identificador.Numero >= 100).ToList();
 
-                        case ETipoDeListado.MesasDisponiblesPB: return BBDD.Mesa.Where(Identificador => Identificador.ID_EstadoMesa == (int)ClsEstadosMesas.EEstadosMesas.Activo_Disponible
-                        && Identificador.Numero <= 99).ToList();
+                        case ETipoDeListado.MesasDisponiblesPB:
+                            return BBDD.Mesa.Where(Identificador => Identificador.ID_EstadoMesa == (int)ClsEstadosMesas.EEstadosMesas.Activo_Disponible
+&& Identificador.Numero <= 99).ToList();
 
-                        case ETipoDeListado.MesasDisponiblesPA: return BBDD.Mesa.Where(Identificador => Identificador.ID_EstadoMesa == (int)ClsEstadosMesas.EEstadosMesas.Activo_Disponible
-                        && Identificador.Numero >= 100).ToList();
+                        case ETipoDeListado.MesasDisponiblesPA:
+                            return BBDD.Mesa.Where(Identificador => Identificador.ID_EstadoMesa == (int)ClsEstadosMesas.EEstadosMesas.Activo_Disponible
+&& Identificador.Numero >= 100).ToList();
 
                         case ETipoDeListado.MesasOcupadas: return BBDD.Mesa.Include("Usuario").Where(Identificador => Identificador.ID_EstadoMesa == (int)ClsEstadosMesas.EEstadosMesas.Ocupada).ToList();
 
@@ -82,10 +84,12 @@ namespace Negocio
                     {
                         case ETipoDeListado.PorID: return BBDD.Mesa.SingleOrDefault(Identificador => Identificador.ID_Mesa == _MesaBuscar);
                         case ETipoDeListado.PorNumeroDeMesa: return BBDD.Mesa.SingleOrDefault(Identificador => Identificador.Numero == _MesaBuscar);
-                        case ETipoDeListado.PrimerMesaInactivaPB: return BBDD.Mesa.FirstOrDefault(Identificador => Identificador.ID_EstadoMesa == (int)ClsEstadosMesas.EEstadosMesas.Inactivo 
-                        && Identificador.Numero <= 99);
-                        case ETipoDeListado.PrimerMesaInactivaPA: return BBDD.Mesa.FirstOrDefault(Identificador => Identificador.ID_EstadoMesa == (int)ClsEstadosMesas.EEstadosMesas.Inactivo 
-                        && Identificador.Numero >= 100);
+                        case ETipoDeListado.PrimerMesaInactivaPB:
+                            return BBDD.Mesa.FirstOrDefault(Identificador => Identificador.ID_EstadoMesa == (int)ClsEstadosMesas.EEstadosMesas.Inactivo
+&& Identificador.Numero <= 99);
+                        case ETipoDeListado.PrimerMesaInactivaPA:
+                            return BBDD.Mesa.FirstOrDefault(Identificador => Identificador.ID_EstadoMesa == (int)ClsEstadosMesas.EEstadosMesas.Inactivo
+&& Identificador.Numero >= 100);
                         default: return null;
                     }
                 }

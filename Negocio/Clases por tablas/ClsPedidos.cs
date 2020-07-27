@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Datos;
+using Negocio.Clases_por_tablas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Datos;
-using Negocio.Clases_por_tablas;
 
 namespace Negocio
 {
@@ -64,7 +62,7 @@ namespace Negocio
                                     DateTime FechaHasta = Convert.ToDateTime(_FechaHasta).Date;
 
                                     ListaFiltrada = BBDD.Pedido.Include("Cliente").Include("Delivery.EstadoDelivery").Where(Identificador => Identificador.Fecha >= FechaDesde
-                                    && Identificador.Fecha <= FechaHasta 
+                                    && Identificador.Fecha <= FechaHasta
                                     && Identificador.ID_Delivery != null).ToList();
                                 }
                                 else if (_FechaDesde != string.Empty)
@@ -101,7 +99,7 @@ namespace Negocio
                                 }
                                 else
                                 {
-                                    Predicado.Add(Identificador => Identificador.Delivery.ID_EstadoDelivery == (int)ClsEstadosDeliveries.EEstadosDeliveries.EnCocina 
+                                    Predicado.Add(Identificador => Identificador.Delivery.ID_EstadoDelivery == (int)ClsEstadosDeliveries.EEstadosDeliveries.EnCocina
                                     || Identificador.Delivery.ID_EstadoDelivery == (int)ClsEstadosDeliveries.EEstadosDeliveries.ParaEntrega);
                                 }
 

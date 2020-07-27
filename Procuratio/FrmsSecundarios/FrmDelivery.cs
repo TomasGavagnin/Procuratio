@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Datos;
+﻿using Datos;
 using Negocio;
 using Negocio.Clases_por_tablas;
-using Procuratio.FrmsSecundarios.FrmsTemporales.FrmDelivery;
 using Procuratio.ClsDeApoyo;
 using Procuratio.FrmGenerales;
+using Procuratio.FrmsSecundarios.FrmsTemporales.FrmDelivery;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Procuratio.FrmsSecundarios
 {
@@ -88,7 +82,7 @@ namespace Procuratio.FrmsSecundarios
             Estado, Seleccionar
         }
 
-        private readonly string TextoVisualBuscar = "Buscar por nombre de cliente...";
+        private readonly string TEXTO_VISUAL_BUSCAR = "Buscar por nombre de cliente...";
         private int UltimaFilaSeleccionada = -1;
         private int Segundos = 0, Minutos = 0;
         private const int ActualizarDatos = 5;
@@ -125,13 +119,13 @@ namespace Procuratio.FrmsSecundarios
 
         private void TxtBuscarPorNombre_Enter(object sender, EventArgs e)
         {
-            if (txtBuscarPorNombre.Text == TextoVisualBuscar) { txtBuscarPorNombre.Text = string.Empty; }
+            if (txtBuscarPorNombre.Text == TEXTO_VISUAL_BUSCAR) { txtBuscarPorNombre.Text = string.Empty; }
             txtBuscarPorNombre.ForeColor = ClsColores.GrisClaro;
         }
 
         private void TxtBuscarPorNombre_Leave(object sender, EventArgs e)
         {
-            if (txtBuscarPorNombre.Text == string.Empty) { txtBuscarPorNombre.Text = TextoVisualBuscar; }
+            if (txtBuscarPorNombre.Text == string.Empty) { txtBuscarPorNombre.Text = TEXTO_VISUAL_BUSCAR; }
             txtBuscarPorNombre.ForeColor = ClsColores.GrisOscuro;
         }
         #endregion
@@ -149,8 +143,8 @@ namespace Procuratio.FrmsSecundarios
         {
             Segundos = 0;
             Minutos = 0;
-        
-            FrmRespuesta RespuestaFormulario; 
+
+            FrmRespuesta RespuestaFormulario;
 
             int ID_EstadoEnvio = 0;
 
@@ -207,8 +201,8 @@ namespace Procuratio.FrmsSecundarios
         {
             Segundos = 0;
             Minutos = 0;
-            
-            txtBuscarPorNombre.Text = TextoVisualBuscar;
+
+            txtBuscarPorNombre.Text = TEXTO_VISUAL_BUSCAR;
             cmbEstadoEnvio.SelectedValue = 0;
             cmbEstadoEnvio.Text = "En cocina y no entregados";
             ckbIncluirFechaDesde.Checked = true;
@@ -582,7 +576,7 @@ namespace Procuratio.FrmsSecundarios
                 }
             }
         }
-    
+
         private void BtnDeliveryEntregado_Click(object sender, EventArgs e)
         {
             using (FrmValidarUsuario FormValidarUsuario = new FrmValidarUsuario(FrmValidarUsuario.EFiltroUsuariosAutorizados.Todos))
@@ -716,7 +710,7 @@ namespace Procuratio.FrmsSecundarios
                 ID_EstadoDelivery = EstadoDeliverySeleccionado.ID_EstadoDelivery;
             }
 
-            if (txtBuscarPorNombre.Text != TextoVisualBuscar) { NombreCliente = txtBuscarPorNombre.Text; }
+            if (txtBuscarPorNombre.Text != TEXTO_VISUAL_BUSCAR) { NombreCliente = txtBuscarPorNombre.Text; }
 
             string FechaDesde = Convert.ToString(dtpFechaDesde.Value.Date);
             string FechaHasta = Convert.ToString(dtpDechaHasta.Value.Date);
@@ -727,7 +721,7 @@ namespace Procuratio.FrmsSecundarios
 
             ClsPedidos Pedidos = new ClsPedidos();
 
-            List<Pedido> CargarDGVDelivery = Pedidos.LeerListado(_TipoDeListado, ref InformacionDelError, FechaDesde,FechaHasta, NombreCliente, ID_EstadoDelivery, _DeliveryEnCocinaYNoEntregado);
+            List<Pedido> CargarDGVDelivery = Pedidos.LeerListado(_TipoDeListado, ref InformacionDelError, FechaDesde, FechaHasta, NombreCliente, ID_EstadoDelivery, _DeliveryEnCocinaYNoEntregado);
 
             if (CargarDGVDelivery != null)
             {
@@ -755,7 +749,7 @@ namespace Procuratio.FrmsSecundarios
                     dgvDelivery.Rows[NumeroDeFila].Cells[(int)ENumColDGVDelivery.Nombre].Value = Elemento.Cliente.Nombre;
                     dgvDelivery.Rows[NumeroDeFila].Cells[(int)ENumColDGVDelivery.Apellido].Value = Elemento.Cliente.Apellido;
                     dgvDelivery.Rows[NumeroDeFila].Cells[(int)ENumColDGVDelivery.Telefono].Value = Convert.ToString(Elemento.Cliente.Telefono);
-                   
+
                     if (Elemento.Delivery.Telefono == null)
                     {
                         dgvDelivery.Rows[NumeroDeFila].Cells[(int)ENumColDGVDelivery.TelefonoCadete].Value = string.Empty;

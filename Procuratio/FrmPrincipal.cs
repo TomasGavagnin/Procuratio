@@ -1,15 +1,16 @@
-﻿using System;
-using System.Drawing;
-using System.Runtime.InteropServices; //libreria para manipular el form
-using System.Windows.Forms;
+﻿using Datos;
 using Negocio;
-using Datos;
 using Negocio.Clases_por_tablas;
+using Procuratio.ClsDeApoyo;
+using Procuratio.FrmGenerales;
 using Procuratio.FrmsSecundarios;
 using Procuratio.FrmsSecundarios.FrmEstadisticas;
 using Procuratio.FrmsSecundarios.FrmsTemporales;
-using Procuratio.ClsDeApoyo;
-using Procuratio.FrmGenerales;
+using Procuratio.FrmsSecundarios.FrmsTemporales.FrmCarta;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices; //libreria para manipular el form
+using System.Windows.Forms;
 
 namespace Procuratio
 {
@@ -53,7 +54,7 @@ namespace Procuratio
                 picBTNReducir.Visible = false;
             }
 
-            FormCliente.PreparaFormParaPrincipal();
+            FORM_CLIENTE.PreparaFormParaPrincipal();
         }
 
         private void CargarConfiguraciones()
@@ -144,7 +145,7 @@ namespace Procuratio
             int AnchoFormInformacion = 200;
 
             string InformacionDelError = string.Empty;
-            
+
             ClsVencimientosFuncionalidades VencimientosFuncionalidades = new ClsVencimientosFuncionalidades();
             VencimientoFuncionalidades ComprobarVencimientos = VencimientosFuncionalidades.LeerPorNumero(1, ref InformacionDelError);
 
@@ -238,7 +239,7 @@ namespace Procuratio
             FrmCocina.ObtenerInstancia().BloquearPorVencimientoLicencia(_Bloquear);
             FrmConfiguracion.ObtenerInstancia().BloquearPorVencimientoLicencia(_Bloquear);
             FrmDelivery.ObtenerInstancia().BloquearPorVencimientoLicencia(_Bloquear);
-            FormCliente.BloquearPorVencimientoLicencia(false);
+            FORM_CLIENTE.BloquearPorVencimientoLicencia(false);
             tsmAccesoRapido.Enabled = !_Bloquear;
             tsmHerramientas.Enabled = !_Bloquear;
         }
@@ -246,7 +247,7 @@ namespace Procuratio
 
         #region Variables
         private static FrmPrincipal InstanciaForm;
-        private readonly FrmCliente FormCliente = new FrmCliente(FrmCliente.EMostrarOcultarColumnas.MostrarSeleccionar);
+        private readonly FrmCliente FORM_CLIENTE = new FrmCliente(FrmCliente.EMostrarOcultarColumnas.MostrarSeleccionar);
 
         private Form UltimoFormAbierto;
         private Button BotonPresionado;
@@ -255,20 +256,15 @@ namespace Procuratio
         private int Horas = 0, Minutos = 0, Segundos = 0;
         private int MinutosTranscurridos = 0, TiempoLimiteTranscurrido = 10;
         private bool FormAccesoEspecialAbierto = false;
-        private readonly TimeSpan PrimeraAdvertencia = new TimeSpan(12, 00, 00);
-        private readonly TimeSpan SegundaAdvertencia = new TimeSpan(20, 00, 00);
-        private readonly TimeSpan TiempoLimiteConexion = new TimeSpan(24, 00, 00);
+        private readonly TimeSpan PRIMERA_ADVERTENCIA = new TimeSpan(12, 00, 00);
+        private readonly TimeSpan SEGUNDA_ADVERTENCIA = new TimeSpan(20, 00, 00);
+        private readonly TimeSpan TIEMPO_LIMITE_CONEXION = new TimeSpan(24, 00, 00);
 
         private bool SeEstaMostrandoAdvertencia = false;
         private int SegundoDeInicioAdvertencia = -1;
 
-        private readonly int MedidaMenuExpandido = 300, MedidaMenuEncogido = 85;
-        private readonly int MedidaEstadisticaMenuExpandido = 303, MedidaEstadisticaMenuEncogido = 50;
-
-        private enum ETipoBotonDeSubmenu
-        {
-            Ninguno, EstadisticasCarta, EstadisticasDelivery, EstadisticasGenerales, EstadisticasCaja, EstadisticasReservas
-        }
+        private readonly int MEDIDA_MENU_EXPANDIDO = 300, MEDIDA_MENU_CONTRAIDO = 85;
+        private readonly int MEDIDA_ESTADISTICA_MENU_EXPANDIDO = 303, MEDIDA_ESTADISTICA_MENU_CONTRAIDO = 50;
         #endregion
 
         #region codigo para agregarle la propiedad de mover a la barra personalizada y el doble click
@@ -281,7 +277,7 @@ namespace Procuratio
         {
             ReleaseCapture();
             SendMessage(Handle, 0x112, 0xf012, 0);
-            
+
             //Cambiar el icono que se muestra si se reduce la pantalla por apretar y arrastrar la barra (y no con el boton)
             if (WindowState == FormWindowState.Normal)
             {
@@ -440,18 +436,18 @@ namespace Procuratio
                 pnlSeparadorEstadisticas.Visible = false;
             }
 
-            if (pnlMenuVertical.Width == MedidaMenuExpandido)
+            if (pnlMenuVertical.Width == MEDIDA_MENU_EXPANDIDO)
             {
                 OcultaMuestraTextoMenuContraido(true);
 
-                pnlMenuVertical.Width = MedidaMenuEncogido;
+                pnlMenuVertical.Width = MEDIDA_MENU_CONTRAIDO;
                 picBTNDespliegaMenuVertical.Dock = DockStyle.Fill;
             }
             else
             {
                 OcultaMuestraTextoMenuContraido(false);
 
-                pnlMenuVertical.Width = MedidaMenuExpandido;
+                pnlMenuVertical.Width = MEDIDA_MENU_EXPANDIDO;
                 picBTNDespliegaMenuVertical.Dock = DockStyle.Right;
 
                 if (BotonPresionado != null)
@@ -517,16 +513,16 @@ namespace Procuratio
         private void btnConfiguracion_Click(object sender, EventArgs e) => PreparaFormParaMostrar(FrmConfiguracion.ObtenerInstancia(), sender);
         private void BtnDelivery_Click(object sender, EventArgs e) => PreparaFormParaMostrar(FrmDelivery.ObtenerInstancia(), sender);
         private void BtnStock_Click(object sender, EventArgs e) => PreparaFormParaMostrar(FrmStock.ObtenerInstancia(), sender);
-        private void BtnClientes_Click(object sender, EventArgs e) => PreparaFormParaMostrar(FormCliente, sender);
+        private void BtnClientes_Click(object sender, EventArgs e) => PreparaFormParaMostrar(FORM_CLIENTE, sender);
 
         #region Codigo de gestion del submenu de estadisticas
         private void BtnEstadisticas_Click(object sender, EventArgs e)
         {
-            if (pnlMenuVertical.Width == MedidaMenuEncogido) { DesplegarContraerMenuVertical(); }
+            if (pnlMenuVertical.Width == MEDIDA_MENU_CONTRAIDO) { DesplegarContraerMenuVertical(); }
 
-            if (pnlContBotonesEstadisticas.Height == MedidaEstadisticaMenuEncogido)
+            if (pnlContBotonesEstadisticas.Height == MEDIDA_ESTADISTICA_MENU_CONTRAIDO)
             {
-                pnlContBotonesEstadisticas.Height = MedidaEstadisticaMenuExpandido;
+                pnlContBotonesEstadisticas.Height = MEDIDA_ESTADISTICA_MENU_EXPANDIDO;
                 pnlSeparadorEstadisticas.Visible = true;
             }
             else
@@ -534,7 +530,7 @@ namespace Procuratio
                 // El cambio de la propiedad visible evita un bug visual de la scrollbar
                 pnlContBotonesMenu.Visible = false;
 
-                pnlContBotonesEstadisticas.Height = MedidaEstadisticaMenuEncogido;
+                pnlContBotonesEstadisticas.Height = MEDIDA_ESTADISTICA_MENU_CONTRAIDO;
                 pnlSeparadorEstadisticas.Visible = false;
 
                 pnlContBotonesMenu.Visible = true;
@@ -634,12 +630,12 @@ namespace Procuratio
 
                 UltimoFormAbierto = _FormMostrar;
 
-                if (BotonPresionado.Name != btnEstadisticas.Name && pnlContBotonesEstadisticas.Height == MedidaEstadisticaMenuExpandido)
+                if (BotonPresionado.Name != btnEstadisticas.Name && pnlContBotonesEstadisticas.Height == MEDIDA_ESTADISTICA_MENU_EXPANDIDO)
                 {
                     // El cambio de la propiedad visible evita un bug visual de la scrollbar
                     pnlContBotonesMenu.Visible = false;
 
-                    pnlContBotonesEstadisticas.Height = MedidaEstadisticaMenuEncogido;
+                    pnlContBotonesEstadisticas.Height = MEDIDA_ESTADISTICA_MENU_CONTRAIDO;
                     pnlSeparadorEstadisticas.Visible = false;
 
                     pnlContBotonesMenu.Visible = true;
@@ -679,7 +675,7 @@ namespace Procuratio
             if (MinutosTranscurridos >= TiempoLimiteTranscurrido) { TiempoTranscurridoExcedido(); }
 
             // Encoger menu lateral (cada 10 minutos)
-            if (Minutos % 10 == 0 && Segundos == 0 && pnlMenuVertical.Width == MedidaMenuExpandido) { DesplegarContraerMenuVertical(); }
+            if (Minutos % 10 == 0 && Segundos == 0 && pnlMenuVertical.Width == MEDIDA_MENU_EXPANDIDO) { DesplegarContraerMenuVertical(); }
         }
 
         private void ActualizarReloj()
@@ -753,10 +749,10 @@ namespace Procuratio
                 }
             }
         }
-        
+
         private void ComprobarConexionMaxima()
         {
-            if (TimeSpan.Parse(tslTiempoConexion.Text.Substring(21, 8).Trim()) >= TiempoLimiteConexion)
+            if (TimeSpan.Parse(tslTiempoConexion.Text.Substring(21, 8).Trim()) >= TIEMPO_LIMITE_CONEXION)
             {
                 tmrActualizarDatos.Stop();
 
@@ -766,11 +762,11 @@ namespace Procuratio
 
                 Close();
             }
-            else if (TimeSpan.Parse(tslTiempoConexion.Text.Substring(21, 8).Trim()) >= SegundaAdvertencia)
+            else if (TimeSpan.Parse(tslTiempoConexion.Text.Substring(21, 8).Trim()) >= SEGUNDA_ADVERTENCIA)
             {
                 tslTiempoConexion.ForeColor = ClsColores.NarajaRojo;
             }
-            else if (TimeSpan.Parse(tslTiempoConexion.Text.Substring(21, 8).Trim()) >= PrimeraAdvertencia)
+            else if (TimeSpan.Parse(tslTiempoConexion.Text.Substring(21, 8).Trim()) >= PRIMERA_ADVERTENCIA)
             {
                 tslTiempoConexion.ForeColor = ClsColores.AmarilloClaro;
             }
@@ -878,10 +874,11 @@ namespace Procuratio
             using (FrmValidarUsuario FormValidarUsuario = new FrmValidarUsuario(FrmValidarUsuario.EFiltroUsuariosAutorizados.GerentesSubGerentes))
             {
                 FormValidarUsuario.ShowDialog();
-
+                
                 if (FormValidarUsuario.DialogResult == DialogResult.OK)
                 {
-                    FrmCarta.ObtenerInstancia().BtnCrearCategoria_Click(sender, e);
+                    FrmVerEditarCategorias FormCrearEditarVerCategorias = new FrmVerEditarCategorias();
+                    FormCrearEditarVerCategorias.ShowDialog();
                 }
             }
         }
@@ -1022,4 +1019,4 @@ namespace Procuratio
         public int S_TiempoLimiteTranscurrido { set { TiempoLimiteTranscurrido = value; } }
         #endregion
     }
-}   
+}

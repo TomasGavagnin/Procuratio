@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using Datos;
+﻿using Datos;
 using Negocio;
 using Procuratio.ClsDeApoyo;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Procuratio
 {
@@ -56,7 +52,7 @@ namespace Procuratio
         private void btnEstiloBotones_MouseMove(object sender, MouseEventArgs e)
         {
             Button BotonEnFoco = (Button)sender;
-            
+
             if (BotonEnFoco.Name == btnEliminarUsuarios.Name)
             {
                 BotonEnFoco.BackColor = ClsColores.Rojo;

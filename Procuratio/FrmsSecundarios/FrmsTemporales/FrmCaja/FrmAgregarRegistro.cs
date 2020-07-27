@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using Datos;
+﻿using Datos;
 using Negocio;
-using Procuratio.FrmsSecundarios.FrmsTemporales.FrmCaja;
 using Procuratio.ClsDeApoyo;
+using Procuratio.FrmsSecundarios.FrmsTemporales.FrmCaja;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace Procuratio
 {
@@ -159,8 +154,8 @@ namespace Procuratio
         private void BtnAgregarRegistro_Click(object sender, EventArgs e)
         {
             txtDetalle.Text = txtDetalle.Text.Trim();
-            
-            if (ID_Registro != -1 && txtMonto.Text != string.Empty && txtMonto.Text.Substring(0,1) != "," && txtMonto.Text.Substring(txtMonto.Text.Length - 1, 1) != ",")
+
+            if (ID_Registro != -1 && txtMonto.Text != string.Empty && txtMonto.Text.Substring(0, 1) != "," && txtMonto.Text.Substring(txtMonto.Text.Length - 1, 1) != ",")
             {
                 using (FrmValidarUsuario FormValidarUsuario = new FrmValidarUsuario(FrmValidarUsuario.EFiltroUsuariosAutorizados.GerentesSubGerentes))
                 {

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
-using System.Data;
+﻿using Negocio.Clases_por_tablas;
+using System;
 using System.Configuration;
-using Negocio.Clases_por_tablas;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Negocio.Clases_de_apoyo.Clases_para_estadisticas
 {
@@ -47,7 +43,7 @@ namespace Negocio.Clases_de_apoyo.Clases_para_estadisticas
 
                 foreach (DataRow Elemento in TablaDeDatosTemporal.Rows)
                 {
-                    if ((int)Elemento[2] == (int)ClsTiposDeMovimientos.ETipoDeMovimientos.Ingreso )
+                    if ((int)Elemento[2] == (int)ClsTiposDeMovimientos.ETipoDeMovimientos.Ingreso)
                     {
                         TablaDeDatos.Rows.Add(Elemento[0], Elemento[1], "Ingreso");
                     }

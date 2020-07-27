@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Datos;
+using Negocio.Clases_por_tablas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Datos;
-using Negocio.Clases_por_tablas;
 
 namespace Negocio
 {
@@ -39,17 +37,18 @@ namespace Negocio
                             .OrderBy(Identificador => Identificador.Articulo.CategoriaArticulo.Nombre)
                             .ThenBy(Identificador => Identificador.Articulo.Nombre).ToList();
 
-                        case ETipoDeListado.ParaCocina: return BBDD.Detalle.Include("Articulo.CategoriaArticulo").Include("Pedido").Where(Identificador => Identificador.ID_Pedido == _ID_Pedido
-                        && (Identificador.ID_EstadoDetalle == (int)ClsEstadoDetalle.EEstadoDetalle.NoCocinado || Identificador.ID_EstadoDetalle == (int)ClsEstadoDetalle.EEstadoDetalle.CantidadAumentada)).ToList();
+                        case ETipoDeListado.ParaCocina:
+                            return BBDD.Detalle.Include("Articulo.CategoriaArticulo").Include("Pedido").Where(Identificador => Identificador.ID_Pedido == _ID_Pedido
+&& (Identificador.ID_EstadoDetalle == (int)ClsEstadoDetalle.EEstadoDetalle.NoCocinado || Identificador.ID_EstadoDetalle == (int)ClsEstadoDetalle.EEstadoDetalle.CantidadAumentada)).ToList();
 
                         case ETipoDeListado.CategoriaEnUso:
-                            return BBDD.Detalle.Include("Articulo.CategoriaArticulo").Include("Pedido").Where(Identificador => Identificador.Articulo.ID_CategoriaArticulo == _ID_CategoriaQueSeEditara 
+                            return BBDD.Detalle.Include("Articulo.CategoriaArticulo").Include("Pedido").Where(Identificador => Identificador.Articulo.ID_CategoriaArticulo == _ID_CategoriaQueSeEditara
                             && Identificador.Pedido.ID_EstadoPedido != (int)ClsEstadosPedidos.EEstadosPedidos.Eliminado
                             && Identificador.Pedido.ID_EstadoPedido != (int)ClsEstadosPedidos.EEstadosPedidos.Finalizado).ToList();
 
                         case ETipoDeListado.NoEntregados:
-                            return BBDD.Detalle.Include("Articulo.CategoriaArticulo").Include("Pedido").Where(Identificador => Identificador.ID_Pedido == _ID_Pedido 
-                            && Identificador.ID_ArticuloEntregado == (int)ClsArticulosEntregados.EArticuloEntregado.NoEntregado 
+                            return BBDD.Detalle.Include("Articulo.CategoriaArticulo").Include("Pedido").Where(Identificador => Identificador.ID_Pedido == _ID_Pedido
+                            && Identificador.ID_ArticuloEntregado == (int)ClsArticulosEntregados.EArticuloEntregado.NoEntregado
                             && Identificador.Articulo.CategoriaArticulo.ParaCocina == (int)ClsCategoriasArticulos.EParaCocina.Si)
                             .OrderBy(Identificador => Identificador.Articulo.CategoriaArticulo.Nombre)
                             .ThenBy(Identificador => Identificador.Articulo.Nombre).ToList();
@@ -80,13 +79,14 @@ namespace Negocio
             using (BDRestauranteEntities BBDD = new BDRestauranteEntities())
             {
                 try
-                {   
+                {
                     // busca por el id del pedido
                     switch (_TipoDeBusqueda)
                     {
                         case ETipoDeBusqueda.PorIDPedido: return BBDD.Detalle.Include("Articulo.CategoriaArticulo").Include("Pedido").SingleOrDefault(Identificador => Identificador.ID_Pedido == _ID_Pedido);
-                        case ETipoDeBusqueda.PorPedidoYArticulo: return BBDD.Detalle.Include("Articulo.CategoriaArticulo").Include("Pedido").SingleOrDefault(Identificador => Identificador.ID_Pedido == _ID_Pedido
-                        && Identificador.ID_Articulo == _ID_Articulo);
+                        case ETipoDeBusqueda.PorPedidoYArticulo:
+                            return BBDD.Detalle.Include("Articulo.CategoriaArticulo").Include("Pedido").SingleOrDefault(Identificador => Identificador.ID_Pedido == _ID_Pedido
+&& Identificador.ID_Articulo == _ID_Articulo);
                         default: return null;
                     }
                 }
@@ -155,7 +155,7 @@ namespace Negocio
                         ObjetoActualizado.ID_EstadoDetalle = _Detalle.ID_EstadoDetalle;
                         ObjetoActualizado.CantidadAgregada = _Detalle.CantidadAgregada;
                         ObjetoActualizado.ID_ArticuloEntregado = _Detalle.ID_ArticuloEntregado;
-                        
+
                         return BBDD.SaveChanges();
                     }
                     else

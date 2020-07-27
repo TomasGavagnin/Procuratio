@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Datos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Datos;
 
 namespace Negocio.Clases_por_tablas
 {
@@ -32,7 +30,7 @@ namespace Negocio.Clases_por_tablas
                     {
                         case ETipoListado.AsistenciasSuperadas:
                             {
-                                return BBDD.ClienteXPedido.Include("EstadoClienteXPedido").Include("Pedido").Where(Identificador => Identificador.ID_Cliente == _ID_Cliente 
+                                return BBDD.ClienteXPedido.Include("EstadoClienteXPedido").Include("Pedido").Where(Identificador => Identificador.ID_Cliente == _ID_Cliente
                                 && Identificador.Pedido.Fecha == DateTime.Today.Date && Identificador.Pedido.ID_EstadoPedido != (int)ClsEstadosPedidos.EEstadosPedidos.Eliminado).ToList();
                             }
                         case ETipoListado.BuscarParaEliminar:
@@ -46,7 +44,7 @@ namespace Negocio.Clases_por_tablas
                         case ETipoListado.CantidadAsistencias:
                             {
                                 return BBDD.ClienteXPedido.Include("Pedido").Where(Identificador => Identificador.ID_Cliente == _ID_Cliente
-                                && Identificador.ID_EstadoClienteXPedido == (int)ClsEstadosClientesXPedidos.EEstadosClientesXPedidos.Disponible 
+                                && Identificador.ID_EstadoClienteXPedido == (int)ClsEstadosClientesXPedidos.EEstadosClientesXPedidos.Disponible
                                 && Identificador.Pedido.ID_EstadoPedido == (int)ClsEstadosPedidos.EEstadosPedidos.Finalizado).ToList();
                             }
                         default: return null;

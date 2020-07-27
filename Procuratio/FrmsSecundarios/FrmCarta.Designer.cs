@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblRegistroDeDatos = new System.Windows.Forms.Label();
             this.dgvCarta = new System.Windows.Forms.DataGridView();
             this.colID_Articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,7 +65,6 @@
             this.txtCantidad = new System.Windows.Forms.TextBox();
             this.pnlDecorativo1 = new System.Windows.Forms.Panel();
             this.lblCantidad = new System.Windows.Forms.Label();
-            this.btnCrearCategoria = new System.Windows.Forms.Button();
             this.picLupa = new System.Windows.Forms.PictureBox();
             this.ttpMensajesDeAyuda = new System.Windows.Forms.ToolTip(this.components);
             this.BtnVerEditarCategorias = new System.Windows.Forms.Button();
@@ -99,14 +98,14 @@
             this.dgvCarta.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             this.dgvCarta.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(28)))), ((int)(((byte)(36)))));
             this.dgvCarta.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(94)))), ((int)(((byte)(1)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCarta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(94)))), ((int)(((byte)(1)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCarta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCarta.ColumnHeadersHeight = 45;
             this.dgvCarta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvCarta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -122,20 +121,20 @@
             this.dgvCarta.Location = new System.Drawing.Point(7, 70);
             this.dgvCarta.Name = "dgvCarta";
             this.dgvCarta.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(94)))), ((int)(((byte)(1)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Brown;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCarta.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(94)))), ((int)(((byte)(1)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Brown;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCarta.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvCarta.RowHeadersVisible = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(28)))), ((int)(((byte)(36)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Brown;
-            this.dgvCarta.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(28)))), ((int)(((byte)(36)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Brown;
+            this.dgvCarta.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCarta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvCarta.Size = new System.Drawing.Size(750, 352);
             this.dgvCarta.TabIndex = 23;
@@ -404,7 +403,7 @@
             this.btnEliminarArtCat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEliminarArtCat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEliminarArtCat.ForeColor = System.Drawing.Color.White;
-            this.btnEliminarArtCat.Location = new System.Drawing.Point(766, 238);
+            this.btnEliminarArtCat.Location = new System.Drawing.Point(766, 182);
             this.btnEliminarArtCat.Name = "btnEliminarArtCat";
             this.btnEliminarArtCat.Size = new System.Drawing.Size(160, 50);
             this.btnEliminarArtCat.TabIndex = 63;
@@ -595,25 +594,6 @@
             this.lblCantidad.Text = "Cantidad:";
             this.lblCantidad.Visible = false;
             // 
-            // btnCrearCategoria
-            // 
-            this.btnCrearCategoria.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCrearCategoria.BackColor = System.Drawing.Color.Transparent;
-            this.btnCrearCategoria.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnCrearCategoria.FlatAppearance.BorderSize = 2;
-            this.btnCrearCategoria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCrearCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCrearCategoria.ForeColor = System.Drawing.Color.White;
-            this.btnCrearCategoria.Location = new System.Drawing.Point(766, 126);
-            this.btnCrearCategoria.Name = "btnCrearCategoria";
-            this.btnCrearCategoria.Size = new System.Drawing.Size(160, 50);
-            this.btnCrearCategoria.TabIndex = 68;
-            this.btnCrearCategoria.Text = "Crear categoria";
-            this.btnCrearCategoria.UseVisualStyleBackColor = false;
-            this.btnCrearCategoria.Click += new System.EventHandler(this.BtnCrearCategoria_Click);
-            this.btnCrearCategoria.MouseLeave += new System.EventHandler(this.btnEstiloBotones_Leave);
-            this.btnCrearCategoria.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnEstiloBotones_MouseMove);
-            // 
             // picLupa
             // 
             this.picLupa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(28)))), ((int)(((byte)(36)))));
@@ -635,11 +615,11 @@
             this.BtnVerEditarCategorias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnVerEditarCategorias.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnVerEditarCategorias.ForeColor = System.Drawing.Color.White;
-            this.BtnVerEditarCategorias.Location = new System.Drawing.Point(766, 182);
+            this.BtnVerEditarCategorias.Location = new System.Drawing.Point(766, 126);
             this.BtnVerEditarCategorias.Name = "BtnVerEditarCategorias";
             this.BtnVerEditarCategorias.Size = new System.Drawing.Size(160, 50);
             this.BtnVerEditarCategorias.TabIndex = 69;
-            this.BtnVerEditarCategorias.Text = "Ver y editar categorias";
+            this.BtnVerEditarCategorias.Text = "Ver, editar y crear categorias";
             this.BtnVerEditarCategorias.UseVisualStyleBackColor = false;
             this.BtnVerEditarCategorias.Click += new System.EventHandler(this.BtnVerEditarCategorias_Click);
             this.BtnVerEditarCategorias.MouseLeave += new System.EventHandler(this.btnEstiloBotones_Leave);
@@ -652,7 +632,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(42)))), ((int)(((byte)(52)))));
             this.ClientSize = new System.Drawing.Size(935, 555);
             this.Controls.Add(this.BtnVerEditarCategorias);
-            this.Controls.Add(this.btnCrearCategoria);
             this.Controls.Add(this.pnlContenedorResultados);
             this.Controls.Add(this.btnCrearArticulo);
             this.Controls.Add(this.btnEliminarArtCat);
@@ -701,7 +680,6 @@
         private System.Windows.Forms.Button btnEliminarArtCat;
         private System.Windows.Forms.Button btnCrearArticulo;
         private System.Windows.Forms.Panel pnlContenedorResultados;
-        private System.Windows.Forms.Button btnCrearCategoria;
         private System.Windows.Forms.CheckBox chkRedondearPrecio;
         private System.Windows.Forms.ToolTip ttpMensajesDeAyuda;
         private System.Windows.Forms.Button BtnVerEditarCategorias;

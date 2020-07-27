@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Datos;
+using Negocio;
+using Procuratio.ClsDeApoyo;
+using Procuratio.FrmGenerales;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using Datos;
-using Negocio;
-using System.ComponentModel;
-using Procuratio.ClsDeApoyo;
-using Procuratio.FrmGenerales;
 
 namespace Procuratio
 {
@@ -203,7 +203,7 @@ namespace Procuratio
                 }
                 else
                 {
-                    using (FrmInformacion FormInformacion = new FrmInformacion("El maximo de mesas permitidas es 12.",ClsColores.Blanco, 150, 300))
+                    using (FrmInformacion FormInformacion = new FrmInformacion("El maximo de mesas permitidas es 12.", ClsColores.Blanco, 150, 300))
                     {
                         FormInformacion.ShowDialog();
                     }

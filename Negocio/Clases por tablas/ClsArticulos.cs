@@ -1,9 +1,7 @@
-﻿using System;
+﻿using Datos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Datos;
 
 namespace Negocio
 {
@@ -35,8 +33,9 @@ namespace Negocio
                 {
                     switch (_TipoDeFiltro)
                     {
-                        case ETipoListado.ArticulosActivos: return BBDD.Articulo.Include("CategoriaArticulo").Where(Identificador => Identificador.ID_EstadoArticulo == (int)_EstadoArticuloBuscar 
-                        && Identificador.CategoriaArticulo.ID_EstadoCategoriaArticulo == (int)_EstadoArticuloBuscar).OrderBy(Identificador => Identificador.CategoriaArticulo.Nombre).ThenBy(Identificador => Identificador.Nombre).ToList();
+                        case ETipoListado.ArticulosActivos:
+                            return BBDD.Articulo.Include("CategoriaArticulo").Where(Identificador => Identificador.ID_EstadoArticulo == (int)_EstadoArticuloBuscar
+&& Identificador.CategoriaArticulo.ID_EstadoCategoriaArticulo == (int)_EstadoArticuloBuscar).OrderBy(Identificador => Identificador.CategoriaArticulo.Nombre).ThenBy(Identificador => Identificador.Nombre).ToList();
                         case ETipoListado.AritulosRepetidos:
                             _Nombre = _Nombre.ToLower();
                             return BBDD.Articulo.Include("CategoriaArticulo").Where(Identificador => Identificador.Nombre.ToLower() == _Nombre
@@ -50,12 +49,12 @@ namespace Negocio
                                 // En este caso armo un predicado por defecto (o todos los articulos activos o todos los inactivos)
                                 if ((int)_EstadoArticuloBuscar == (int)ETipoListado.ArticulosActivos)
                                 {
-                                    ListaFiltrada = BBDD.Articulo.Include("CategoriaArticulo").Where(Identificador => Identificador.ID_EstadoArticulo == (int)_EstadoArticuloBuscar 
+                                    ListaFiltrada = BBDD.Articulo.Include("CategoriaArticulo").Where(Identificador => Identificador.ID_EstadoArticulo == (int)_EstadoArticuloBuscar
                                     && Identificador.CategoriaArticulo.ID_EstadoCategoriaArticulo == (int)_EstadoArticuloBuscar).ToList();
                                 }
                                 else
                                 {
-                                    ListaFiltrada = BBDD.Articulo.Include("CategoriaArticulo").Where(Identificador => Identificador.ID_EstadoArticulo == (int)_EstadoArticuloBuscar 
+                                    ListaFiltrada = BBDD.Articulo.Include("CategoriaArticulo").Where(Identificador => Identificador.ID_EstadoArticulo == (int)_EstadoArticuloBuscar
                                     || Identificador.CategoriaArticulo.ID_EstadoCategoriaArticulo == (int)_EstadoArticuloBuscar).ToList();
                                 }
 

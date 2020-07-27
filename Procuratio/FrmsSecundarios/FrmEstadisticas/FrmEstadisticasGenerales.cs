@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Negocio.Clases_de_apoyo;
+using Procuratio.ClsDeApoyo;
+using System;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Negocio;
-using Negocio.Clases_de_apoyo;
-using System.Collections;
 using System.Windows.Forms.DataVisualization.Charting;
-using Procuratio.ClsDeApoyo;
 
 namespace Procuratio.FrmsSecundarios.FrmEstadisticas
 {
