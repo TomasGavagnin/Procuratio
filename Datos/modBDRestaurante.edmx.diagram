@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="027feaf0be154a0d897dcca8588ca272" Name="Diagram1">
+        <EntityTypeShape EntityType="BDRestauranteModel.Articulo" Width="1.5" PointX="3" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.ArticuloEntregado" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.BlockDeNota" Width="1.5" PointX="7.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.Caja" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.CategoriaArticulo" Width="1.5" PointX="0.75" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.Cliente" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.Configuracion" Width="1.5" PointX="9.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.Delivery" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.Detalle" Width="1.875" PointX="5.375" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.EstadoArticulo" Width="1.5" PointX="0.75" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.EstadoCaja" Width="1.5" PointX="6" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.EstadoCategoriaArticulo" Width="1.5" PointX="1.5" PointY="20.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.EstadoDelivery" Width="1.5" PointX="1.5" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.EstadoDetalle" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.EstadoMesa" Width="1.5" PointX="0.75" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.EstadoPedido" Width="1.5" PointX="0.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.EstadoReserva" Width="1.5" PointX="3.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.EstadoUsuario" Width="1.5" PointX="0.75" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.InformacionRestaurante" Width="1.5" PointX="9.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.Mesa" Width="1.5" PointX="3" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.MesaXReserva" Width="1.5" PointX="11.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.Pedido" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.PedidoXMesa" Width="1.5" PointX="5.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.Perfil" Width="1.5" PointX="0.75" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.Reserva" Width="1.5" PointX="6" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.TipoDeMonto" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.TipoDeMovimiento" Width="1.5" PointX="3.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.Usuario" Width="1.5" PointX="3" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.VencimientoFuncionalidades" Width="1.5" PointX="11.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDRestauranteModel.ViaDeContacto" Width="1.5" PointX="3.75" PointY="20" IsExpanded="true" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Articulo__ID_Cat__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Articulo__ID_Est__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Detalle__ID_Arti__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Detalle__ID_Arti__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Caja__ID_EstadoC__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Caja__ID_Pedido__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Caja__ID_TipoDeM__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Caja__ID_Usuario__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Categoria__ID_Es__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Pedido__ID_Clien__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Reserva__ID_Clie__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Delivery__ID_Est__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Pedido__ID_Deliv__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Detalle__ID_Chef__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Detalle__ID_Esta__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Detalle__ID_Pedi__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Mesa__ID_EstadoM__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Pedido__ID_Estad__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Reserva__ID_Esta__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Usuario__ID_Esta__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Mesa__ID_Usuario__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__MesaXRese__ID_Me__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__PedidoXMe__ID_Me__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__MesaXRese__ID_Re__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Pedido__ID_Reser__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__PedidoXMe__ID_Pe__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Usuario__ID_Perf__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Reserva__ID_ViaC__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__TipoDeMon__ID_Ti__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Pedido__ID_Chef__6E01572D" />
+        <AssociationConnector Association="BDRestauranteModel.FK__Pedido__ID_Mozo__6EF57B66" />
+        <EntityTypeShape EntityType="BDRestauranteModel.ClienteXPedido" Width="1.5" PointX="8.25" PointY="13.75" />
+        <EntityTypeShape EntityType="BDRestauranteModel.EstadoClienteXPedido" Width="1.5" PointX="6" PointY="20.125" />
+        <EntityTypeShape EntityType="BDRestauranteModel.sysdiagrams" Width="1.5" PointX="12.375" PointY="4.75" />
+        <AssociationConnector Association="BDRestauranteModel.FK__ClienteXP__ID_Cl__2A164134" />
+        <AssociationConnector Association="BDRestauranteModel.FK__ClienteXP__ID_Es__2BFE89A6" />
+        <AssociationConnector Association="BDRestauranteModel.FK__ClienteXP__ID_Pe__2B0A656D" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

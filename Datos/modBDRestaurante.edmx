@@ -1,0 +1,2744 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BDRestauranteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="ID_Articulo" />
+          </Key>
+          <Property Name="ID_Articulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Precio" Type="float" />
+          <Property Name="PrecioDelivery" Type="float" />
+          <Property Name="ID_EstadoArticulo" Type="int" Nullable="false" />
+          <Property Name="ID_CategoriaArticulo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ArticuloEntregado">
+          <Key>
+            <PropertyRef Name="ID_ArticuloEntregado" />
+          </Key>
+          <Property Name="ID_ArticuloEntregado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BlockDeNota">
+          <Key>
+            <PropertyRef Name="ID_BlockDeNota" />
+          </Key>
+          <Property Name="ID_BlockDeNota" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TextoBlockNota" Type="varchar" MaxLength="8000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Caja">
+          <Key>
+            <PropertyRef Name="ID_Caja" />
+          </Key>
+          <Property Name="ID_Caja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Hora" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Monto" Type="float" Nullable="false" />
+          <Property Name="Detalle" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="ID_Pedido" Type="int" />
+          <Property Name="ID_TipoDeMonto" Type="int" Nullable="false" />
+          <Property Name="ID_EstadoCaja" Type="int" Nullable="false" />
+          <Property Name="ID_Usuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CategoriaArticulo">
+          <Key>
+            <PropertyRef Name="ID_CategoriaArticulo" />
+          </Key>
+          <Property Name="ID_CategoriaArticulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ParaCocina" Type="int" Nullable="false" />
+          <Property Name="ID_EstadoCategoriaArticulo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ID_Cliente" />
+          </Key>
+          <Property Name="ID_Cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefono" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClienteXPedido">
+          <Key>
+            <PropertyRef Name="ID_ClienteXPedido" />
+          </Key>
+          <Property Name="ID_ClienteXPedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Cliente" Type="int" Nullable="false" />
+          <Property Name="ID_Pedido" Type="int" Nullable="false" />
+          <Property Name="ID_EstadoClienteXPedido" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Configuracion">
+          <Key>
+            <PropertyRef Name="ID_Configuracion" />
+          </Key>
+          <Property Name="ID_Configuracion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrabajaConPlantaAlta" Type="int" Nullable="false" />
+          <Property Name="AvisoEspera" Type="int" Nullable="false" />
+          <Property Name="TiempoFormAbierto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Delivery">
+          <Key>
+            <PropertyRef Name="ID_Delivery" />
+          </Key>
+          <Property Name="ID_Delivery" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_EstadoDelivery" Type="int" Nullable="false" />
+          <Property Name="Telefono" Type="bigint" />
+          <Property Name="Destino" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Detalle">
+          <Key>
+            <PropertyRef Name="ID_Detalle" />
+          </Key>
+          <Property Name="ID_Detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Pedido" Type="int" Nullable="false" />
+          <Property Name="ID_Articulo" Type="int" Nullable="false" />
+          <Property Name="ID_Chef" Type="int" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Nota" Type="varchar" MaxLength="500" />
+          <Property Name="Precio" Type="float" />
+          <Property Name="ID_EstadoDetalle" Type="int" Nullable="false" />
+          <Property Name="CantidadAgregada" Type="int" Nullable="false" />
+          <Property Name="ID_ArticuloEntregado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoArticulo">
+          <Key>
+            <PropertyRef Name="ID_EstadoArticulo" />
+          </Key>
+          <Property Name="ID_EstadoArticulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoCaja">
+          <Key>
+            <PropertyRef Name="ID_EstadoCaja" />
+          </Key>
+          <Property Name="ID_EstadoCaja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoCategoriaArticulo">
+          <Key>
+            <PropertyRef Name="ID_EstadoCategoriaArticulo" />
+          </Key>
+          <Property Name="ID_EstadoCategoriaArticulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoClienteXPedido">
+          <Key>
+            <PropertyRef Name="ID_EstadoClienteXPedido" />
+          </Key>
+          <Property Name="ID_EstadoClienteXPedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoDelivery">
+          <Key>
+            <PropertyRef Name="ID_EstadoDelivery" />
+          </Key>
+          <Property Name="ID_EstadoDelivery" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoDetalle">
+          <Key>
+            <PropertyRef Name="ID_EstadoDetalle" />
+          </Key>
+          <Property Name="ID_EstadoDetalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoMesa">
+          <Key>
+            <PropertyRef Name="ID_EstadoMesa" />
+          </Key>
+          <Property Name="ID_EstadoMesa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoPedido">
+          <Key>
+            <PropertyRef Name="ID_EstadoPedido" />
+          </Key>
+          <Property Name="ID_EstadoPedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoReserva">
+          <Key>
+            <PropertyRef Name="ID_EstadoReserva" />
+          </Key>
+          <Property Name="ID_EstadoReserva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadoUsuario">
+          <Key>
+            <PropertyRef Name="ID_EstadoUsuario" />
+          </Key>
+          <Property Name="ID_EstadoUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InformacionRestaurante">
+          <Key>
+            <PropertyRef Name="ID_InformacionRestaurante" />
+          </Key>
+          <Property Name="ID_InformacionRestaurante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Eslogan" Type="varchar" MaxLength="100" />
+          <Property Name="TelefonoUno" Type="bigint" Nullable="false" />
+          <Property Name="TelefonoDos" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Mesa">
+          <Key>
+            <PropertyRef Name="ID_Mesa" />
+          </Key>
+          <Property Name="ID_Mesa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero" Type="int" Nullable="false" />
+          <Property Name="ID_EstadoMesa" Type="int" Nullable="false" />
+          <Property Name="Capacidad" Type="int" Nullable="false" />
+          <Property Name="ID_Usuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MesaXReserva">
+          <Key>
+            <PropertyRef Name="ID_MesaXReserva" />
+          </Key>
+          <Property Name="ID_MesaXReserva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Mesa" Type="int" Nullable="false" />
+          <Property Name="ID_Reserva" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pedido">
+          <Key>
+            <PropertyRef Name="ID_Pedido" />
+          </Key>
+          <Property Name="ID_Pedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Hora" Type="time" Precision="7" Nullable="false" />
+          <Property Name="CantidadPersonas" Type="int" Nullable="false" />
+          <Property Name="TotalPedido" Type="float" />
+          <Property Name="ID_EstadoPedido" Type="int" Nullable="false" />
+          <Property Name="ID_Cliente" Type="int" Nullable="false" />
+          <Property Name="ID_Reserva" Type="int" />
+          <Property Name="ID_Chef" Type="int" Nullable="false" />
+          <Property Name="Nota" Type="varchar" MaxLength="500" />
+          <Property Name="TiempoEspera" Type="datetime" />
+          <Property Name="ID_Delivery" Type="int" />
+          <Property Name="ID_Mozo" Type="int" />
+        </EntityType>
+        <EntityType Name="PedidoXMesa">
+          <Key>
+            <PropertyRef Name="ID_PedidoXMesa" />
+          </Key>
+          <Property Name="ID_PedidoXMesa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Mesa" Type="int" Nullable="false" />
+          <Property Name="ID_Pedido" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="ID_Perfil" />
+          </Key>
+          <Property Name="ID_Perfil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Reserva">
+          <Key>
+            <PropertyRef Name="ID_Reserva" />
+          </Key>
+          <Property Name="ID_Reserva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Hora" Type="time" Precision="7" Nullable="false" />
+          <Property Name="CantidadPersonas" Type="int" Nullable="false" />
+          <Property Name="ID_ViaContacto" Type="int" Nullable="false" />
+          <Property Name="ID_EstadoReserva" Type="int" Nullable="false" />
+          <Property Name="ID_Cliente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TipoDeMonto">
+          <Key>
+            <PropertyRef Name="ID_TipoDeMonto" />
+          </Key>
+          <Property Name="ID_TipoDeMonto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ID_TipoDeMovimiento" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoDeMovimiento">
+          <Key>
+            <PropertyRef Name="ID_TipoDeMovimiento" />
+          </Key>
+          <Property Name="ID_TipoDeMovimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="ID_Usuario" />
+          </Key>
+          <Property Name="ID_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nick" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Apellido" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ID_EstadoUsuario" Type="int" Nullable="false" />
+          <Property Name="ID_Perfil" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VencimientoFuncionalidades">
+          <Key>
+            <PropertyRef Name="ID_VencimientoFuncionalidades" />
+          </Key>
+          <Property Name="ID_VencimientoFuncionalidades" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VencimientoGeneral" Type="date" Nullable="false" />
+          <Property Name="VencimientoFunciones" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ViaDeContacto">
+          <Key>
+            <PropertyRef Name="ID_ViaDeContacto" />
+          </Key>
+          <Property Name="ID_ViaDeContacto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Articulo__ID_Cat__5DCAEF64">
+          <End Role="CategoriaArticulo" Type="Self.CategoriaArticulo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriaArticulo">
+              <PropertyRef Name="ID_CategoriaArticulo" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="ID_CategoriaArticulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Articulo__ID_Est__5EBF139D">
+          <End Role="EstadoArticulo" Type="Self.EstadoArticulo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoArticulo">
+              <PropertyRef Name="ID_EstadoArticulo" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="ID_EstadoArticulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Caja__ID_EstadoC__619B8048">
+          <End Role="EstadoCaja" Type="Self.EstadoCaja" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Caja" Type="Self.Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCaja">
+              <PropertyRef Name="ID_EstadoCaja" />
+            </Principal>
+            <Dependent Role="Caja">
+              <PropertyRef Name="ID_EstadoCaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Caja__ID_Pedido__60A75C0F">
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Caja" Type="Self.Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido">
+              <PropertyRef Name="ID_Pedido" />
+            </Principal>
+            <Dependent Role="Caja">
+              <PropertyRef Name="ID_Pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Caja__ID_TipoDeM__628FA481">
+          <End Role="TipoDeMonto" Type="Self.TipoDeMonto" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Caja" Type="Self.Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDeMonto">
+              <PropertyRef Name="ID_TipoDeMonto" />
+            </Principal>
+            <Dependent Role="Caja">
+              <PropertyRef Name="ID_TipoDeMonto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Caja__ID_Usuario__6383C8BA">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Caja" Type="Self.Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Caja">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Categoria__ID_Es__59063A47">
+          <End Role="EstadoCategoriaArticulo" Type="Self.EstadoCategoriaArticulo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CategoriaArticulo" Type="Self.CategoriaArticulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCategoriaArticulo">
+              <PropertyRef Name="ID_EstadoCategoriaArticulo" />
+            </Principal>
+            <Dependent Role="CategoriaArticulo">
+              <PropertyRef Name="ID_EstadoCategoriaArticulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClienteXP__ID_Cl__71D1E811">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="ClienteXPedido" Type="Self.ClienteXPedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="ClienteXPedido">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClienteXP__ID_Es__73BA3083">
+          <End Role="EstadoClienteXPedido" Type="Self.EstadoClienteXPedido" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ClienteXPedido" Type="Self.ClienteXPedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoClienteXPedido">
+              <PropertyRef Name="ID_EstadoClienteXPedido" />
+            </Principal>
+            <Dependent Role="ClienteXPedido">
+              <PropertyRef Name="ID_EstadoClienteXPedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClienteXP__ID_Pe__72C60C4A">
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="1" />
+          <End Role="ClienteXPedido" Type="Self.ClienteXPedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido">
+              <PropertyRef Name="ID_Pedido" />
+            </Principal>
+            <Dependent Role="ClienteXPedido">
+              <PropertyRef Name="ID_Pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Delivery__ID_Est__59FA5E80">
+          <End Role="EstadoDelivery" Type="Self.EstadoDelivery" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoDelivery">
+              <PropertyRef Name="ID_EstadoDelivery" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="ID_EstadoDelivery" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle__ID_Arti__5535A963">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="ID_Articulo" />
+            </Principal>
+            <Dependent Role="Detalle">
+              <PropertyRef Name="ID_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle__ID_Arti__5812160E">
+          <End Role="ArticuloEntregado" Type="Self.ArticuloEntregado" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticuloEntregado">
+              <PropertyRef Name="ID_ArticuloEntregado" />
+            </Principal>
+            <Dependent Role="Detalle">
+              <PropertyRef Name="ID_ArticuloEntregado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle__ID_Chef__5629CD9C">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Detalle">
+              <PropertyRef Name="ID_Chef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle__ID_Esta__571DF1D5">
+          <End Role="EstadoDetalle" Type="Self.EstadoDetalle" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoDetalle">
+              <PropertyRef Name="ID_EstadoDetalle" />
+            </Principal>
+            <Dependent Role="Detalle">
+              <PropertyRef Name="ID_EstadoDetalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle__ID_Pedi__5441852A">
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido">
+              <PropertyRef Name="ID_Pedido" />
+            </Principal>
+            <Dependent Role="Detalle">
+              <PropertyRef Name="ID_Pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mesa__ID_EstadoM__5AEE82B9">
+          <End Role="EstadoMesa" Type="Self.EstadoMesa" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Mesa" Type="Self.Mesa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoMesa">
+              <PropertyRef Name="ID_EstadoMesa" />
+            </Principal>
+            <Dependent Role="Mesa">
+              <PropertyRef Name="ID_EstadoMesa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mesa__ID_Usuario__4AB81AF0">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Mesa" Type="Self.Mesa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Mesa">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MesaXRese__ID_Me__48CFD27E">
+          <End Role="Mesa" Type="Self.Mesa" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MesaXReserva" Type="Self.MesaXReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mesa">
+              <PropertyRef Name="ID_Mesa" />
+            </Principal>
+            <Dependent Role="MesaXReserva">
+              <PropertyRef Name="ID_Mesa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MesaXRese__ID_Re__49C3F6B7">
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MesaXReserva" Type="Self.MesaXReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserva">
+              <PropertyRef Name="ID_Reserva" />
+            </Principal>
+            <Dependent Role="MesaXReserva">
+              <PropertyRef Name="ID_Reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedido__ID_Chef__52593CB8">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="ID_Chef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedido__ID_Clien__4E88ABD4">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedido__ID_Deliv__5165187F">
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="0..1" />
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delivery">
+              <PropertyRef Name="ID_Delivery" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="ID_Delivery" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedido__ID_Estad__5070F446">
+          <End Role="EstadoPedido" Type="Self.EstadoPedido" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoPedido">
+              <PropertyRef Name="ID_EstadoPedido" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="ID_EstadoPedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedido__ID_Mozo__534D60F1">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="ID_Mozo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedido__ID_Reser__4F7CD00D">
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="0..1" />
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserva">
+              <PropertyRef Name="ID_Reserva" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="ID_Reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PedidoXMe__ID_Me__4BAC3F29">
+          <End Role="Mesa" Type="Self.Mesa" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PedidoXMesa" Type="Self.PedidoXMesa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mesa">
+              <PropertyRef Name="ID_Mesa" />
+            </Principal>
+            <Dependent Role="PedidoXMesa">
+              <PropertyRef Name="ID_Mesa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PedidoXMe__ID_Pe__4CA06362">
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PedidoXMesa" Type="Self.PedidoXMesa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido">
+              <PropertyRef Name="ID_Pedido" />
+            </Principal>
+            <Dependent Role="PedidoXMesa">
+              <PropertyRef Name="ID_Pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reserva__ID_Clie__47DBAE45">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reserva__ID_Esta__5BE2A6F2">
+          <End Role="EstadoReserva" Type="Self.EstadoReserva" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoReserva">
+              <PropertyRef Name="ID_EstadoReserva" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="ID_EstadoReserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reserva__ID_ViaC__5CD6CB2B">
+          <End Role="ViaDeContacto" Type="Self.ViaDeContacto" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ViaDeContacto">
+              <PropertyRef Name="ID_ViaDeContacto" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="ID_ViaContacto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TipoDeMon__ID_Ti__6477ECF3">
+          <End Role="TipoDeMovimiento" Type="Self.TipoDeMovimiento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TipoDeMonto" Type="Self.TipoDeMonto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDeMovimiento">
+              <PropertyRef Name="ID_TipoDeMovimiento" />
+            </Principal>
+            <Dependent Role="TipoDeMonto">
+              <PropertyRef Name="ID_TipoDeMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__ID_Esta__5FB337D6">
+          <End Role="EstadoUsuario" Type="Self.EstadoUsuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoUsuario">
+              <PropertyRef Name="ID_EstadoUsuario" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="ID_EstadoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__ID_Perf__4D94879B">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="ID_Perfil" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="ID_Perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="SP_ArticulosMasVendidosCarta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_FechaDesde" Type="varchar" Mode="In" />
+          <Parameter Name="p_FechaHasta" Type="varchar" Mode="In" />
+          <Parameter Name="p_ParaCocina" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_ArticulosMasVendidosCategoriaCarta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_FechaDesde" Type="varchar" Mode="In" />
+          <Parameter Name="p_FechaHasta" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_ArticulosMasVendidosCategoriaDelivery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_FechaDesde" Type="varchar" Mode="In" />
+          <Parameter Name="p_FechaHasta" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_ArticulosMasVendidosCategoriaReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_FechaDesde" Type="varchar" Mode="In" />
+          <Parameter Name="p_FechaHasta" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_ArticulosMasVendidosDelivery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_FechaDesde" Type="varchar" Mode="In" />
+          <Parameter Name="p_FechaHasta" Type="varchar" Mode="In" />
+          <Parameter Name="p_ParaCocina" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_ArticulosMasVendidosReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_FechaDesde" Type="varchar" Mode="In" />
+          <Parameter Name="p_FechaHasta" Type="varchar" Mode="In" />
+          <Parameter Name="p_ParaCocina" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_ArticulosMenosVendidosCarta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_FechaDesde" Type="varchar" Mode="In" />
+          <Parameter Name="p_FechaHasta" Type="varchar" Mode="In" />
+          <Parameter Name="p_ParaCocina" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_ArticulosMenosVendidosCategoriaCarta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_FechaDesde" Type="varchar" Mode="In" />
+          <Parameter Name="p_FechaHasta" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_ArticulosMenosVendidosCategoriaDelivery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_FechaDesde" Type="varchar" Mode="In" />
+          <Parameter Name="p_FechaHasta" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_ArticulosMenosVendidosCategoriaReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_FechaDesde" Type="varchar" Mode="In" />
+          <Parameter Name="p_FechaHasta" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_ArticulosMenosVendidosDelivery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_FechaDesde" Type="varchar" Mode="In" />
+          <Parameter Name="p_FechaHasta" Type="varchar" Mode="In" />
+          <Parameter Name="p_ParaCocina" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_ArticulosMenosVendidosReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_FechaDesde" Type="varchar" Mode="In" />
+          <Parameter Name="p_FechaHasta" Type="varchar" Mode="In" />
+          <Parameter Name="p_ParaCocina" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_ArticulosVendidosPorMesCarta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_Año" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_ArticulosVendidosPorMesDelivery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_Año" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_ArticulosVendidosPorMesReserva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_Año" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_GananciasYPerdidasPorMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_Año" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_VentasPorMozoPorMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="p_Año" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="BDRestauranteModelStoreContainer">
+          <EntitySet Name="Articulo" EntityType="Self.Articulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArticuloEntregado" EntityType="Self.ArticuloEntregado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlockDeNota" EntityType="Self.BlockDeNota" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Caja" EntityType="Self.Caja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CategoriaArticulo" EntityType="Self.CategoriaArticulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClienteXPedido" EntityType="Self.ClienteXPedido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Configuracion" EntityType="Self.Configuracion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Delivery" EntityType="Self.Delivery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detalle" EntityType="Self.Detalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoArticulo" EntityType="Self.EstadoArticulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoCaja" EntityType="Self.EstadoCaja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoCategoriaArticulo" EntityType="Self.EstadoCategoriaArticulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoClienteXPedido" EntityType="Self.EstadoClienteXPedido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoDelivery" EntityType="Self.EstadoDelivery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoDetalle" EntityType="Self.EstadoDetalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoMesa" EntityType="Self.EstadoMesa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoPedido" EntityType="Self.EstadoPedido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoReserva" EntityType="Self.EstadoReserva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoUsuario" EntityType="Self.EstadoUsuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InformacionRestaurante" EntityType="Self.InformacionRestaurante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mesa" EntityType="Self.Mesa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MesaXReserva" EntityType="Self.MesaXReserva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pedido" EntityType="Self.Pedido" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PedidoXMesa" EntityType="Self.PedidoXMesa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reserva" EntityType="Self.Reserva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDeMonto" EntityType="Self.TipoDeMonto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDeMovimiento" EntityType="Self.TipoDeMovimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VencimientoFuncionalidades" EntityType="Self.VencimientoFuncionalidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViaDeContacto" EntityType="Self.ViaDeContacto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Articulo__ID_Cat__5DCAEF64" Association="Self.FK__Articulo__ID_Cat__5DCAEF64">
+            <End Role="CategoriaArticulo" EntitySet="CategoriaArticulo" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Articulo__ID_Est__5EBF139D" Association="Self.FK__Articulo__ID_Est__5EBF139D">
+            <End Role="EstadoArticulo" EntitySet="EstadoArticulo" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Caja__ID_EstadoC__619B8048" Association="Self.FK__Caja__ID_EstadoC__619B8048">
+            <End Role="EstadoCaja" EntitySet="EstadoCaja" />
+            <End Role="Caja" EntitySet="Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Caja__ID_Pedido__60A75C0F" Association="Self.FK__Caja__ID_Pedido__60A75C0F">
+            <End Role="Pedido" EntitySet="Pedido" />
+            <End Role="Caja" EntitySet="Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Caja__ID_TipoDeM__628FA481" Association="Self.FK__Caja__ID_TipoDeM__628FA481">
+            <End Role="TipoDeMonto" EntitySet="TipoDeMonto" />
+            <End Role="Caja" EntitySet="Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Caja__ID_Usuario__6383C8BA" Association="Self.FK__Caja__ID_Usuario__6383C8BA">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Caja" EntitySet="Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Categoria__ID_Es__59063A47" Association="Self.FK__Categoria__ID_Es__59063A47">
+            <End Role="EstadoCategoriaArticulo" EntitySet="EstadoCategoriaArticulo" />
+            <End Role="CategoriaArticulo" EntitySet="CategoriaArticulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClienteXP__ID_Cl__71D1E811" Association="Self.FK__ClienteXP__ID_Cl__71D1E811">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClienteXPedido" EntitySet="ClienteXPedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClienteXP__ID_Es__73BA3083" Association="Self.FK__ClienteXP__ID_Es__73BA3083">
+            <End Role="EstadoClienteXPedido" EntitySet="EstadoClienteXPedido" />
+            <End Role="ClienteXPedido" EntitySet="ClienteXPedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClienteXP__ID_Pe__72C60C4A" Association="Self.FK__ClienteXP__ID_Pe__72C60C4A">
+            <End Role="Pedido" EntitySet="Pedido" />
+            <End Role="ClienteXPedido" EntitySet="ClienteXPedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Delivery__ID_Est__59FA5E80" Association="Self.FK__Delivery__ID_Est__59FA5E80">
+            <End Role="EstadoDelivery" EntitySet="EstadoDelivery" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle__ID_Arti__5535A963" Association="Self.FK__Detalle__ID_Arti__5535A963">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Detalle" EntitySet="Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle__ID_Arti__5812160E" Association="Self.FK__Detalle__ID_Arti__5812160E">
+            <End Role="ArticuloEntregado" EntitySet="ArticuloEntregado" />
+            <End Role="Detalle" EntitySet="Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle__ID_Chef__5629CD9C" Association="Self.FK__Detalle__ID_Chef__5629CD9C">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Detalle" EntitySet="Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle__ID_Esta__571DF1D5" Association="Self.FK__Detalle__ID_Esta__571DF1D5">
+            <End Role="EstadoDetalle" EntitySet="EstadoDetalle" />
+            <End Role="Detalle" EntitySet="Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle__ID_Pedi__5441852A" Association="Self.FK__Detalle__ID_Pedi__5441852A">
+            <End Role="Pedido" EntitySet="Pedido" />
+            <End Role="Detalle" EntitySet="Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mesa__ID_EstadoM__5AEE82B9" Association="Self.FK__Mesa__ID_EstadoM__5AEE82B9">
+            <End Role="EstadoMesa" EntitySet="EstadoMesa" />
+            <End Role="Mesa" EntitySet="Mesa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mesa__ID_Usuario__4AB81AF0" Association="Self.FK__Mesa__ID_Usuario__4AB81AF0">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mesa" EntitySet="Mesa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MesaXRese__ID_Me__48CFD27E" Association="Self.FK__MesaXRese__ID_Me__48CFD27E">
+            <End Role="Mesa" EntitySet="Mesa" />
+            <End Role="MesaXReserva" EntitySet="MesaXReserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MesaXRese__ID_Re__49C3F6B7" Association="Self.FK__MesaXRese__ID_Re__49C3F6B7">
+            <End Role="Reserva" EntitySet="Reserva" />
+            <End Role="MesaXReserva" EntitySet="MesaXReserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedido__ID_Chef__52593CB8" Association="Self.FK__Pedido__ID_Chef__52593CB8">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedido__ID_Clien__4E88ABD4" Association="Self.FK__Pedido__ID_Clien__4E88ABD4">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedido__ID_Deliv__5165187F" Association="Self.FK__Pedido__ID_Deliv__5165187F">
+            <End Role="Delivery" EntitySet="Delivery" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedido__ID_Estad__5070F446" Association="Self.FK__Pedido__ID_Estad__5070F446">
+            <End Role="EstadoPedido" EntitySet="EstadoPedido" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedido__ID_Mozo__534D60F1" Association="Self.FK__Pedido__ID_Mozo__534D60F1">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedido__ID_Reser__4F7CD00D" Association="Self.FK__Pedido__ID_Reser__4F7CD00D">
+            <End Role="Reserva" EntitySet="Reserva" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PedidoXMe__ID_Me__4BAC3F29" Association="Self.FK__PedidoXMe__ID_Me__4BAC3F29">
+            <End Role="Mesa" EntitySet="Mesa" />
+            <End Role="PedidoXMesa" EntitySet="PedidoXMesa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PedidoXMe__ID_Pe__4CA06362" Association="Self.FK__PedidoXMe__ID_Pe__4CA06362">
+            <End Role="Pedido" EntitySet="Pedido" />
+            <End Role="PedidoXMesa" EntitySet="PedidoXMesa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reserva__ID_Clie__47DBAE45" Association="Self.FK__Reserva__ID_Clie__47DBAE45">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reserva__ID_Esta__5BE2A6F2" Association="Self.FK__Reserva__ID_Esta__5BE2A6F2">
+            <End Role="EstadoReserva" EntitySet="EstadoReserva" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reserva__ID_ViaC__5CD6CB2B" Association="Self.FK__Reserva__ID_ViaC__5CD6CB2B">
+            <End Role="ViaDeContacto" EntitySet="ViaDeContacto" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TipoDeMon__ID_Ti__6477ECF3" Association="Self.FK__TipoDeMon__ID_Ti__6477ECF3">
+            <End Role="TipoDeMovimiento" EntitySet="TipoDeMovimiento" />
+            <End Role="TipoDeMonto" EntitySet="TipoDeMonto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__ID_Esta__5FB337D6" Association="Self.FK__Usuario__ID_Esta__5FB337D6">
+            <End Role="EstadoUsuario" EntitySet="EstadoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__ID_Perf__4D94879B" Association="Self.FK__Usuario__ID_Perf__4D94879B">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDRestauranteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="ID_Articulo" />
+          </Key>
+          <Property Name="ID_Articulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Precio" Type="Double" />
+          <Property Name="ID_EstadoArticulo" Type="Int32" Nullable="false" />
+          <Property Name="ID_CategoriaArticulo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CategoriaArticulo" Relationship="Self.FK__Articulo__ID_Cat__5BE2A6F2" FromRole="Articulo" ToRole="CategoriaArticulo" />
+          <NavigationProperty Name="EstadoArticulo" Relationship="Self.FK__Articulo__ID_Est__5CD6CB2B" FromRole="Articulo" ToRole="EstadoArticulo" />
+          <NavigationProperty Name="Detalle" Relationship="Self.FK__Detalle__ID_Arti__534D60F1" FromRole="Articulo" ToRole="Detalle" />
+          <Property Name="PrecioDelivery" Type="Double" />
+        </EntityType>
+        <EntityType Name="ArticuloEntregado">
+          <Key>
+            <PropertyRef Name="ID_ArticuloEntregado" />
+          </Key>
+          <Property Name="ID_ArticuloEntregado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Detalle" Relationship="Self.FK__Detalle__ID_Arti__5629CD9C" FromRole="ArticuloEntregado" ToRole="Detalle" />
+        </EntityType>
+        <EntityType Name="BlockDeNota">
+          <Key>
+            <PropertyRef Name="ID_BlockDeNota" />
+          </Key>
+          <Property Name="ID_BlockDeNota" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TextoBlockNota" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Caja">
+          <Key>
+            <PropertyRef Name="ID_Caja" />
+          </Key>
+          <Property Name="ID_Caja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Hora" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Monto" Type="Double" Nullable="false" />
+          <Property Name="Detalle" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Pedido" Type="Int32" />
+          <Property Name="ID_TipoDeMonto" Type="Int32" Nullable="false" />
+          <Property Name="ID_EstadoCaja" Type="Int32" Nullable="false" />
+          <Property Name="ID_Usuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EstadoCaja" Relationship="Self.FK__Caja__ID_EstadoC__5FB337D6" FromRole="Caja" ToRole="EstadoCaja" />
+          <NavigationProperty Name="Pedido" Relationship="Self.FK__Caja__ID_Pedido__5EBF139D" FromRole="Caja" ToRole="Pedido" />
+          <NavigationProperty Name="TipoDeMonto" Relationship="Self.FK__Caja__ID_TipoDeM__60A75C0F" FromRole="Caja" ToRole="TipoDeMonto" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Caja__ID_Usuario__619B8048" FromRole="Caja" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="CategoriaArticulo">
+          <Key>
+            <PropertyRef Name="ID_CategoriaArticulo" />
+          </Key>
+          <Property Name="ID_CategoriaArticulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParaCocina" Type="Int32" Nullable="false" />
+          <Property Name="ID_EstadoCategoriaArticulo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Articulo" Relationship="Self.FK__Articulo__ID_Cat__5BE2A6F2" FromRole="CategoriaArticulo" ToRole="Articulo" />
+          <NavigationProperty Name="EstadoCategoriaArticulo" Relationship="Self.FK__Categoria__ID_Es__571DF1D5" FromRole="CategoriaArticulo" ToRole="EstadoCategoriaArticulo" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ID_Cliente" />
+          </Key>
+          <Property Name="ID_Cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Pedido" Relationship="Self.FK__Pedido__ID_Clien__4E88ABD4" FromRole="Cliente" ToRole="Pedido" />
+          <NavigationProperty Name="Reserva" Relationship="Self.FK__Reserva__ID_Clie__47DBAE45" FromRole="Cliente" ToRole="Reserva" />
+          <NavigationProperty Name="ClienteXPedido" Relationship="BDRestauranteModel.FK__ClienteXP__ID_Cl__2A164134" FromRole="Cliente" ToRole="ClienteXPedido" />
+        </EntityType>
+        <EntityType Name="Configuracion">
+          <Key>
+            <PropertyRef Name="ID_Configuracion" />
+          </Key>
+          <Property Name="ID_Configuracion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrabajaConPlantaAlta" Type="Int32" Nullable="false" />
+          <Property Name="AvisoEspera" Type="Int32" Nullable="false" />
+          <Property Name="TiempoFormAbierto" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Delivery">
+          <Key>
+            <PropertyRef Name="ID_Delivery" />
+          </Key>
+          <Property Name="ID_Delivery" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_EstadoDelivery" Type="Int32" Nullable="false" />
+          <Property Name="Telefono" Type="Int64" />
+          <Property Name="Destino" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EstadoDelivery" Relationship="Self.FK__Delivery__ID_Est__5812160E" FromRole="Delivery" ToRole="EstadoDelivery" />
+          <NavigationProperty Name="Pedido" Relationship="Self.FK__Pedido__ID_Deliv__5165187F" FromRole="Delivery" ToRole="Pedido" />
+        </EntityType>
+        <EntityType Name="Detalle">
+          <Key>
+            <PropertyRef Name="ID_Detalle" />
+          </Key>
+          <Property Name="ID_Detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Pedido" Type="Int32" Nullable="false" />
+          <Property Name="ID_Articulo" Type="Int32" Nullable="false" />
+          <Property Name="ID_Chef" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Nota" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Precio" Type="Double" />
+          <Property Name="ID_EstadoDetalle" Type="Int32" Nullable="false" />
+          <Property Name="CantidadAgregada" Type="Int32" Nullable="false" />
+          <Property Name="ID_ArticuloEntregado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Articulo" Relationship="Self.FK__Detalle__ID_Arti__534D60F1" FromRole="Detalle" ToRole="Articulo" />
+          <NavigationProperty Name="ArticuloEntregado" Relationship="Self.FK__Detalle__ID_Arti__5629CD9C" FromRole="Detalle" ToRole="ArticuloEntregado" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Detalle__ID_Chef__5441852A" FromRole="Detalle" ToRole="Usuario" />
+          <NavigationProperty Name="EstadoDetalle" Relationship="Self.FK__Detalle__ID_Esta__5535A963" FromRole="Detalle" ToRole="EstadoDetalle" />
+          <NavigationProperty Name="Pedido" Relationship="Self.FK__Detalle__ID_Pedi__52593CB8" FromRole="Detalle" ToRole="Pedido" />
+        </EntityType>
+        <EntityType Name="EstadoArticulo">
+          <Key>
+            <PropertyRef Name="ID_EstadoArticulo" />
+          </Key>
+          <Property Name="ID_EstadoArticulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Articulo" Relationship="Self.FK__Articulo__ID_Est__5CD6CB2B" FromRole="EstadoArticulo" ToRole="Articulo" />
+        </EntityType>
+        <EntityType Name="EstadoCaja">
+          <Key>
+            <PropertyRef Name="ID_EstadoCaja" />
+          </Key>
+          <Property Name="ID_EstadoCaja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Caja" Relationship="Self.FK__Caja__ID_EstadoC__5FB337D6" FromRole="EstadoCaja" ToRole="Caja" />
+        </EntityType>
+        <EntityType Name="EstadoCategoriaArticulo">
+          <Key>
+            <PropertyRef Name="ID_EstadoCategoriaArticulo" />
+          </Key>
+          <Property Name="ID_EstadoCategoriaArticulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CategoriaArticulo" Relationship="Self.FK__Categoria__ID_Es__571DF1D5" FromRole="EstadoCategoriaArticulo" ToRole="CategoriaArticulo" />
+        </EntityType>
+        <EntityType Name="EstadoDelivery">
+          <Key>
+            <PropertyRef Name="ID_EstadoDelivery" />
+          </Key>
+          <Property Name="ID_EstadoDelivery" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Delivery" Relationship="Self.FK__Delivery__ID_Est__5812160E" FromRole="EstadoDelivery" ToRole="Delivery" />
+        </EntityType>
+        <EntityType Name="EstadoDetalle">
+          <Key>
+            <PropertyRef Name="ID_EstadoDetalle" />
+          </Key>
+          <Property Name="ID_EstadoDetalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Detalle" Relationship="Self.FK__Detalle__ID_Esta__5535A963" FromRole="EstadoDetalle" ToRole="Detalle" />
+        </EntityType>
+        <EntityType Name="EstadoMesa">
+          <Key>
+            <PropertyRef Name="ID_EstadoMesa" />
+          </Key>
+          <Property Name="ID_EstadoMesa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Mesa" Relationship="Self.FK__Mesa__ID_EstadoM__59063A47" FromRole="EstadoMesa" ToRole="Mesa" />
+        </EntityType>
+        <EntityType Name="EstadoPedido">
+          <Key>
+            <PropertyRef Name="ID_EstadoPedido" />
+          </Key>
+          <Property Name="ID_EstadoPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Pedido" Relationship="Self.FK__Pedido__ID_Estad__5070F446" FromRole="EstadoPedido" ToRole="Pedido" />
+        </EntityType>
+        <EntityType Name="EstadoReserva">
+          <Key>
+            <PropertyRef Name="ID_EstadoReserva" />
+          </Key>
+          <Property Name="ID_EstadoReserva" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Reserva" Relationship="Self.FK__Reserva__ID_Esta__59FA5E80" FromRole="EstadoReserva" ToRole="Reserva" />
+        </EntityType>
+        <EntityType Name="EstadoUsuario">
+          <Key>
+            <PropertyRef Name="ID_EstadoUsuario" />
+          </Key>
+          <Property Name="ID_EstadoUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__ID_Esta__5DCAEF64" FromRole="EstadoUsuario" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="InformacionRestaurante">
+          <Key>
+            <PropertyRef Name="ID_InformacionRestaurante" />
+          </Key>
+          <Property Name="ID_InformacionRestaurante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Eslogan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TelefonoUno" Type="Int64" Nullable="false" />
+          <Property Name="TelefonoDos" Type="Int64" />
+        </EntityType>
+        <EntityType Name="Mesa">
+          <Key>
+            <PropertyRef Name="ID_Mesa" />
+          </Key>
+          <Property Name="ID_Mesa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero" Type="Int32" Nullable="false" />
+          <Property Name="ID_EstadoMesa" Type="Int32" Nullable="false" />
+          <Property Name="Capacidad" Type="Int32" Nullable="false" />
+          <Property Name="ID_Usuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EstadoMesa" Relationship="Self.FK__Mesa__ID_EstadoM__59063A47" FromRole="Mesa" ToRole="EstadoMesa" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Mesa__ID_Usuario__4AB81AF0" FromRole="Mesa" ToRole="Usuario" />
+          <NavigationProperty Name="MesaXReserva" Relationship="Self.FK__MesaXRese__ID_Me__48CFD27E" FromRole="Mesa" ToRole="MesaXReserva" />
+          <NavigationProperty Name="PedidoXMesa" Relationship="Self.FK__PedidoXMe__ID_Me__4BAC3F29" FromRole="Mesa" ToRole="PedidoXMesa" />
+        </EntityType>
+        <EntityType Name="MesaXReserva">
+          <Key>
+            <PropertyRef Name="ID_MesaXReserva" />
+          </Key>
+          <Property Name="ID_MesaXReserva" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Mesa" Type="Int32" Nullable="false" />
+          <Property Name="ID_Reserva" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Mesa" Relationship="Self.FK__MesaXRese__ID_Me__48CFD27E" FromRole="MesaXReserva" ToRole="Mesa" />
+          <NavigationProperty Name="Reserva" Relationship="Self.FK__MesaXRese__ID_Re__49C3F6B7" FromRole="MesaXReserva" ToRole="Reserva" />
+        </EntityType>
+        <EntityType Name="Pedido">
+          <Key>
+            <PropertyRef Name="ID_Pedido" />
+          </Key>
+          <Property Name="ID_Pedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Hora" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="CantidadPersonas" Type="Int32" Nullable="false" />
+          <Property Name="TotalPedido" Type="Double" />
+          <Property Name="ID_EstadoPedido" Type="Int32" Nullable="false" />
+          <Property Name="ID_Cliente" Type="Int32" Nullable="false" />
+          <Property Name="ID_Reserva" Type="Int32" />
+          <Property Name="ID_Chef" Type="Int32" Nullable="false" />
+          <Property Name="Nota" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TiempoEspera" Type="DateTime" />
+          <Property Name="ID_Delivery" Type="Int32" />
+          <NavigationProperty Name="Caja" Relationship="Self.FK__Caja__ID_Pedido__5EBF139D" FromRole="Pedido" ToRole="Caja" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Pedido__ID_Clien__4E88ABD4" FromRole="Pedido" ToRole="Cliente" />
+          <NavigationProperty Name="Delivery" Relationship="Self.FK__Pedido__ID_Deliv__5165187F" FromRole="Pedido" ToRole="Delivery" />
+          <NavigationProperty Name="Detalle" Relationship="Self.FK__Detalle__ID_Pedi__52593CB8" FromRole="Pedido" ToRole="Detalle" />
+          <NavigationProperty Name="EstadoPedido" Relationship="Self.FK__Pedido__ID_Estad__5070F446" FromRole="Pedido" ToRole="EstadoPedido" />
+          <NavigationProperty Name="Reserva" Relationship="Self.FK__Pedido__ID_Reser__4F7CD00D" FromRole="Pedido" ToRole="Reserva" />
+          <NavigationProperty Name="PedidoXMesa" Relationship="Self.FK__PedidoXMe__ID_Pe__4CA06362" FromRole="Pedido" ToRole="PedidoXMesa" />
+          <Property Name="ID_Mozo" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="BDRestauranteModel.FK__Pedido__ID_Chef__6E01572D" FromRole="Pedido" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="BDRestauranteModel.FK__Pedido__ID_Mozo__6EF57B66" FromRole="Pedido" ToRole="Usuario" />
+          <NavigationProperty Name="ClienteXPedido" Relationship="BDRestauranteModel.FK__ClienteXP__ID_Pe__2B0A656D" FromRole="Pedido" ToRole="ClienteXPedido" />
+        </EntityType>
+        <EntityType Name="PedidoXMesa">
+          <Key>
+            <PropertyRef Name="ID_PedidoXMesa" />
+          </Key>
+          <Property Name="ID_PedidoXMesa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Mesa" Type="Int32" Nullable="false" />
+          <Property Name="ID_Pedido" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Mesa" Relationship="Self.FK__PedidoXMe__ID_Me__4BAC3F29" FromRole="PedidoXMesa" ToRole="Mesa" />
+          <NavigationProperty Name="Pedido" Relationship="Self.FK__PedidoXMe__ID_Pe__4CA06362" FromRole="PedidoXMesa" ToRole="Pedido" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="ID_Perfil" />
+          </Key>
+          <Property Name="ID_Perfil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__ID_Perf__4D94879B" FromRole="Perfil" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Reserva">
+          <Key>
+            <PropertyRef Name="ID_Reserva" />
+          </Key>
+          <Property Name="ID_Reserva" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Hora" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="CantidadPersonas" Type="Int32" Nullable="false" />
+          <Property Name="ID_ViaContacto" Type="Int32" Nullable="false" />
+          <Property Name="ID_EstadoReserva" Type="Int32" Nullable="false" />
+          <Property Name="ID_Cliente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__Reserva__ID_Clie__47DBAE45" FromRole="Reserva" ToRole="Cliente" />
+          <NavigationProperty Name="EstadoReserva" Relationship="Self.FK__Reserva__ID_Esta__59FA5E80" FromRole="Reserva" ToRole="EstadoReserva" />
+          <NavigationProperty Name="MesaXReserva" Relationship="Self.FK__MesaXRese__ID_Re__49C3F6B7" FromRole="Reserva" ToRole="MesaXReserva" />
+          <NavigationProperty Name="Pedido" Relationship="Self.FK__Pedido__ID_Reser__4F7CD00D" FromRole="Reserva" ToRole="Pedido" />
+          <NavigationProperty Name="ViaDeContacto" Relationship="Self.FK__Reserva__ID_ViaC__5AEE82B9" FromRole="Reserva" ToRole="ViaDeContacto" />
+        </EntityType>
+        <EntityType Name="TipoDeMonto">
+          <Key>
+            <PropertyRef Name="ID_TipoDeMonto" />
+          </Key>
+          <Property Name="ID_TipoDeMonto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_TipoDeMovimiento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Caja" Relationship="Self.FK__Caja__ID_TipoDeM__60A75C0F" FromRole="TipoDeMonto" ToRole="Caja" />
+          <NavigationProperty Name="TipoDeMovimiento" Relationship="Self.FK__TipoDeMon__ID_Ti__628FA481" FromRole="TipoDeMonto" ToRole="TipoDeMovimiento" />
+        </EntityType>
+        <EntityType Name="TipoDeMovimiento">
+          <Key>
+            <PropertyRef Name="ID_TipoDeMovimiento" />
+          </Key>
+          <Property Name="ID_TipoDeMovimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TipoDeMonto" Relationship="Self.FK__TipoDeMon__ID_Ti__628FA481" FromRole="TipoDeMovimiento" ToRole="TipoDeMonto" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="ID_Usuario" />
+          </Key>
+          <Property Name="ID_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nick" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_EstadoUsuario" Type="Int32" Nullable="false" />
+          <Property Name="ID_Perfil" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Caja" Relationship="Self.FK__Caja__ID_Usuario__619B8048" FromRole="Usuario" ToRole="Caja" />
+          <NavigationProperty Name="Detalle" Relationship="Self.FK__Detalle__ID_Chef__5441852A" FromRole="Usuario" ToRole="Detalle" />
+          <NavigationProperty Name="EstadoUsuario" Relationship="Self.FK__Usuario__ID_Esta__5DCAEF64" FromRole="Usuario" ToRole="EstadoUsuario" />
+          <NavigationProperty Name="Mesa" Relationship="Self.FK__Mesa__ID_Usuario__4AB81AF0" FromRole="Usuario" ToRole="Mesa" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK__Usuario__ID_Perf__4D94879B" FromRole="Usuario" ToRole="Perfil" />
+          <NavigationProperty Name="Pedido" Relationship="BDRestauranteModel.FK__Pedido__ID_Chef__6E01572D" FromRole="Usuario" ToRole="Pedido" />
+          <NavigationProperty Name="Pedido1" Relationship="BDRestauranteModel.FK__Pedido__ID_Mozo__6EF57B66" FromRole="Usuario" ToRole="Pedido" />
+        </EntityType>
+        <EntityType Name="VencimientoFuncionalidades">
+          <Key>
+            <PropertyRef Name="ID_VencimientoFuncionalidades" />
+          </Key>
+          <Property Name="ID_VencimientoFuncionalidades" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VencimientoGeneral" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VencimientoFunciones" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="ViaDeContacto">
+          <Key>
+            <PropertyRef Name="ID_ViaDeContacto" />
+          </Key>
+          <Property Name="ID_ViaDeContacto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Reserva" Relationship="Self.FK__Reserva__ID_ViaC__5AEE82B9" FromRole="ViaDeContacto" ToRole="Reserva" />
+        </EntityType>
+        <Association Name="FK__Articulo__ID_Cat__5BE2A6F2">
+          <End Role="CategoriaArticulo" Type="Self.CategoriaArticulo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriaArticulo">
+              <PropertyRef Name="ID_CategoriaArticulo" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="ID_CategoriaArticulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Articulo__ID_Est__5CD6CB2B">
+          <End Role="EstadoArticulo" Type="Self.EstadoArticulo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoArticulo">
+              <PropertyRef Name="ID_EstadoArticulo" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="ID_EstadoArticulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle__ID_Arti__534D60F1">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="ID_Articulo" />
+            </Principal>
+            <Dependent Role="Detalle">
+              <PropertyRef Name="ID_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle__ID_Arti__5629CD9C">
+          <End Role="ArticuloEntregado" Type="Self.ArticuloEntregado" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ArticuloEntregado">
+              <PropertyRef Name="ID_ArticuloEntregado" />
+            </Principal>
+            <Dependent Role="Detalle">
+              <PropertyRef Name="ID_ArticuloEntregado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Caja__ID_EstadoC__5FB337D6">
+          <End Role="EstadoCaja" Type="Self.EstadoCaja" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Caja" Type="Self.Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCaja">
+              <PropertyRef Name="ID_EstadoCaja" />
+            </Principal>
+            <Dependent Role="Caja">
+              <PropertyRef Name="ID_EstadoCaja" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Caja__ID_Pedido__5EBF139D">
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Caja" Type="Self.Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido">
+              <PropertyRef Name="ID_Pedido" />
+            </Principal>
+            <Dependent Role="Caja">
+              <PropertyRef Name="ID_Pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Caja__ID_TipoDeM__60A75C0F">
+          <End Role="TipoDeMonto" Type="Self.TipoDeMonto" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Caja" Type="Self.Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDeMonto">
+              <PropertyRef Name="ID_TipoDeMonto" />
+            </Principal>
+            <Dependent Role="Caja">
+              <PropertyRef Name="ID_TipoDeMonto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Caja__ID_Usuario__619B8048">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Caja" Type="Self.Caja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Caja">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Categoria__ID_Es__571DF1D5">
+          <End Role="EstadoCategoriaArticulo" Type="Self.EstadoCategoriaArticulo" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CategoriaArticulo" Type="Self.CategoriaArticulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoCategoriaArticulo">
+              <PropertyRef Name="ID_EstadoCategoriaArticulo" />
+            </Principal>
+            <Dependent Role="CategoriaArticulo">
+              <PropertyRef Name="ID_EstadoCategoriaArticulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedido__ID_Clien__4E88ABD4">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reserva__ID_Clie__47DBAE45">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Delivery__ID_Est__5812160E">
+          <End Role="EstadoDelivery" Type="Self.EstadoDelivery" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoDelivery">
+              <PropertyRef Name="ID_EstadoDelivery" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="ID_EstadoDelivery" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedido__ID_Deliv__5165187F">
+          <End Role="Delivery" Type="Self.Delivery" Multiplicity="0..1" />
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Delivery">
+              <PropertyRef Name="ID_Delivery" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="ID_Delivery" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle__ID_Chef__5441852A">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Detalle">
+              <PropertyRef Name="ID_Chef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle__ID_Esta__5535A963">
+          <End Role="EstadoDetalle" Type="Self.EstadoDetalle" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoDetalle">
+              <PropertyRef Name="ID_EstadoDetalle" />
+            </Principal>
+            <Dependent Role="Detalle">
+              <PropertyRef Name="ID_EstadoDetalle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Detalle__ID_Pedi__52593CB8">
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Detalle" Type="Self.Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido">
+              <PropertyRef Name="ID_Pedido" />
+            </Principal>
+            <Dependent Role="Detalle">
+              <PropertyRef Name="ID_Pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mesa__ID_EstadoM__59063A47">
+          <End Role="EstadoMesa" Type="Self.EstadoMesa" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Mesa" Type="Self.Mesa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoMesa">
+              <PropertyRef Name="ID_EstadoMesa" />
+            </Principal>
+            <Dependent Role="Mesa">
+              <PropertyRef Name="ID_EstadoMesa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedido__ID_Estad__5070F446">
+          <End Role="EstadoPedido" Type="Self.EstadoPedido" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoPedido">
+              <PropertyRef Name="ID_EstadoPedido" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="ID_EstadoPedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reserva__ID_Esta__59FA5E80">
+          <End Role="EstadoReserva" Type="Self.EstadoReserva" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoReserva">
+              <PropertyRef Name="ID_EstadoReserva" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="ID_EstadoReserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__ID_Esta__5DCAEF64">
+          <End Role="EstadoUsuario" Type="Self.EstadoUsuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoUsuario">
+              <PropertyRef Name="ID_EstadoUsuario" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="ID_EstadoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mesa__ID_Usuario__4AB81AF0">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Mesa" Type="Self.Mesa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Mesa">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MesaXRese__ID_Me__48CFD27E">
+          <End Role="Mesa" Type="Self.Mesa" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MesaXReserva" Type="Self.MesaXReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mesa">
+              <PropertyRef Name="ID_Mesa" />
+            </Principal>
+            <Dependent Role="MesaXReserva">
+              <PropertyRef Name="ID_Mesa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PedidoXMe__ID_Me__4BAC3F29">
+          <End Role="Mesa" Type="Self.Mesa" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PedidoXMesa" Type="Self.PedidoXMesa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mesa">
+              <PropertyRef Name="ID_Mesa" />
+            </Principal>
+            <Dependent Role="PedidoXMesa">
+              <PropertyRef Name="ID_Mesa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MesaXRese__ID_Re__49C3F6B7">
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MesaXReserva" Type="Self.MesaXReserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserva">
+              <PropertyRef Name="ID_Reserva" />
+            </Principal>
+            <Dependent Role="MesaXReserva">
+              <PropertyRef Name="ID_Reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedido__ID_Reser__4F7CD00D">
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="0..1" />
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserva">
+              <PropertyRef Name="ID_Reserva" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="ID_Reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PedidoXMe__ID_Pe__4CA06362">
+          <End Role="Pedido" Type="Self.Pedido" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PedidoXMesa" Type="Self.PedidoXMesa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido">
+              <PropertyRef Name="ID_Pedido" />
+            </Principal>
+            <Dependent Role="PedidoXMesa">
+              <PropertyRef Name="ID_Pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__ID_Perf__4D94879B">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="ID_Perfil" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="ID_Perfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reserva__ID_ViaC__5AEE82B9">
+          <End Role="ViaDeContacto" Type="Self.ViaDeContacto" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ViaDeContacto">
+              <PropertyRef Name="ID_ViaDeContacto" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="ID_ViaContacto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TipoDeMon__ID_Ti__628FA481">
+          <End Role="TipoDeMovimiento" Type="Self.TipoDeMovimiento" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TipoDeMonto" Type="Self.TipoDeMonto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDeMovimiento">
+              <PropertyRef Name="ID_TipoDeMovimiento" />
+            </Principal>
+            <Dependent Role="TipoDeMonto">
+              <PropertyRef Name="ID_TipoDeMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDRestauranteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articulo" EntityType="Self.Articulo" />
+          <EntitySet Name="ArticuloEntregado" EntityType="Self.ArticuloEntregado" />
+          <EntitySet Name="BlockDeNota" EntityType="Self.BlockDeNota" />
+          <EntitySet Name="Caja" EntityType="Self.Caja" />
+          <EntitySet Name="CategoriaArticulo" EntityType="Self.CategoriaArticulo" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Configuracion" EntityType="Self.Configuracion" />
+          <EntitySet Name="Delivery" EntityType="Self.Delivery" />
+          <EntitySet Name="Detalle" EntityType="Self.Detalle" />
+          <EntitySet Name="EstadoArticulo" EntityType="Self.EstadoArticulo" />
+          <EntitySet Name="EstadoCaja" EntityType="Self.EstadoCaja" />
+          <EntitySet Name="EstadoCategoriaArticulo" EntityType="Self.EstadoCategoriaArticulo" />
+          <EntitySet Name="EstadoDelivery" EntityType="Self.EstadoDelivery" />
+          <EntitySet Name="EstadoDetalle" EntityType="Self.EstadoDetalle" />
+          <EntitySet Name="EstadoMesa" EntityType="Self.EstadoMesa" />
+          <EntitySet Name="EstadoPedido" EntityType="Self.EstadoPedido" />
+          <EntitySet Name="EstadoReserva" EntityType="Self.EstadoReserva" />
+          <EntitySet Name="EstadoUsuario" EntityType="Self.EstadoUsuario" />
+          <EntitySet Name="InformacionRestaurante" EntityType="Self.InformacionRestaurante" />
+          <EntitySet Name="Mesa" EntityType="Self.Mesa" />
+          <EntitySet Name="MesaXReserva" EntityType="Self.MesaXReserva" />
+          <EntitySet Name="Pedido" EntityType="Self.Pedido" />
+          <EntitySet Name="PedidoXMesa" EntityType="Self.PedidoXMesa" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" />
+          <EntitySet Name="Reserva" EntityType="Self.Reserva" />
+          <EntitySet Name="TipoDeMonto" EntityType="Self.TipoDeMonto" />
+          <EntitySet Name="TipoDeMovimiento" EntityType="Self.TipoDeMovimiento" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="VencimientoFuncionalidades" EntityType="Self.VencimientoFuncionalidades" />
+          <EntitySet Name="ViaDeContacto" EntityType="Self.ViaDeContacto" />
+          <AssociationSet Name="FK__Articulo__ID_Cat__5BE2A6F2" Association="Self.FK__Articulo__ID_Cat__5BE2A6F2">
+            <End Role="CategoriaArticulo" EntitySet="CategoriaArticulo" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Articulo__ID_Est__5CD6CB2B" Association="Self.FK__Articulo__ID_Est__5CD6CB2B">
+            <End Role="EstadoArticulo" EntitySet="EstadoArticulo" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle__ID_Arti__534D60F1" Association="Self.FK__Detalle__ID_Arti__534D60F1">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Detalle" EntitySet="Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle__ID_Arti__5629CD9C" Association="Self.FK__Detalle__ID_Arti__5629CD9C">
+            <End Role="ArticuloEntregado" EntitySet="ArticuloEntregado" />
+            <End Role="Detalle" EntitySet="Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Caja__ID_EstadoC__5FB337D6" Association="Self.FK__Caja__ID_EstadoC__5FB337D6">
+            <End Role="EstadoCaja" EntitySet="EstadoCaja" />
+            <End Role="Caja" EntitySet="Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Caja__ID_Pedido__5EBF139D" Association="Self.FK__Caja__ID_Pedido__5EBF139D">
+            <End Role="Pedido" EntitySet="Pedido" />
+            <End Role="Caja" EntitySet="Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Caja__ID_TipoDeM__60A75C0F" Association="Self.FK__Caja__ID_TipoDeM__60A75C0F">
+            <End Role="TipoDeMonto" EntitySet="TipoDeMonto" />
+            <End Role="Caja" EntitySet="Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Caja__ID_Usuario__619B8048" Association="Self.FK__Caja__ID_Usuario__619B8048">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Caja" EntitySet="Caja" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Categoria__ID_Es__571DF1D5" Association="Self.FK__Categoria__ID_Es__571DF1D5">
+            <End Role="EstadoCategoriaArticulo" EntitySet="EstadoCategoriaArticulo" />
+            <End Role="CategoriaArticulo" EntitySet="CategoriaArticulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedido__ID_Clien__4E88ABD4" Association="Self.FK__Pedido__ID_Clien__4E88ABD4">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reserva__ID_Clie__47DBAE45" Association="Self.FK__Reserva__ID_Clie__47DBAE45">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Delivery__ID_Est__5812160E" Association="Self.FK__Delivery__ID_Est__5812160E">
+            <End Role="EstadoDelivery" EntitySet="EstadoDelivery" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedido__ID_Deliv__5165187F" Association="Self.FK__Pedido__ID_Deliv__5165187F">
+            <End Role="Delivery" EntitySet="Delivery" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle__ID_Chef__5441852A" Association="Self.FK__Detalle__ID_Chef__5441852A">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Detalle" EntitySet="Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle__ID_Esta__5535A963" Association="Self.FK__Detalle__ID_Esta__5535A963">
+            <End Role="EstadoDetalle" EntitySet="EstadoDetalle" />
+            <End Role="Detalle" EntitySet="Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Detalle__ID_Pedi__52593CB8" Association="Self.FK__Detalle__ID_Pedi__52593CB8">
+            <End Role="Pedido" EntitySet="Pedido" />
+            <End Role="Detalle" EntitySet="Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mesa__ID_EstadoM__59063A47" Association="Self.FK__Mesa__ID_EstadoM__59063A47">
+            <End Role="EstadoMesa" EntitySet="EstadoMesa" />
+            <End Role="Mesa" EntitySet="Mesa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedido__ID_Estad__5070F446" Association="Self.FK__Pedido__ID_Estad__5070F446">
+            <End Role="EstadoPedido" EntitySet="EstadoPedido" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reserva__ID_Esta__59FA5E80" Association="Self.FK__Reserva__ID_Esta__59FA5E80">
+            <End Role="EstadoReserva" EntitySet="EstadoReserva" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__ID_Esta__5DCAEF64" Association="Self.FK__Usuario__ID_Esta__5DCAEF64">
+            <End Role="EstadoUsuario" EntitySet="EstadoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mesa__ID_Usuario__4AB81AF0" Association="Self.FK__Mesa__ID_Usuario__4AB81AF0">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Mesa" EntitySet="Mesa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MesaXRese__ID_Me__48CFD27E" Association="Self.FK__MesaXRese__ID_Me__48CFD27E">
+            <End Role="Mesa" EntitySet="Mesa" />
+            <End Role="MesaXReserva" EntitySet="MesaXReserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PedidoXMe__ID_Me__4BAC3F29" Association="Self.FK__PedidoXMe__ID_Me__4BAC3F29">
+            <End Role="Mesa" EntitySet="Mesa" />
+            <End Role="PedidoXMesa" EntitySet="PedidoXMesa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MesaXRese__ID_Re__49C3F6B7" Association="Self.FK__MesaXRese__ID_Re__49C3F6B7">
+            <End Role="Reserva" EntitySet="Reserva" />
+            <End Role="MesaXReserva" EntitySet="MesaXReserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedido__ID_Reser__4F7CD00D" Association="Self.FK__Pedido__ID_Reser__4F7CD00D">
+            <End Role="Reserva" EntitySet="Reserva" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PedidoXMe__ID_Pe__4CA06362" Association="Self.FK__PedidoXMe__ID_Pe__4CA06362">
+            <End Role="Pedido" EntitySet="Pedido" />
+            <End Role="PedidoXMesa" EntitySet="PedidoXMesa" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__ID_Perf__4D94879B" Association="Self.FK__Usuario__ID_Perf__4D94879B">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reserva__ID_ViaC__5AEE82B9" Association="Self.FK__Reserva__ID_ViaC__5AEE82B9">
+            <End Role="ViaDeContacto" EntitySet="ViaDeContacto" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TipoDeMon__ID_Ti__628FA481" Association="Self.FK__TipoDeMon__ID_Ti__628FA481">
+            <End Role="TipoDeMovimiento" EntitySet="TipoDeMovimiento" />
+            <End Role="TipoDeMonto" EntitySet="TipoDeMonto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedido__ID_Chef__6E01572D" Association="BDRestauranteModel.FK__Pedido__ID_Chef__6E01572D">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pedido__ID_Mozo__6EF57B66" Association="BDRestauranteModel.FK__Pedido__ID_Mozo__6EF57B66">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Pedido" EntitySet="Pedido" />
+          </AssociationSet>
+          <EntitySet Name="ClienteXPedido" EntityType="BDRestauranteModel.ClienteXPedido" />
+          <EntitySet Name="EstadoClienteXPedido" EntityType="BDRestauranteModel.EstadoClienteXPedido" />
+          <EntitySet Name="sysdiagrams" EntityType="BDRestauranteModel.sysdiagrams" />
+          <AssociationSet Name="FK__ClienteXP__ID_Cl__2A164134" Association="BDRestauranteModel.FK__ClienteXP__ID_Cl__2A164134">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ClienteXPedido" EntitySet="ClienteXPedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClienteXP__ID_Es__2BFE89A6" Association="BDRestauranteModel.FK__ClienteXP__ID_Es__2BFE89A6">
+            <End Role="EstadoClienteXPedido" EntitySet="EstadoClienteXPedido" />
+            <End Role="ClienteXPedido" EntitySet="ClienteXPedido" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClienteXP__ID_Pe__2B0A656D" Association="BDRestauranteModel.FK__ClienteXP__ID_Pe__2B0A656D">
+            <End Role="Pedido" EntitySet="Pedido" />
+            <End Role="ClienteXPedido" EntitySet="ClienteXPedido" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ArticulosMasVendidosCarta" ReturnType="Collection(BDRestauranteModel.SP_ArticulosMasVendidosCarta_Result)">
+            <Parameter Name="p_FechaDesde" Mode="In" Type="String" />
+            <Parameter Name="p_FechaHasta" Mode="In" Type="String" />
+            <Parameter Name="p_ParaCocina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ArticulosMasVendidosCategoriaCarta" ReturnType="Collection(BDRestauranteModel.SP_ArticulosMasVendidosCategoriaCarta_Result)">
+            <Parameter Name="p_FechaDesde" Mode="In" Type="String" />
+            <Parameter Name="p_FechaHasta" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ArticulosMasVendidosCategoriaDelivery" ReturnType="Collection(BDRestauranteModel.SP_ArticulosMasVendidosCategoriaDelivery_Result)">
+            <Parameter Name="p_FechaDesde" Mode="In" Type="String" />
+            <Parameter Name="p_FechaHasta" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ArticulosMasVendidosCategoriaReserva" ReturnType="Collection(BDRestauranteModel.SP_ArticulosMasVendidosCategoriaReserva_Result)">
+            <Parameter Name="p_FechaDesde" Mode="In" Type="String" />
+            <Parameter Name="p_FechaHasta" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ArticulosMasVendidosDelivery" ReturnType="Collection(BDRestauranteModel.SP_ArticulosMasVendidosDelivery_Result)">
+            <Parameter Name="p_FechaDesde" Mode="In" Type="String" />
+            <Parameter Name="p_FechaHasta" Mode="In" Type="String" />
+            <Parameter Name="p_ParaCocina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ArticulosMasVendidosReserva" ReturnType="Collection(BDRestauranteModel.SP_ArticulosMasVendidosReserva_Result)">
+            <Parameter Name="p_FechaDesde" Mode="In" Type="String" />
+            <Parameter Name="p_FechaHasta" Mode="In" Type="String" />
+            <Parameter Name="p_ParaCocina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ArticulosMenosVendidosCarta" ReturnType="Collection(BDRestauranteModel.SP_ArticulosMenosVendidosCarta_Result)">
+            <Parameter Name="p_FechaDesde" Mode="In" Type="String" />
+            <Parameter Name="p_FechaHasta" Mode="In" Type="String" />
+            <Parameter Name="p_ParaCocina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ArticulosMenosVendidosCategoriaCarta" ReturnType="Collection(BDRestauranteModel.SP_ArticulosMenosVendidosCategoriaCarta_Result)">
+            <Parameter Name="p_FechaDesde" Mode="In" Type="String" />
+            <Parameter Name="p_FechaHasta" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ArticulosMenosVendidosCategoriaDelivery" ReturnType="Collection(BDRestauranteModel.SP_ArticulosMenosVendidosCategoriaDelivery_Result)">
+            <Parameter Name="p_FechaDesde" Mode="In" Type="String" />
+            <Parameter Name="p_FechaHasta" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ArticulosMenosVendidosCategoriaReserva" ReturnType="Collection(BDRestauranteModel.SP_ArticulosMenosVendidosCategoriaReserva_Result)">
+            <Parameter Name="p_FechaDesde" Mode="In" Type="String" />
+            <Parameter Name="p_FechaHasta" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ArticulosMenosVendidosDelivery" ReturnType="Collection(BDRestauranteModel.SP_ArticulosMenosVendidosDelivery_Result)">
+            <Parameter Name="p_FechaDesde" Mode="In" Type="String" />
+            <Parameter Name="p_FechaHasta" Mode="In" Type="String" />
+            <Parameter Name="p_ParaCocina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ArticulosMenosVendidosReserva" ReturnType="Collection(BDRestauranteModel.SP_ArticulosMenosVendidosReserva_Result)">
+            <Parameter Name="p_FechaDesde" Mode="In" Type="String" />
+            <Parameter Name="p_FechaHasta" Mode="In" Type="String" />
+            <Parameter Name="p_ParaCocina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ArticulosVendidosPorMesCarta" ReturnType="Collection(BDRestauranteModel.SP_ArticulosVendidosPorMesCarta_Result)">
+          <Parameter Name="p_Año" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ArticulosVendidosPorMesDelivery" ReturnType="Collection(BDRestauranteModel.SP_ArticulosVendidosPorMesDelivery_Result)">
+          <Parameter Name="p_Año" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ArticulosVendidosPorMesReserva" ReturnType="Collection(BDRestauranteModel.SP_ArticulosVendidosPorMesReserva_Result)">
+          <Parameter Name="p_Año" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GananciasYPerdidasPorMes" ReturnType="Collection(BDRestauranteModel.SP_GananciasYPerdidasPorMes_Result)">
+          <Parameter Name="p_Año" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(BDRestauranteModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(BDRestauranteModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="SP_VentasPorMozoPorMes" ReturnType="Collection(BDRestauranteModel.SP_VentasPorMozoPorMes_Result)">
+          <Parameter Name="p_Año" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <Association Name="FK__Pedido__ID_Chef__6E01572D">
+          <End Type="BDRestauranteModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="BDRestauranteModel.Pedido" Role="Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="ID_Chef" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pedido__ID_Mozo__6EF57B66">
+          <End Type="BDRestauranteModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="BDRestauranteModel.Pedido" Role="Pedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Pedido">
+              <PropertyRef Name="ID_Mozo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClienteXPedido">
+          <Key>
+            <PropertyRef Name="ID_ClienteXPedido" />
+          </Key>
+          <Property Name="ID_ClienteXPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Cliente" Type="Int32" Nullable="false" />
+          <Property Name="ID_Pedido" Type="Int32" Nullable="false" />
+          <Property Name="ID_EstadoClienteXPedido" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="BDRestauranteModel.FK__ClienteXP__ID_Cl__2A164134" FromRole="ClienteXPedido" ToRole="Cliente" />
+          <NavigationProperty Name="EstadoClienteXPedido" Relationship="BDRestauranteModel.FK__ClienteXP__ID_Es__2BFE89A6" FromRole="ClienteXPedido" ToRole="EstadoClienteXPedido" />
+          <NavigationProperty Name="Pedido" Relationship="BDRestauranteModel.FK__ClienteXP__ID_Pe__2B0A656D" FromRole="ClienteXPedido" ToRole="Pedido" />
+        </EntityType>
+        <EntityType Name="EstadoClienteXPedido">
+          <Key>
+            <PropertyRef Name="ID_EstadoClienteXPedido" />
+          </Key>
+          <Property Name="ID_EstadoClienteXPedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ClienteXPedido" Relationship="BDRestauranteModel.FK__ClienteXP__ID_Es__2BFE89A6" FromRole="EstadoClienteXPedido" ToRole="ClienteXPedido" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__ClienteXP__ID_Cl__2A164134">
+          <End Type="BDRestauranteModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="BDRestauranteModel.ClienteXPedido" Role="ClienteXPedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID_Cliente" />
+            </Principal>
+            <Dependent Role="ClienteXPedido">
+              <PropertyRef Name="ID_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClienteXP__ID_Es__2BFE89A6">
+          <End Type="BDRestauranteModel.EstadoClienteXPedido" Role="EstadoClienteXPedido" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="BDRestauranteModel.ClienteXPedido" Role="ClienteXPedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoClienteXPedido">
+              <PropertyRef Name="ID_EstadoClienteXPedido" />
+            </Principal>
+            <Dependent Role="ClienteXPedido">
+              <PropertyRef Name="ID_EstadoClienteXPedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClienteXP__ID_Pe__2B0A656D">
+          <End Type="BDRestauranteModel.Pedido" Role="Pedido" Multiplicity="1" />
+          <End Type="BDRestauranteModel.ClienteXPedido" Role="ClienteXPedido" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pedido">
+              <PropertyRef Name="ID_Pedido" />
+            </Principal>
+            <Dependent Role="ClienteXPedido">
+              <PropertyRef Name="ID_Pedido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SP_ArticulosMasVendidosCarta_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ArticulosMasVendidosCategoriaCarta_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ArticulosMasVendidosCategoriaDelivery_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ArticulosMasVendidosCategoriaReserva_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ArticulosMasVendidosDelivery_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ArticulosMasVendidosReserva_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ArticulosMenosVendidosCarta_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ArticulosMenosVendidosCategoriaCarta_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ArticulosMenosVendidosCategoriaDelivery_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ArticulosMenosVendidosCategoriaReserva_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ArticulosMenosVendidosDelivery_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ArticulosMenosVendidosReserva_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ArticulosVendidosPorMesCarta_Result">
+          <Property Type="Int32" Name="Mes" Nullable="true" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ArticulosVendidosPorMesDelivery_Result">
+          <Property Type="Int32" Name="Mes" Nullable="true" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_ArticulosVendidosPorMesReserva_Result">
+          <Property Type="Int32" Name="Mes" Nullable="true" />
+          <Property Type="Int32" Name="cantidad" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_GananciasYPerdidasPorMes_Result">
+          <Property Type="Double" Name="Monto" Nullable="true" />
+          <Property Type="Int32" Name="Mes" Nullable="true" />
+          <Property Type="Int32" Name="ID_TipoDeMovimiento" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SP_VentasPorMozoPorMes_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Apellido" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Mes" Nullable="true" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDRestauranteModelStoreContainer" CdmEntityContainer="BDRestauranteEntities">
+          <EntitySetMapping Name="Articulo">
+            <EntityTypeMapping TypeName="BDRestauranteModel.Articulo">
+              <MappingFragment StoreEntitySet="Articulo">
+                <ScalarProperty Name="PrecioDelivery" ColumnName="PrecioDelivery" />
+                <ScalarProperty Name="ID_Articulo" ColumnName="ID_Articulo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="ID_EstadoArticulo" ColumnName="ID_EstadoArticulo" />
+                <ScalarProperty Name="ID_CategoriaArticulo" ColumnName="ID_CategoriaArticulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticuloEntregado">
+            <EntityTypeMapping TypeName="BDRestauranteModel.ArticuloEntregado">
+              <MappingFragment StoreEntitySet="ArticuloEntregado">
+                <ScalarProperty Name="ID_ArticuloEntregado" ColumnName="ID_ArticuloEntregado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlockDeNota">
+            <EntityTypeMapping TypeName="BDRestauranteModel.BlockDeNota">
+              <MappingFragment StoreEntitySet="BlockDeNota">
+                <ScalarProperty Name="ID_BlockDeNota" ColumnName="ID_BlockDeNota" />
+                <ScalarProperty Name="TextoBlockNota" ColumnName="TextoBlockNota" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Caja">
+            <EntityTypeMapping TypeName="BDRestauranteModel.Caja">
+              <MappingFragment StoreEntitySet="Caja">
+                <ScalarProperty Name="ID_Caja" ColumnName="ID_Caja" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="ID_Pedido" ColumnName="ID_Pedido" />
+                <ScalarProperty Name="ID_TipoDeMonto" ColumnName="ID_TipoDeMonto" />
+                <ScalarProperty Name="ID_EstadoCaja" ColumnName="ID_EstadoCaja" />
+                <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoriaArticulo">
+            <EntityTypeMapping TypeName="BDRestauranteModel.CategoriaArticulo">
+              <MappingFragment StoreEntitySet="CategoriaArticulo">
+                <ScalarProperty Name="ID_CategoriaArticulo" ColumnName="ID_CategoriaArticulo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ParaCocina" ColumnName="ParaCocina" />
+                <ScalarProperty Name="ID_EstadoCategoriaArticulo" ColumnName="ID_EstadoCategoriaArticulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="BDRestauranteModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configuracion">
+            <EntityTypeMapping TypeName="BDRestauranteModel.Configuracion">
+              <MappingFragment StoreEntitySet="Configuracion">
+                <ScalarProperty Name="ID_Configuracion" ColumnName="ID_Configuracion" />
+                <ScalarProperty Name="TrabajaConPlantaAlta" ColumnName="TrabajaConPlantaAlta" />
+                <ScalarProperty Name="AvisoEspera" ColumnName="AvisoEspera" />
+                <ScalarProperty Name="TiempoFormAbierto" ColumnName="TiempoFormAbierto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Delivery">
+            <EntityTypeMapping TypeName="BDRestauranteModel.Delivery">
+              <MappingFragment StoreEntitySet="Delivery">
+                <ScalarProperty Name="ID_Delivery" ColumnName="ID_Delivery" />
+                <ScalarProperty Name="ID_EstadoDelivery" ColumnName="ID_EstadoDelivery" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Destino" ColumnName="Destino" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detalle">
+            <EntityTypeMapping TypeName="BDRestauranteModel.Detalle">
+              <MappingFragment StoreEntitySet="Detalle">
+                <ScalarProperty Name="ID_Detalle" ColumnName="ID_Detalle" />
+                <ScalarProperty Name="ID_Pedido" ColumnName="ID_Pedido" />
+                <ScalarProperty Name="ID_Articulo" ColumnName="ID_Articulo" />
+                <ScalarProperty Name="ID_Chef" ColumnName="ID_Chef" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="ID_EstadoDetalle" ColumnName="ID_EstadoDetalle" />
+                <ScalarProperty Name="CantidadAgregada" ColumnName="CantidadAgregada" />
+                <ScalarProperty Name="ID_ArticuloEntregado" ColumnName="ID_ArticuloEntregado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoArticulo">
+            <EntityTypeMapping TypeName="BDRestauranteModel.EstadoArticulo">
+              <MappingFragment StoreEntitySet="EstadoArticulo">
+                <ScalarProperty Name="ID_EstadoArticulo" ColumnName="ID_EstadoArticulo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoCaja">
+            <EntityTypeMapping TypeName="BDRestauranteModel.EstadoCaja">
+              <MappingFragment StoreEntitySet="EstadoCaja">
+                <ScalarProperty Name="ID_EstadoCaja" ColumnName="ID_EstadoCaja" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoCategoriaArticulo">
+            <EntityTypeMapping TypeName="BDRestauranteModel.EstadoCategoriaArticulo">
+              <MappingFragment StoreEntitySet="EstadoCategoriaArticulo">
+                <ScalarProperty Name="ID_EstadoCategoriaArticulo" ColumnName="ID_EstadoCategoriaArticulo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoDelivery">
+            <EntityTypeMapping TypeName="BDRestauranteModel.EstadoDelivery">
+              <MappingFragment StoreEntitySet="EstadoDelivery">
+                <ScalarProperty Name="ID_EstadoDelivery" ColumnName="ID_EstadoDelivery" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoDetalle">
+            <EntityTypeMapping TypeName="BDRestauranteModel.EstadoDetalle">
+              <MappingFragment StoreEntitySet="EstadoDetalle">
+                <ScalarProperty Name="ID_EstadoDetalle" ColumnName="ID_EstadoDetalle" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoMesa">
+            <EntityTypeMapping TypeName="BDRestauranteModel.EstadoMesa">
+              <MappingFragment StoreEntitySet="EstadoMesa">
+                <ScalarProperty Name="ID_EstadoMesa" ColumnName="ID_EstadoMesa" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoPedido">
+            <EntityTypeMapping TypeName="BDRestauranteModel.EstadoPedido">
+              <MappingFragment StoreEntitySet="EstadoPedido">
+                <ScalarProperty Name="ID_EstadoPedido" ColumnName="ID_EstadoPedido" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoReserva">
+            <EntityTypeMapping TypeName="BDRestauranteModel.EstadoReserva">
+              <MappingFragment StoreEntitySet="EstadoReserva">
+                <ScalarProperty Name="ID_EstadoReserva" ColumnName="ID_EstadoReserva" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoUsuario">
+            <EntityTypeMapping TypeName="BDRestauranteModel.EstadoUsuario">
+              <MappingFragment StoreEntitySet="EstadoUsuario">
+                <ScalarProperty Name="ID_EstadoUsuario" ColumnName="ID_EstadoUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InformacionRestaurante">
+            <EntityTypeMapping TypeName="BDRestauranteModel.InformacionRestaurante">
+              <MappingFragment StoreEntitySet="InformacionRestaurante">
+                <ScalarProperty Name="ID_InformacionRestaurante" ColumnName="ID_InformacionRestaurante" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Eslogan" ColumnName="Eslogan" />
+                <ScalarProperty Name="TelefonoUno" ColumnName="TelefonoUno" />
+                <ScalarProperty Name="TelefonoDos" ColumnName="TelefonoDos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mesa">
+            <EntityTypeMapping TypeName="BDRestauranteModel.Mesa">
+              <MappingFragment StoreEntitySet="Mesa">
+                <ScalarProperty Name="ID_Mesa" ColumnName="ID_Mesa" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="ID_EstadoMesa" ColumnName="ID_EstadoMesa" />
+                <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+                <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MesaXReserva">
+            <EntityTypeMapping TypeName="BDRestauranteModel.MesaXReserva">
+              <MappingFragment StoreEntitySet="MesaXReserva">
+                <ScalarProperty Name="ID_MesaXReserva" ColumnName="ID_MesaXReserva" />
+                <ScalarProperty Name="ID_Mesa" ColumnName="ID_Mesa" />
+                <ScalarProperty Name="ID_Reserva" ColumnName="ID_Reserva" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pedido">
+            <EntityTypeMapping TypeName="BDRestauranteModel.Pedido">
+              <MappingFragment StoreEntitySet="Pedido">
+                <ScalarProperty Name="ID_Mozo" ColumnName="ID_Mozo" />
+                <ScalarProperty Name="ID_Pedido" ColumnName="ID_Pedido" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="CantidadPersonas" ColumnName="CantidadPersonas" />
+                <ScalarProperty Name="TotalPedido" ColumnName="TotalPedido" />
+                <ScalarProperty Name="ID_EstadoPedido" ColumnName="ID_EstadoPedido" />
+                <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+                <ScalarProperty Name="ID_Reserva" ColumnName="ID_Reserva" />
+                <ScalarProperty Name="ID_Chef" ColumnName="ID_Chef" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+                <ScalarProperty Name="TiempoEspera" ColumnName="TiempoEspera" />
+                <ScalarProperty Name="ID_Delivery" ColumnName="ID_Delivery" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PedidoXMesa">
+            <EntityTypeMapping TypeName="BDRestauranteModel.PedidoXMesa">
+              <MappingFragment StoreEntitySet="PedidoXMesa">
+                <ScalarProperty Name="ID_PedidoXMesa" ColumnName="ID_PedidoXMesa" />
+                <ScalarProperty Name="ID_Mesa" ColumnName="ID_Mesa" />
+                <ScalarProperty Name="ID_Pedido" ColumnName="ID_Pedido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Perfil">
+            <EntityTypeMapping TypeName="BDRestauranteModel.Perfil">
+              <MappingFragment StoreEntitySet="Perfil">
+                <ScalarProperty Name="ID_Perfil" ColumnName="ID_Perfil" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reserva">
+            <EntityTypeMapping TypeName="BDRestauranteModel.Reserva">
+              <MappingFragment StoreEntitySet="Reserva">
+                <ScalarProperty Name="ID_Reserva" ColumnName="ID_Reserva" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Hora" ColumnName="Hora" />
+                <ScalarProperty Name="CantidadPersonas" ColumnName="CantidadPersonas" />
+                <ScalarProperty Name="ID_ViaContacto" ColumnName="ID_ViaContacto" />
+                <ScalarProperty Name="ID_EstadoReserva" ColumnName="ID_EstadoReserva" />
+                <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDeMonto">
+            <EntityTypeMapping TypeName="BDRestauranteModel.TipoDeMonto">
+              <MappingFragment StoreEntitySet="TipoDeMonto">
+                <ScalarProperty Name="ID_TipoDeMonto" ColumnName="ID_TipoDeMonto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID_TipoDeMovimiento" ColumnName="ID_TipoDeMovimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDeMovimiento">
+            <EntityTypeMapping TypeName="BDRestauranteModel.TipoDeMovimiento">
+              <MappingFragment StoreEntitySet="TipoDeMovimiento">
+                <ScalarProperty Name="ID_TipoDeMovimiento" ColumnName="ID_TipoDeMovimiento" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="BDRestauranteModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+                <ScalarProperty Name="Nick" ColumnName="Nick" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="ID_EstadoUsuario" ColumnName="ID_EstadoUsuario" />
+                <ScalarProperty Name="ID_Perfil" ColumnName="ID_Perfil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VencimientoFuncionalidades">
+            <EntityTypeMapping TypeName="BDRestauranteModel.VencimientoFuncionalidades">
+              <MappingFragment StoreEntitySet="VencimientoFuncionalidades">
+                <ScalarProperty Name="ID_VencimientoFuncionalidades" ColumnName="ID_VencimientoFuncionalidades" />
+                <ScalarProperty Name="VencimientoGeneral" ColumnName="VencimientoGeneral" />
+                <ScalarProperty Name="VencimientoFunciones" ColumnName="VencimientoFunciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViaDeContacto">
+            <EntityTypeMapping TypeName="BDRestauranteModel.ViaDeContacto">
+              <MappingFragment StoreEntitySet="ViaDeContacto">
+                <ScalarProperty Name="ID_ViaDeContacto" ColumnName="ID_ViaDeContacto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClienteXPedido">
+            <EntityTypeMapping TypeName="BDRestauranteModel.ClienteXPedido">
+              <MappingFragment StoreEntitySet="ClienteXPedido">
+                <ScalarProperty Name="ID_EstadoClienteXPedido" ColumnName="ID_EstadoClienteXPedido" />
+                <ScalarProperty Name="ID_Pedido" ColumnName="ID_Pedido" />
+                <ScalarProperty Name="ID_Cliente" ColumnName="ID_Cliente" />
+                <ScalarProperty Name="ID_ClienteXPedido" ColumnName="ID_ClienteXPedido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoClienteXPedido">
+            <EntityTypeMapping TypeName="BDRestauranteModel.EstadoClienteXPedido">
+              <MappingFragment StoreEntitySet="EstadoClienteXPedido">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ID_EstadoClienteXPedido" ColumnName="ID_EstadoClienteXPedido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BDRestauranteModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="BDRestauranteModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="SP_ArticulosMasVendidosCarta" FunctionName="BDRestauranteModel.Store.SP_ArticulosMasVendidosCarta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_ArticulosMasVendidosCarta_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ArticulosMasVendidosCategoriaCarta" FunctionName="BDRestauranteModel.Store.SP_ArticulosMasVendidosCategoriaCarta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_ArticulosMasVendidosCategoriaCarta_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ArticulosMasVendidosCategoriaDelivery" FunctionName="BDRestauranteModel.Store.SP_ArticulosMasVendidosCategoriaDelivery">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_ArticulosMasVendidosCategoriaDelivery_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ArticulosMasVendidosCategoriaReserva" FunctionName="BDRestauranteModel.Store.SP_ArticulosMasVendidosCategoriaReserva">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_ArticulosMasVendidosCategoriaReserva_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ArticulosMasVendidosDelivery" FunctionName="BDRestauranteModel.Store.SP_ArticulosMasVendidosDelivery">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_ArticulosMasVendidosDelivery_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ArticulosMasVendidosReserva" FunctionName="BDRestauranteModel.Store.SP_ArticulosMasVendidosReserva">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_ArticulosMasVendidosReserva_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ArticulosMenosVendidosCarta" FunctionName="BDRestauranteModel.Store.SP_ArticulosMenosVendidosCarta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_ArticulosMenosVendidosCarta_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ArticulosMenosVendidosCategoriaCarta" FunctionName="BDRestauranteModel.Store.SP_ArticulosMenosVendidosCategoriaCarta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_ArticulosMenosVendidosCategoriaCarta_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ArticulosMenosVendidosCategoriaDelivery" FunctionName="BDRestauranteModel.Store.SP_ArticulosMenosVendidosCategoriaDelivery">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_ArticulosMenosVendidosCategoriaDelivery_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ArticulosMenosVendidosCategoriaReserva" FunctionName="BDRestauranteModel.Store.SP_ArticulosMenosVendidosCategoriaReserva">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_ArticulosMenosVendidosCategoriaReserva_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ArticulosMenosVendidosDelivery" FunctionName="BDRestauranteModel.Store.SP_ArticulosMenosVendidosDelivery">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_ArticulosMenosVendidosDelivery_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ArticulosMenosVendidosReserva" FunctionName="BDRestauranteModel.Store.SP_ArticulosMenosVendidosReserva">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_ArticulosMenosVendidosReserva_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ArticulosVendidosPorMesCarta" FunctionName="BDRestauranteModel.Store.SP_ArticulosVendidosPorMesCarta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_ArticulosVendidosPorMesCarta_Result">
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ArticulosVendidosPorMesDelivery" FunctionName="BDRestauranteModel.Store.SP_ArticulosVendidosPorMesDelivery">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_ArticulosVendidosPorMesDelivery_Result">
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ArticulosVendidosPorMesReserva" FunctionName="BDRestauranteModel.Store.SP_ArticulosVendidosPorMesReserva">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_ArticulosVendidosPorMesReserva_Result">
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="BDRestauranteModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="BDRestauranteModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="SP_GananciasYPerdidasPorMes" FunctionName="BDRestauranteModel.Store.SP_GananciasYPerdidasPorMes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_GananciasYPerdidasPorMes_Result">
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="ID_TipoDeMovimiento" ColumnName="ID_TipoDeMovimiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="BDRestauranteModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="BDRestauranteModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="BDRestauranteModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="BDRestauranteModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="SP_VentasPorMozoPorMes" FunctionName="BDRestauranteModel.Store.SP_VentasPorMozoPorMes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDRestauranteModel.SP_VentasPorMozoPorMes_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

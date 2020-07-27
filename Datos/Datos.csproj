@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B36B25F1-710A-40ED-945E-3EF191814034}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Datos</RootNamespace>
+    <AssemblyName>Datos</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Articulo.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ArticuloEntregado.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BlockDeNota.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Caja.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CategoriaArticulo.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cliente.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClienteXPedido.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Configuracion.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Delivery.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Detalle.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstadoArticulo.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstadoCaja.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstadoCategoriaArticulo.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstadoClienteXPedido.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstadoDelivery.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstadoDetalle.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstadoMesa.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstadoPedido.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstadoReserva.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstadoUsuario.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InformacionRestaurante.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mesa.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MesaXReserva.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="modBDRestaurante.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>modBDRestaurante.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="modBDRestaurante.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="modBDRestaurante.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>modBDRestaurante.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Pedido.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PedidoXMesa.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Perfil.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reserva.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ArticulosMasVendidosCarta_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ArticulosMasVendidosCategoriaCarta_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ArticulosMasVendidosCategoriaDelivery_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ArticulosMasVendidosCategoriaReserva_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ArticulosMasVendidosDelivery_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ArticulosMasVendidosReserva_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ArticulosMenosVendidosCarta_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ArticulosMenosVendidosCategoriaCarta_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ArticulosMenosVendidosCategoriaDelivery_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ArticulosMenosVendidosCategoriaReserva_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ArticulosMenosVendidosDelivery_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ArticulosMenosVendidosReserva_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ArticulosVendidosPorMesCarta_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ArticulosVendidosPorMesDelivery_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_ArticulosVendidosPorMesReserva_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GananciasYPerdidasPorMes_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_VentasPorMozoPorMes_Result.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoDeMonto.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TipoDeMovimiento.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VencimientoFuncionalidades.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViaDeContacto.cs">
+      <DependentUpon>modBDRestaurante.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="modBDRestaurante.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>modBDRestaurante.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="modBDRestaurante.edmx.diagram">
+      <DependentUpon>modBDRestaurante.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="modBDRestaurante.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>modBDRestaurante.edmx</DependentUpon>
+      <LastGenOutput>modBDRestaurante.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="modBDRestaurante.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>modBDRestaurante.edmx</DependentUpon>
+      <LastGenOutput>modBDRestaurante.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
