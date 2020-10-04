@@ -9,7 +9,24 @@ namespace Negocio
     {
         public enum EMesasDisponibles
         {
-            MesasDisponiblesPA, MesasDisponiblesPB, MesasReservadas, PorID
+            /// <summary>
+            /// Trae de la BBDD todas las mesas disponibles de la planta alta para una reserva el dia que indique por parametro. Necesita el 
+            /// parametro de la FECHA A RESERVAR.
+            /// </summary>
+            MesasDisponiblesPA,
+            /// <summary>
+            /// Trae de la BBDD todas las mesas disponibles de la planta baja para una reserva el dia que indique por parametro. Necesita el 
+            /// parametro de la FECHA A RESERVAR.
+            /// </summary>
+            MesasDisponiblesPB, 
+            /// <summary>
+            /// Trae de la BBDD las mesas que esta ocupando una reserva segun el ID pasado por parametro. Necesita el ID de la reserva.
+            /// </summary>
+            MesasReservadas, 
+            /// <summary>
+            /// Trae de la BBDD los datos de las mesas por reservas segun el ID solicitados. Necesita el ID de la reserva.
+            /// </summary>
+            PorID
         }
 
         /// <summary>
@@ -31,8 +48,8 @@ namespace Negocio
 
                         case EMesasDisponibles.MesasReservadas:
                             return BBDD.MesaXReserva.Include("Reserva").Include("Mesa").Where(Identificador => Identificador.Reserva.ID_Reserva == _ID_Reserva).ToList();
+                       
                         case EMesasDisponibles.MesasDisponiblesPB:
-
                             return BBDD.MesaXReserva.Include("Reserva").Include("Mesa").Where(Identificador => Identificador.Reserva.ID_EstadoReserva == (int)ClsEstadoReservas.EEstadosReservas.Pendiente
                             && Identificador.Reserva.Fecha == _FechaReservar).ToList();
 

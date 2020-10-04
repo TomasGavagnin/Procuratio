@@ -61,7 +61,7 @@ namespace Procuratio
         private void FrmCarta_Shown(object sender, EventArgs e)
         {
             FormularioCargado = true;
-            CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivos);
+            CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivosInactivos);
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Procuratio
 
                 if (FormCrearArticulo.DialogResult == DialogResult.OK)
                 {
-                    CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivos);
+                    CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivosInactivos);
                     FrmPrincipal.ObtenerInstancia().S_tslResultadoOperacion = "Articulo creado correctamente";
                 }
             }
@@ -224,7 +224,7 @@ namespace Procuratio
             using (FrmVerEditarCategorias FormVerEditarCategorias = new FrmVerEditarCategorias())
             {
                 FormVerEditarCategorias.ShowDialog();
-                CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivos);
+                CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivosInactivos);
 
                 FormularioCargado = false;
                 CargarCMBCategorias();
@@ -241,7 +241,7 @@ namespace Procuratio
                 FormElementosActivos.ShowDialog();
 
                 //Actualizar la carta y DGV
-                CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivos);
+                CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivosInactivos);
 
                 FormularioCargado = false;
                 CargarCMBCategorias();
@@ -348,7 +348,7 @@ namespace Procuratio
         {
             if (txtCantidad.Text == string.Empty) { txtCantidad.Text = "0"; }
 
-            CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivos);
+            CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivosInactivos);
 
             ClsArticulos Articulos = new ClsArticulos();
             Articulo ActualizarPrecio = new Articulo();
@@ -656,7 +656,7 @@ namespace Procuratio
 
                 ClsArticulos Articulos = new ClsArticulos();
 
-                List<Articulo> ListarArticulosActivos = Articulos.LeerListado(_TipoDeListado, ref InformacionDelError, ClsArticulos.ETipoListado.ArticulosActivos, NombreArticulo, ID_CategoriaFiltro);
+                List<Articulo> ListarArticulosActivos = Articulos.LeerListado(_TipoDeListado, ref InformacionDelError, ClsArticulos.ETipoListado.ArticulosActivosInactivos, NombreArticulo, ID_CategoriaFiltro);
 
                 if (ListarArticulosActivos != null)
                 {

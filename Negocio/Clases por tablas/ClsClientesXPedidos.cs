@@ -9,7 +9,22 @@ namespace Negocio.Clases_por_tablas
     {
         public enum ETipoListado
         {
-            AsistenciasSuperadas, BuscarParaEliminar, ClientesPedido, CantidadAsistencias
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            AsistenciasSuperadas,
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            BuscarParaEliminar,
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            ClientesPedido,
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            CantidadAsistencias
         }
 
         /// <summary>

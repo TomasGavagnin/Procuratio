@@ -9,7 +9,18 @@ namespace Negocio
     {
         public enum ETipoDeListado
         {
-            EliminarPorID, CargarPorID, BuscarMesasYMozo
+            /// <summary>
+            /// Trae de la BBDD los registros que tengan ese ID. Necesita como parametro el ID de los registros que se desean eliminar.
+            /// </summary>
+            EliminarPorID, 
+            /// <summary>
+            /// Trae de la BBDD los registros que tengan de pedidos que se encuentren activos. No necesita ningun parametro.
+            /// </summary>
+            CargarPorID,
+            /// <summary>
+            /// Trae de la BBDD los registros que tengan ese ID. Necesita como parametro el ID de los registros.
+            /// </summary>
+            BuscarMesasYMozo
         }
 
         /// <summary>
@@ -29,7 +40,7 @@ namespace Negocio
 
                         case ETipoDeListado.CargarPorID:
                             return BBDD.PedidoXMesa.Include("Mesa.Usuario").Include("Pedido").Where(Identificador => Identificador.Pedido.ID_EstadoPedido != (int)ClsEstadosPedidos.EEstadosPedidos.Eliminado
-&& Identificador.Pedido.ID_EstadoPedido != (int)ClsEstadosPedidos.EEstadosPedidos.Finalizado).ToList();
+                            && Identificador.Pedido.ID_EstadoPedido != (int)ClsEstadosPedidos.EEstadosPedidos.Finalizado).ToList();
 
                         case ETipoDeListado.BuscarMesasYMozo:
                             return BBDD.PedidoXMesa.Include("Mesa.Usuario").Include("Pedido").Where(Identificador => Identificador.ID_Pedido == _PedidoBuscar).ToList();

@@ -10,12 +10,30 @@ namespace Negocio
     {
         public enum ETipoDeBusqueda
         {
-            PorIDPedido, PorPedidoYArticulo
+
+            PorIDPedido, 
+            
+            PorPedidoYArticulo
         }
 
         public enum ETipoDeListado
         {
-            PorIDPedido, ParaCocina, CategoriaEnUso, NoEntregados
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            PorIDPedido,
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            ParaCocina,
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            CategoriaEnUso,
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            NoEntregados
         }
 
         /// <summary>

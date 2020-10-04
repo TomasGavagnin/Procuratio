@@ -9,8 +9,54 @@ namespace Negocio
     {
         public enum ETipoListado
         {
-            UsuariosActivos, UsuariosInactivos, UsuariosGerentes, UsuariosGerYSubGer,
-            UsuariosParaMesas, UsuariosChef, ChefGerenteSubgerente, DatosRepetidos, GerenteSubGerenteMozoDueño, Desarrollador,
+            /// <summary>
+            /// Trae de la BBDD todos los usuarios que no se encuentran eliminados (no muestra a los usuarios con perfil "Administrador"). No necesita ningun parametro.
+            /// </summary>
+            UsuariosActivos,
+            /// <summary>
+            /// Trae de la BBDD todos los usuarios que se encuentran eliminados (no muestra a los usuarios con perfil Administrador). No necesita ningun parametro.
+            /// </summary>
+            UsuariosInactivos,
+            /// <summary>
+            /// Trae de la BBDD todos los usuarios que no esten eliminados y sean gerentes (incluido a los que tengan el perfil administrador). No necesita ningun parametro.
+            /// </summary>
+            UsuariosGerentes,
+            /// <summary>
+            /// Trae de la BBDD todos los usuarios activos que no esten eliminados y sean gerentes o subgerentes (incluido a los que tengan el perfil administrador). No necesita ningun parametro.
+            /// </summary>
+            UsuariosGerYSubGer,
+            /// <summary>
+            /// Trae de la BBDD todos los usuarios activos que pueden atender mesas (perfil chef y administrador no). No necesita ningun parametro.
+            /// </summary>
+            UsuariosParaMesas,
+            /// <summary>
+            /// Trae de la BBDD todos los usuarios activos que tengan el perfil de chef (no trae al perfil administrador). No necesita ningun parametro.
+            /// </summary>
+            UsuariosChef,
+            /// <summary>
+            /// Trae de la BBDD todos los usuarios activos que tengan el perfil de gerente, subgerente y chef (incluye al perfil administrador). No necesita ningun parametro.
+            /// </summary>
+            ChefGerenteSubgerente,
+            /// <summary>
+            /// Trae de la BBDD todos los usuarios que coincidan en nombre y apellido, o solo la contraseña de las pasadas por parametro en 
+            /// comparacion con los usuarios ya creados. Necesita que le pasen por parametro un NOMBRE, APELLIDO, Y CONTRASEÑA en el caso de que 
+            /// no se este editando ningun usuario, en caso contrario, se debe pasar el ID del usuario que se esta editando para que asi este sea 
+            /// ignorado en la busqueda.
+            /// </summary>
+            DatosRepetidos,
+            /// <summary>
+            /// Trae de la BBDD todos los usuarios que no esten eliminados y sean gerentes, subgerentes o tengan el ID pasado por 
+            /// Parametro (incluido a los que tengan el perfil administrador). Necesita el ID del que este realizando la edicion en caso de 
+            /// que sea un mozo.
+            /// </summary>
+            GerenteSubGerenteMozoDueño,
+            /// <summary>
+            /// Trae de la BBDD todos los usuarios activos que tengan el perfil de administrador. No necesita ningun parametro.
+            /// </summary>
+            Desarrollador,
+            /// <summary>
+            /// Trae de la BBDD todos los usuarios activos (menos los que tengan el perfil administrador). No necesita ningun parametro.
+            /// </summary>
             TodosLosUsuarios
         }
 
@@ -44,49 +90,49 @@ namespace Negocio
                     {
                         case ETipoListado.UsuariosActivos:
                             return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo
-&& Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Administrador).ToList();
+                            && Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Administrador).ToList();
 
                         case ETipoListado.UsuariosInactivos:
                             return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Inactivo
-&& Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Administrador).ToList();
+                            && Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Administrador).ToList();
 
                         case ETipoListado.UsuariosGerYSubGer:
                             return BBDD.Usuario.Where(Identificador => Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Gerente
-|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.SubGerente
-|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
-&& Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
+                            || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.SubGerente
+                            || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
+                            && Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
 
                         case ETipoListado.UsuariosGerentes:
                             return BBDD.Usuario.Where(Identificador => Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Gerente
-|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
-&& Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
+                            || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
+                            && Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
 
                         case ETipoListado.UsuariosParaMesas:
                             return BBDD.Usuario.Where(Identificador => Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Chef
-&& Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo
-&& Identificador.ID_Usuario != 1).ToList();
+                            && Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo
+                            && Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Administrador).ToList();
 
                         case ETipoListado.UsuariosChef:
                             return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Chef
-&& Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
+                            && Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
 
                         case ETipoListado.ChefGerenteSubgerente:
                             return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Chef
-|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Gerente
-|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.SubGerente
-|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
-&& Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
+                            || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Gerente
+                            || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.SubGerente
+                            || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
+                            && Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
 
                         case ETipoListado.GerenteSubGerenteMozoDueño:
                             return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_Usuario == _ID_UsuarioActual
-|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Gerente
-|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.SubGerente
-|| Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
-&& Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
+                            || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Gerente
+                            || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.SubGerente
+                            || Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
+                            && Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
 
                         case ETipoListado.Desarrollador:
                             return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_Perfil == (int)ClsPerfiles.EPerfiles.Administrador
-&& Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
+                            && Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo).ToList();
 
                         case ETipoListado.DatosRepetidos:
                             _Nombre = _Nombre.ToLower();
@@ -100,7 +146,7 @@ namespace Negocio
 
                         case ETipoListado.TodosLosUsuarios:
                             return BBDD.Usuario.Include("Perfil").Where(Identificador => Identificador.ID_EstadoUsuario == (int)ClsEstadosUsuarios.EEstadosUsuarios.Activo
-&& Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Administrador).ToList();
+                            && Identificador.ID_Perfil != (int)ClsPerfiles.EPerfiles.Administrador).ToList();
 
                         default: return null;
                     }

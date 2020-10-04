@@ -9,7 +9,21 @@ namespace Negocio
     {
         public enum ETipoListado
         {
-            ArticulosActivos = 1, ArticulosInactivos = 2, Filtro, AritulosRepetidos
+            /// <summary>
+            /// Trae de la BBDD los articulos que coincidan con el estado del articulo pasado como parametro. Necesita 
+            /// como parametro el enum con el estado del articulo a buscar
+            /// </summary>
+            ArticulosActivosInactivos = 1,
+            /// <summary>
+            /// Trae de la BBDD los articulos que coincidan con los datos pasados por parametro. Necesita los parametros opcionales (si 
+            /// no se usa alguno, pasar su valor por defecto)
+            /// </summary>
+            Filtro,
+            /// <summary>
+            /// Trae de la BBDD todos los articulos que coincidan con el NOMBRE del parametro pasado, ignorando el que tiene el 
+            /// ID tambien pasado por parametro (si es un articulo que se esta editando). Necesita el ID del articulo y el NOMBRE
+            /// </summary>
+            AritulosRepetidos
         }
 
         /// <summary>
@@ -25,7 +39,7 @@ namespace Negocio
         /// <param name="_Nombre">Parametro opcional que se usa cuando se quiere verificar que el articulo no este en uso.</param>
         /// <param name="_ID_Articulo">Parametro opcional que se usa para ignorar el articulo que se esta editando cuando se quiere buscar 
         /// repetidos.</param>
-        public List<Articulo> LeerListado(ETipoListado _TipoDeFiltro, ref string _InformacionDelError, ETipoListado _EstadoArticuloBuscar = ETipoListado.ArticulosActivos, string _TextoFilto = "", int _CategoriaFiltro = 0, string _Nombre = "", int _ID_Articulo = 0)
+        public List<Articulo> LeerListado(ETipoListado _TipoDeFiltro, ref string _InformacionDelError, ETipoListado _EstadoArticuloBuscar = ETipoListado.ArticulosActivosInactivos, string _TextoFilto = "", int _CategoriaFiltro = 0, string _Nombre = "", int _ID_Articulo = 0)
         {
             using (BDRestauranteEntities BBDD = new BDRestauranteEntities())
             {
@@ -33,9 +47,9 @@ namespace Negocio
                 {
                     switch (_TipoDeFiltro)
                     {
-                        case ETipoListado.ArticulosActivos:
+                        case ETipoListado.ArticulosActivosInactivos:
                             return BBDD.Articulo.Include("CategoriaArticulo").Where(Identificador => Identificador.ID_EstadoArticulo == (int)_EstadoArticuloBuscar
-&& Identificador.CategoriaArticulo.ID_EstadoCategoriaArticulo == (int)_EstadoArticuloBuscar).OrderBy(Identificador => Identificador.CategoriaArticulo.Nombre).ThenBy(Identificador => Identificador.Nombre).ToList();
+                            && Identificador.CategoriaArticulo.ID_EstadoCategoriaArticulo == (int)_EstadoArticuloBuscar).OrderBy(Identificador => Identificador.CategoriaArticulo.Nombre).ThenBy(Identificador => Identificador.Nombre).ToList();
                         case ETipoListado.AritulosRepetidos:
                             _Nombre = _Nombre.ToLower();
                             return BBDD.Articulo.Include("CategoriaArticulo").Where(Identificador => Identificador.Nombre.ToLower() == _Nombre
@@ -47,7 +61,7 @@ namespace Negocio
                                 List<Articulo> ListaFiltrada = null;
 
                                 // En este caso armo un predicado por defecto (o todos los articulos activos o todos los inactivos)
-                                if ((int)_EstadoArticuloBuscar == (int)ETipoListado.ArticulosActivos)
+                                if ((int)_EstadoArticuloBuscar == (int)ETipoListado.ArticulosActivosInactivos)
                                 {
                                     ListaFiltrada = BBDD.Articulo.Include("CategoriaArticulo").Where(Identificador => Identificador.ID_EstadoArticulo == (int)_EstadoArticuloBuscar
                                     && Identificador.CategoriaArticulo.ID_EstadoCategoriaArticulo == (int)_EstadoArticuloBuscar).ToList();

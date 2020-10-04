@@ -7,7 +7,7 @@ namespace Negocio.Clases_por_tablas
 {
     public class ClsDeliveries : Delivery
     {
-        public static readonly string DireccionPorDefecto = "Se retira en el local";
+        public static readonly string DIRECCION_POR_DEFECTO = "Se retira en el local";
 
         /// <summary>
         /// Busca todos los datos del registro en cuestion para ser mostrados.

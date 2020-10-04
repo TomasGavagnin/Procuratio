@@ -7,8 +7,6 @@ namespace Negocio
 {
     public class ClsConfiguraciones : Configuracion
     {
-
-
         /// <summary>
         /// Busca todos los datos del registro en cuestion para ser mostrados.
         /// </summary>

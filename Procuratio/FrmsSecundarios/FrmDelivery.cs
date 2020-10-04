@@ -761,7 +761,7 @@ namespace Procuratio.FrmsSecundarios
 
                     if (Elemento.Delivery.Destino == null)
                     {
-                        dgvDelivery.Rows[NumeroDeFila].Cells[(int)ENumColDGVDelivery.DireccionDeDestino].Value = ClsDeliveries.DireccionPorDefecto;
+                        dgvDelivery.Rows[NumeroDeFila].Cells[(int)ENumColDGVDelivery.DireccionDeDestino].Value = ClsDeliveries.DIRECCION_POR_DEFECTO;
                     }
                     else
                     {

@@ -10,7 +10,22 @@ namespace Negocio
     {
         public enum ETipoDeListado
         {
-            PedidosEnProceso, FiltroDelivery, DeliveryNoEntregado, todos
+            /// <summary>
+            /// Trae de la BBDD todos los pedidos en proceso. No necesita ningun parametro.
+            /// </summary>
+            PedidosEnProceso, 
+            /// <summary>
+            /// Trae de la BBDD todos los pedidos que coincidan con los datos pasados por parametro. Necesita todos los parametros.
+            /// </summary>
+            FiltroDelivery, 
+            /// <summary>
+            /// Trae de la BBDD todos los pedidos que se encuentren para entrega. No necesita ningun parametro.
+            /// </summary>
+            DeliveryNoEntregado, 
+            /// <summary>
+            /// Trae de la BBDD todos los pedidos. No necesita ningun parametro.
+            /// </summary>
+            todos
         }
 
         /// <summary>

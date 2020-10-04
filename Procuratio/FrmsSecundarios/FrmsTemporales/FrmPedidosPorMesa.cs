@@ -202,7 +202,7 @@ namespace Procuratio
         private void FrmPedidosPorMesa_Shown(object sender, EventArgs e)
         {
             FormularioCargado = true;
-            CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivos);
+            CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivosInactivos);
         }
 
         private void CargarCMBMesas()
@@ -443,7 +443,7 @@ namespace Procuratio
             cmbCategoria.SelectedValue = 0;
             FormularioCargado = true;
 
-            CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivos);
+            CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivosInactivos);
 
             int TotalDeFilas = dgvCarta.Rows.Count;
             int TotalDeFilasSecundarias = dgvArticulosPedido.Rows.Count;
@@ -548,7 +548,7 @@ namespace Procuratio
             txtBuscarPorNombre.Text = TEXTO_VISUAL_BUSCAR;
             cmbCategoria.SelectedItem = 0;
             FormularioCargado = true;
-            CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivos);
+            CargarDGVCarta(ClsArticulos.ETipoListado.ArticulosActivosInactivos);
         }
 
         private void BtnAumentaUnidad_Click(object sender, EventArgs e) => ActualizaCantidad(true);
@@ -1550,7 +1550,7 @@ namespace Procuratio
 
                 ClsArticulos Articulos = new ClsArticulos();
 
-                List<Articulo> ListarArticulosActivos = Articulos.LeerListado(_TipoDeListado, ref InformacionDelError, ClsArticulos.ETipoListado.ArticulosActivos, NombreArticulo, ID_CategoriaFiltro);
+                List<Articulo> ListarArticulosActivos = Articulos.LeerListado(_TipoDeListado, ref InformacionDelError, ClsArticulos.ETipoListado.ArticulosActivosInactivos, NombreArticulo, ID_CategoriaFiltro);
 
                 if (ListarArticulosActivos != null)
                 {

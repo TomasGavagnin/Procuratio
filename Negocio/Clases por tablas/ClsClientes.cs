@@ -9,7 +9,26 @@ namespace Negocio
     {
         public enum EClienteBuscar
         {
-            PorID, UltimoAgregado, Todos, DatosRepetidos, Filtro
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            PorID,
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            UltimoAgregado,
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            Todos,
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            DatosRepetidos,
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            Filtro
         }
 
         /// <summary>

@@ -23,11 +23,12 @@ namespace Procuratio
         {
             CargarConfiguracion();
             MostrarMenuVencimientos();
+            ComprobarVencimeinto();
 
             FormularioCargado = true;
         }
 
-        private void CargarConfiguracion()
+        private void ComprobarVencimeinto()
         {
             string InformacionDelError = string.Empty;
 
@@ -37,6 +38,7 @@ namespace Procuratio
 
             if (LeerConfiguracion != null)
             {
+
                 // No cambiarle el estado a los rbn si se bloquearon por vencimiento de licencia (el rbn PA siempre deberia estar acivado)
                 if (!SeVencioLicencia)
                 {
@@ -57,7 +59,19 @@ namespace Procuratio
                         ckbSegundaPlanta.Checked = true;
                     }
                 }
+            }
+        }
 
+        private void CargarConfiguracion()
+        {
+            string InformacionDelError = string.Empty;
+
+            ClsConfiguraciones Configuraciones = new ClsConfiguraciones();
+            Configuracion LeerConfiguracion = new Configuracion();
+            LeerConfiguracion = Configuraciones.LeerPorNumero(1, ref InformacionDelError);
+
+            if (LeerConfiguracion != null)
+            {
                 int CantidadDeMesasPB = ListarMesasActivasPB();
                 int CantidadDeMesasPA = ListarMesasActivasPA();
 
@@ -306,8 +320,6 @@ namespace Procuratio
 
         private void BtnCrearMesa_Click(object sender, EventArgs e)
         {
-            CargarConfiguracion();
-
             int MesasPlantaBaja = Convert.ToInt32(lblCantidadMesasPB.Text);
 
             // Entrar si la mesa que se va a crear es menor a 99 o la mesa que va a crear sera de la PA

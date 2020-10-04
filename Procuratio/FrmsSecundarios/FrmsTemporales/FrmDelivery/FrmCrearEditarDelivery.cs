@@ -241,7 +241,7 @@ namespace Procuratio.FrmsSecundarios.FrmsTemporales.FrmDelivery
             if (ckbRetiraEnElLocal.Checked)
             {
                 txtDireccion.Enabled = false;
-                txtDireccion.Text = ClsDeliveries.DireccionPorDefecto;
+                txtDireccion.Text = ClsDeliveries.DIRECCION_POR_DEFECTO;
             }
             else
             {

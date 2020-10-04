@@ -9,7 +9,19 @@ namespace Negocio
     {
         public enum ETipoDeFiltro
         {
-            ReservasActivas, ReservasExpiradas, Filtro
+            /// <summary>
+            /// Trae de la BBDD todas las reservas que esten pendientes. No necesita ningun parametro.
+            /// </summary>
+            ReservasActivas,
+            /// <summary>
+            /// Trae de la BBDD todas las reservas que esten pendientes o sin confirmar del dia actual para atras. No necesita ningun parametro.
+            /// </summary>
+            ReservasExpiradas,
+            /// <summary>
+            /// Trae de la BBDD todos los registros que coincidan con los parametros pasados. Necesita que se pasen todos los parametros (los que quieran ser 
+            /// ignorados, solamente se necesita pasar su valor por defecto.
+            /// </summary>
+            Filtro
         }
 
         /// <summary>
@@ -33,13 +45,13 @@ namespace Negocio
                     {
                         case ETipoDeFiltro.ReservasActivas:
                             return BBDD.Reserva.Include("Cliente").Include("EstadoReserva").Where(Identificador => Identificador.Fecha >= DateTime.Today
-&& (Identificador.ID_EstadoReserva != (int)ClsEstadoReservas.EEstadosReservas.Eliminada
-|| Identificador.ID_EstadoReserva == (int)ClsEstadoReservas.EEstadosReservas.SinConfirmar)).ToList();
+                            && (Identificador.ID_EstadoReserva != (int)ClsEstadoReservas.EEstadosReservas.Eliminada
+                            || Identificador.ID_EstadoReserva == (int)ClsEstadoReservas.EEstadosReservas.SinConfirmar)).ToList();
 
                         case ETipoDeFiltro.ReservasExpiradas:
                             return BBDD.Reserva.Include("Cliente").Include("EstadoReserva").Where(Identificador => Identificador.Fecha <= DateTime.Today
-&& (Identificador.ID_EstadoReserva == (int)ClsEstadoReservas.EEstadosReservas.Pendiente
-|| Identificador.ID_EstadoReserva == (int)ClsEstadoReservas.EEstadosReservas.SinConfirmar)).ToList();
+                            && (Identificador.ID_EstadoReserva == (int)ClsEstadoReservas.EEstadosReservas.Pendiente
+                            || Identificador.ID_EstadoReserva == (int)ClsEstadoReservas.EEstadosReservas.SinConfirmar)).ToList();
 
                         case ETipoDeFiltro.Filtro:
                             {

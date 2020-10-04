@@ -27,7 +27,7 @@ namespace Procuratio
         private void FrmCambiarEstados_Shown(object sender, EventArgs e)
         {
             FormularioCargado = true;
-            CargarDGVArticulos(ClsArticulos.ETipoListado.ArticulosActivos);
+            CargarDGVArticulos(ClsArticulos.ETipoListado.ArticulosActivosInactivos);
         }
         #endregion
 
@@ -119,15 +119,15 @@ namespace Procuratio
         /// <summary>Aplica los filtros por nombre y categoria.</summary>
         private void AplicarFiltros()
         {
-            ClsArticulos.ETipoListado EstadoArticulosFiltrar = ClsArticulos.ETipoListado.ArticulosActivos;
+            ClsArticulos.ETipoListado EstadoArticulosFiltrar = ClsArticulos.ETipoListado.ArticulosActivosInactivos;
 
             if (rbnElementosActivos.Checked)
             {
-                EstadoArticulosFiltrar = ClsArticulos.ETipoListado.ArticulosActivos;
+                EstadoArticulosFiltrar = ClsArticulos.ETipoListado.ArticulosActivosInactivos;
             }
             else
             {
-                EstadoArticulosFiltrar = ClsArticulos.ETipoListado.ArticulosInactivos;
+                EstadoArticulosFiltrar = ClsArticulos.ETipoListado.ArticulosActivosInactivos;
             }
 
             CargarDGVArticulos(EstadoArticulosFiltrar);
@@ -257,11 +257,11 @@ namespace Procuratio
             {
                 if (_EstadoElemento == ClsEstadosCategoriasArticulos.EEstadosCategoriasArticulos.Activo)
                 {
-                    CargarDGVArticulos(ClsArticulos.ETipoListado.ArticulosInactivos);
+                    CargarDGVArticulos(ClsArticulos.ETipoListado.ArticulosActivosInactivos);
                 }
                 else
                 {
-                    CargarDGVArticulos(ClsArticulos.ETipoListado.ArticulosActivos);
+                    CargarDGVArticulos(ClsArticulos.ETipoListado.ArticulosActivosInactivos);
                 }
 
                 FormularioCargado = false;
@@ -276,7 +276,7 @@ namespace Procuratio
         {
             if (rbnElementosActivos.Checked)
             {
-                CargarDGVArticulos(ClsArticulos.ETipoListado.ArticulosActivos);
+                CargarDGVArticulos(ClsArticulos.ETipoListado.ArticulosActivosInactivos);
                 CargarDGVCategorias(ClsCategoriasArticulos.ETipoListado.CategoriasActivas);
 
                 btnRestaurarElementos.Visible = false;
@@ -288,7 +288,7 @@ namespace Procuratio
         {
             if (rbnelementosInactivos.Checked)
             {
-                CargarDGVArticulos(ClsArticulos.ETipoListado.ArticulosInactivos);
+                CargarDGVArticulos(ClsArticulos.ETipoListado.ArticulosActivosInactivos);
                 CargarDGVCategorias(ClsCategoriasArticulos.ETipoListado.CategoriasInactivas);
 
                 btnRestaurarElementos.Visible = true;

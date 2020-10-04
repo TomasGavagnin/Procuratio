@@ -9,7 +9,14 @@ namespace Negocio
     {
         public enum ETipoListado
         {
-            Filtrado, CajaAbierta
+            /// <summary>
+            /// Trae de la BBDD los registros que coincidan con los parametros pasados. Necesita de TODOS los parametros.
+            /// </summary>
+            Filtrado, 
+            /// <summary>
+            /// Trae de la BBDD todos los registros que tengan caja abierta como estado de caja. No necesita ningun parametro.
+            /// </summary>
+            CajaAbierta
         }
 
         /// <summary>

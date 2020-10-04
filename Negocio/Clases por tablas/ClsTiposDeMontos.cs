@@ -15,7 +15,14 @@ namespace Negocio
 
         public enum ETipoDeListado
         {
-            Todo, CrearRegistro
+            /// <summary>
+            /// Trae todos los tipos de movimientos. No necesita ningun parametro.
+            /// </summary>
+            Todo, 
+            /// <summary>
+            /// Trae todos los registros que no sean los generados automaticamente por las actividades diarias del restaurante. No necesita ningun parametro.
+            /// </summary>
+            CrearRegistro
         }
 
         /// <summary>

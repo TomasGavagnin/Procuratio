@@ -9,12 +9,34 @@ namespace Negocio
     {
         public enum ETipoListado
         {
-            Todo, CategoriasActivas, CategoriasInactivas, CategoriasRepetidas
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            Todo,
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            CategoriasActivas,
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            CategoriasInactivas,
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            CategoriasRepetidas
         }
 
         public enum ECategoriaBuscar
         {
-            PorID, UltimaAgregada
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            PorID,
+            /// <summary>
+            /// Trae de la BBDD
+            /// </summary>
+            UltimaAgregada
         }
 
         public enum EParaCocina

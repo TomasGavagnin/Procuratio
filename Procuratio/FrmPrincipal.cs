@@ -262,7 +262,7 @@ namespace Procuratio
 
         private bool SeEstaMostrandoAdvertencia = false;
         private int SegundoDeInicioAdvertencia = -1;
-
+        
         private readonly int MEDIDA_MENU_EXPANDIDO = 300, MEDIDA_MENU_CONTRAIDO = 85;
         private readonly int MEDIDA_ESTADISTICA_MENU_EXPANDIDO = 303, MEDIDA_ESTADISTICA_MENU_CONTRAIDO = 50;
         #endregion

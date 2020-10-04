@@ -9,8 +9,50 @@ namespace Negocio
     {
         public enum ETipoDeListado
         {
-            Todo, MesasActivasPB, MesasActivasPA, PorID, PorNumeroDeMesa, PrimerMesaInactivaPB, PrimerMesaInactivaPA, MesasDisponiblesPB,
-            MesasDisponiblesPA, MesasEditar, MesasOcupadas, MesasAOcuparLiberar
+            /// <summary>
+            /// Trae de la BBDD todas las mesas. No necesita ningun parametro.
+            /// </summary>
+            Todo,
+            /// <summary>
+            /// Trae de la BBDD todas las mesas que no se encuentran eliminadas de la planta baja. No necesita parametros.
+            /// </summary>
+            MesasActivasPB,
+            /// <summary>
+            /// Trae de la BBDD todas las mesas que no se encuentran eliminadas de la planta alta. No necesita parametros.
+            /// </summary>
+            MesasActivasPA,
+            /// <summary>
+            /// Trae de la BBDD la mesa que tiene asignado el ID pasado por parametro. Necesita el ID de la mesa como parametro.
+            /// </summary>
+            PorID,
+            /// <summary>
+            /// Trae de la BBDD la mesa que tiene asignado el NUMERO DE MESA pasado por parametro. Necesita el NUMERO DE MESA de la mesa como parametro.
+            /// </summary>
+            PorNumeroDeMesa,
+            /// <summary>
+            /// Trae de la BBDD la primer mesa activa que encuentra en la planta baja. No necesita parametros.
+            /// </summary>
+            PrimerMesaInactivaPB,
+            /// <summary>
+            /// Trae de la BBDD la primer mesa activa que encuentra en la planta alta. No necesita parametros.
+            /// </summary>
+            PrimerMesaInactivaPA,
+            /// <summary>
+            /// Trae de la BBDD las mesas que se encuentras ocupadas o eliminadas en la planta baja. No necesita ningun parametro.
+            /// </summary>
+            MesasDisponiblesPB,
+            /// <summary>
+            /// Trae de la BBDD las mesas que se encuentras ocupadas o eliminadas en la planta alta. No necesita ningun parametro.
+            /// </summary>
+            MesasDisponiblesPA,
+            /// <summary>
+            /// Trae de la BBDD las mesas que se encuentran ocupadas en un pedido. No necesita ningun parametro.
+            /// </summary>
+            MesasOcupadas,
+            /// <summary>
+            /// Trae de la BBDD las mesas que coinciden con los ID del listado de mesas. Necesita una lista de enteros con los ID de cada mesa como parametro.
+            /// </summary>
+            MesasAOcuparLiberar
         }
 
         /// <summary>
@@ -32,19 +74,19 @@ namespace Negocio
 
                         case ETipoDeListado.MesasActivasPB:
                             return BBDD.Mesa.Where(Identificador => Identificador.ID_EstadoMesa != (int)ClsEstadosMesas.EEstadosMesas.Inactivo
-&& Identificador.Numero <= 99).ToList();
+                            && Identificador.Numero <= 99).ToList();
 
                         case ETipoDeListado.MesasActivasPA:
                             return BBDD.Mesa.Where(Identificador => Identificador.ID_EstadoMesa != (int)ClsEstadosMesas.EEstadosMesas.Inactivo
-&& Identificador.Numero >= 100).ToList();
+                            && Identificador.Numero >= 100).ToList();
 
                         case ETipoDeListado.MesasDisponiblesPB:
                             return BBDD.Mesa.Where(Identificador => Identificador.ID_EstadoMesa == (int)ClsEstadosMesas.EEstadosMesas.Activo_Disponible
-&& Identificador.Numero <= 99).ToList();
+                            && Identificador.Numero <= 99).ToList();
 
                         case ETipoDeListado.MesasDisponiblesPA:
                             return BBDD.Mesa.Where(Identificador => Identificador.ID_EstadoMesa == (int)ClsEstadosMesas.EEstadosMesas.Activo_Disponible
-&& Identificador.Numero >= 100).ToList();
+                            && Identificador.Numero >= 100).ToList();
 
                         case ETipoDeListado.MesasOcupadas: return BBDD.Mesa.Include("Usuario").Where(Identificador => Identificador.ID_EstadoMesa == (int)ClsEstadosMesas.EEstadosMesas.Ocupada).ToList();
 
